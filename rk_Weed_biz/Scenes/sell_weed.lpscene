@@ -1,0 +1,657 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    
+    If isModEnabled(nn_GangsOfLifePlay)
+        bmState = Player.getActorVar(GL_BM_state)
+        
+            stock_AK47weed = Player.getActorVar(stock_AK47weed)
+            stock_SSweed = Player.getActorVar(stock_SSweed)
+            stock_WWweed = Player.getActorVar(stock_WWweed)
+            stock_PEweed = Player.getActorVar(stock_PEweed)
+            stock_OGKweed = Player.getActorVar(stock_OGKweed)
+            stock_GSCweed = Player.getActorVar(stock_GSCweed)
+            stock_BBweed = Player.getActorVar(stock_BBweed)
+            stock_GGweed = Player.getActorVar(stock_GGweed)
+            weeddealerLvl = Player.getActorVar(weeddealerLvl)
+            stash_AK47weed = Player.getActorVar(stash_AK47weed)
+            stash_SSweed = Player.getActorVar(stash_SSweed)
+            stash_WWweed = Player.getActorVar(stash_WWweed)
+            stash_PEweed = Player.getActorVar(stash_PEweed)
+            stash_OGKweed = Player.getActorVar(stash_OGKweed)
+            stash_GSCweed = Player.getActorVar(stash_GSCweed)
+            stash_BBweed = Player.getActorVar(stash_BBweed)
+            stash_GGweed = Player.getActorVar(stash_GGweed)
+
+            stock_weed_stash = stash_AK47weed + stash_SSweed + stash_WWweed + stash_PEweed + stash_OGKweed + stash_GSCweed + stash_BBweed + stash_GGweed
+            weedstck = stock_AK47weed + stock_SSweed + stock_WWweed + stock_PEweed + stock_OGKweed + stock_GSCweed + stock_BBweed + stock_GGweed
+            weedbundle = stock_weed_stash + weedstck
+    
+        If bmState < 4
+            "You do not have skills about black market yet."
+            "Try to get more info about it by using the 'Visit Black Market' action."
+            
+        ElseIf weedbundle < 9 
+            "You got not enough weed for sell. You need at leat 10g! Better go find some more!"
+            "Ask for Johnny, the weed dealer, he likes to be at the bar, biergarten, nightclub or the pub."
+            
+        Else
+        
+                //setBackground(street)
+                
+                Player::"Ok, which strain I'm gonna sell?"
+                0:: stock_AK47weed > 9.9 || stash_AK47weed > 9.9:: "Sell AK 47 (Pockets: <stock_AK47weed>g || Stash: <stash_AK47weed>g)"
+                1:: stock_SSweed > 9.9 || stash_SSweed > 9.9:: "Sell Sunset Sherbet (Pockets: <stock_SSweed>g || Stash: <stash_SSweed>g)"
+                2:: stock_WWweed > 9.9 || stash_WWweed > 9.9:: "Sell White Widow (Pockets: <stock_WWweed>g || Stash: <stash_WWweed>g)"
+                3:: stock_PEWeed > 9.9 || stash_PEweed > 9.9:: "Sell Pineapple Express (Pockets: <stock_PEWeed>g || Stash: <stash_PEWeed>g)"
+                4:: stock_OGKWeed > 9.9 || stash_OGKweed > 9.9:: "Sell OG Kush (Pockets: <stock_OGKWeed>g || Stash: <stash_OGKWeed>g)"
+                5:: stock_GSCWeed > 9.9 || stash_GSCweed > 9.9:: "Sell Girl Scout Cookies (Pockets: <stock_GSCWeed>g || Stash: <stash_GSCWeed>g)"
+                6:: stock_BBWeed > 9.9 || stash_BBweed > 9.9:: "Sell Bruce Banner (Pockets: <stock_BBWeed>g || Stash: <stash_BBWeed>g)"
+                7:: stock_GGWeed > 9.9 || stash_GGweed > 9.9:: "Sell Gorilla Glue (Pockets: <stock_GGWeed>g || Stash: <stash_GGWeed>g)"
+                8:: "Bah! I changed my mind!"
+                
+                If 0 
+
+                    Player::"In which reserve I'm gonna dig?"
+                    1::"From my Pockets: <stock_AK47weed>g"
+                    2::"From my Stash: <stash_AK47weed>g"
+                    99:: "Bah! I changed my mind!"
+                    
+                    If 1
+                        
+                        If stock_AK47weed < 10 
+                            "You got not enough AK 47 to sell. You need at leat 10g! Better go find some more!"
+
+                        Else
+                    
+                            nAK = Random(1,10)  // number of g
+                            priceAKtotalsell = nAK * Random(7,11)  // total price
+                            priceAKtotalsellloc = priceAKtotalsell.convertToLocalCurrency()  // total price local
+                        
+                            "You spend some hours selling your weeds."
+                        
+                            countWeedAK = stock_AK47weed - nAK
+                            Player.setActorVar(stock_AK47weed, countWeedAK)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceAKtotalsell
+                        
+                            "You were able to sell <nAK> grams of your weeds for <priceAKtotalsellloc>. <countWeedAK> grams remain."
+                            "+1 added to your weed dealer level."
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        EndIf
+                    
+                    Elseif 2
+                    
+                        If stash_AK47weed < 10 
+                            "You got not enough AK 47 in your stash. You need at leat 10g! Better go find some more!"
+                        
+                        Else
+
+                            If stash_AK47weed >= 10 && stash_AK47weed <= 27
+                                nAK = Random(1,10)  // number of g
+                            Elseif stash_AK47weed >= 28 && stash_AK47weed <= 447
+                                nAK = Random(1,28)  // number of g
+                            Elseif stash_AK47weed >= 448 && stash_AK47weed <= 4479
+                                nAK = Random(1,448)  // number of g
+                            Elseif stash_AK47weed >= 4480 && stash_AK47weed <= 44799
+                                nAK = Random(1,4480)  // number of g
+                            Elseif stash_AK47weed >= 44800 && stash_AK47weed <= 493835
+                                nAK = Random(1,44800)  // number of g
+                            Elseif stash_AK47weed >= 493836 && stash_AK47weed <= 987671
+                                nAK = Random(1,493836)  // number of g
+                            Elseif stash_AK47weed >= 987672
+                                nAK = Random(1,987672)  // number of g
+                            EndIf
+                            
+                    
+                            priceAKtotalsell = nAK * Random(7,11)  // total price
+                            priceAKtotalsellloc = priceAKtotalsell.convertToLocalCurrency()  // total price local
+                        
+                            "You spend some hours selling your weeds."
+                        
+                            countWeedAK = stash_AK47weed - nAK
+                            Player.setActorVar(stash_AK47weed, countWeedAK)
+                        
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceAKtotalsell
+                        
+                            "You were able to sell <nAK> grams of your weeds for <priceAKtotalsellloc>. <countWeedAK> grams remain."
+                            "+1 added to your weed dealer level."
+                            Player.modifyActorVar(weeddealerLvl, 1)
+
+                        EndIf
+                    EndIf   
+
+                Elseif 1 
+
+                    Player::"In which reserve I'm gonna dig?"
+                    1::"From my Pockets: <stock_SSweed>g"
+                    2::"From my Stash: <stash_SSweed>g"
+                    99:: "Bah! I changed my mind!"
+                    
+                    If 1
+                        If stock_SSweed < 10
+                            "You got not enough Sunset Sherbet to sell. You need at leat 10g! Better go find some more!"
+                        Else
+                            
+                            nSSw = Random(1,10)  // number of g
+                            priceSSwtotalsell = nSSw * Random(12,13)  // total price
+                            priceSSwtotalsellloc = priceSSwtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedSSw = stock_SSweed - nSSw
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stock_SSweed, countWeedSSw)
+                        
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceSSwtotalsell  
+                        
+                            "You were able to sell <nSSw> grams of your weeds for <priceSSwtotalsellloc>. <countWeedSSw> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        
+                        EndIf
+                        
+                    Elseif 2
+                         
+                        If stash_SSweed < 10
+                            "You got not enough Sunset Sherbet in your stash. You need at leat 10g! Better go find some more!"
+                        Else
+                        
+                            If stash_SSweed >= 10 && stash_SSweed <= 27
+                                nSSw = Random(1,10)  // number of g 
+                            Elseif stash_SSweed >= 28 && stash_SSweed <= 447
+                                nSSw = Random(1,28)  // number of g
+                            Elseif stash_SSweed >= 448 && stash_SSweed <= 4479
+                                nSSw = Random(1,448)  // number of g
+                            Elseif stash_SSweed >= 4480 && stash_SSweed <= 44799
+                                nSSw = Random(1,4480)  // number of g
+                            Elseif stash_SSweed >= 44800 && stash_SSweed <= 493835
+                                nSSw = Random(1,44800)  // number of g
+                            Elseif stash_SSweed >= 493836 && stash_SSweed <= 987671
+                                nSSw = Random(1,493836)  // number of g
+                            Elseif stash_SSweed >= 987672
+                                nSSw = Random(1,987672)  // number of g
+                            EndIf
+    
+                            priceSSwtotalsell = nSSw * Random(12,13)  // total price
+                            priceSSwtotalsellloc = priceSSwtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedSSw = stash_SSweed - nSSw
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stash_SSweed, countWeedSSw)
+                        
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceSSwtotalsell  
+                        
+                            "You were able to sell <nSSw> grams of your weeds for <priceSSwtotalsellloc>. <countWeedSSw> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        
+                        EndIf
+                    EndIf   
+
+                Elseif 2 
+
+                    Player::"In which reserve I'm gonna dig?"
+                    1::"From my Pockets: <stock_WWweed>g"
+                    2::"From my Stash: <stash_WWweed>g"
+                    99:: "Bah! I changed my mind!"
+                    
+                    If 1
+                
+                        If stock_WWweed < 10
+                            "You got not enough White Widow to sell. You need at leat 10g! Better go find some more!"
+                        Else
+                        
+                            nWWw = Random(1,10)  // number of g
+                            priceWWwtotalsell = nWWw * Random(14,16)  // total price
+                            priceWWwtotalsellloc = priceWWwtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedWWw = stock_WWweed - nWWw
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stock_WWweed, countWeedWWw)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceWWwtotalsell  
+                        
+                            "You were able to sell <nWWw> grams of your weeds for <priceWWwtotalsellloc>. <countWeedWWw> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        
+                        EndIf
+
+                    Elseif 2
+                    
+                        If stash_WWweed < 10
+                            "You got not enough White Widow inside your stash. You need at leat 10g! Better go find some more!"
+                        Else
+                    
+                            If stash_WWweed >= 10 && stash_WWweed <= 27
+                                nWWw = Random(1,10)  // number of g
+                            Elseif stash_WWweed >= 28 && stash_WWweed <= 447
+                                nWWw = Random(1,28)  // number of g
+                            Elseif stash_WWweed >= 448  && stash_WWweed <= 4479
+                                nWWw = Random(1,448)  // number of g
+                            Elseif stash_WWweed >= 4480 && stash_WWweed <= 44799
+                                nWWw = Random(1,4480)  // number of g
+                            Elseif stash_WWweed >= 44800 && stash_WWweed <= 493835
+                                nWWw = Random(1,44800)  // number of g
+                            Elseif stash_WWweed >= 493836 && stash_WWweed <= 987671
+                                nWWw = Random(1,493836)  // number of g
+                            Elseif stash_WWweed >= 987672
+                                nWWw = Random(1,987672)  // number of g
+                            EndIf
+    
+                            priceWWwtotalsell = nWWw * Random(14,16)  // total price
+                            priceWWwtotalsellloc = priceWWwtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedWWw = stash_WWweed - nWWw
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stash_WWweed, countWeedWWw)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceWWwtotalsell  
+                        
+                            "You were able to sell <nWWw> grams of your weeds for <priceWWwtotalsellloc>. <countWeedWWw> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                            
+                        EndIf
+                    EndIf   
+
+                Elseif 3 
+
+                    Player::"In which reserve I'm gonna dig?"
+                    1::"From my Pockets: <stock_PEWeed>g"
+                    2::"From my Stash: <stash_PEWeed>g"
+                    99:: "Bah! I changed my mind!"
+                    
+                    If 1 
+                        
+                        If stock_PEWeed < 10
+                            "You got not enough Pineapple Express to sell. You need at leat 10g! Better go find some more!"
+                        
+                        Else
+                        
+                            nPEW = Random(1,10)  // number of g
+                            pricePEWtotalsell = nPEW * Random(17,18)  // total price
+                            pricePEWtotalsellloc = pricePEWtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedPEW = stock_PEWeed - nPEW
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stock_PEWeed, countWeedPEW)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += pricePEWtotalsell
+                        
+                            "You were able to sell <nPEW> grams of your weeds for <pricePEWtotalsellloc>. <countWeedPEW> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+
+                        EndIf                       
+                        
+
+                    Elseif 2
+                    
+                        If stash_PEWeed < 10
+                            "You got not enough Pineapple Express to sell in your stash. You need at leat 10g! Better go find some more!"
+                        
+                        Else
+                    
+                            If stash_PEWeed >= 10 && stash_PEWeed <= 27
+                                nPEW = Random(1,10)  // number of g
+                            Elseif stash_PEWeed >= 28 && stash_PEWeed <= 447
+                                nPEW = Random(1,28)  // number of g
+                            Elseif stash_PEWeed >= 448 && stash_PEWeed <= 4479
+                                nPEW = Random(1,448)  // number of g
+                            Elseif stash_PEWeed >= 4480 && stash_PEWeed <= 44799
+                                nPEW = Random(1,4480)  // number of g
+                            Elseif stash_PEWeed >= 44800 && stash_PEWeed <= 493835
+                                nPEW = Random(1,44800)  // number of g
+                            Elseif stash_PEWeed >= 493836 && stash_PEWeed <= 987671
+                                nPEW = Random(1,493836)  // number of g
+                            Elseif stash_PEWeed >= 987672
+                                nPEW = Random(1,987672)  // number of g
+                            EndIf
+                        
+                            pricePEWtotalsell = nPEW * Random(17,18)  // total price
+                            pricePEWtotalsellloc = pricePEWtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedPEW = stash_PEWeed - nPEW
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stash_PEWeed, countWeedPEW)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += pricePEWtotalsell
+                        
+                            "You were able to sell <nPEW> grams of your weeds for <pricePEWtotalsellloc>. <countWeedPEW> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        EndIf
+                    
+                    EndIf
+
+                Elseif 4 
+
+                    Player::"In which reserve I'm gonna dig?"
+                    1::"From my Pockets: <stock_OGKWeed>g"
+                    2::"From my Stash: <stash_OGKWeed>g"
+                    99:: "Bah! I changed my mind!"
+                    
+                    If 1
+                
+                        If stock_OGKWeed < 10
+                            "You got not enough OG Kush to sell. You need at leat 10g! Better go find some more!"
+                        Else
+                        
+                            nOGK = Random(1,10)  // number of g
+                            priceOGKtotalsell = nOGK * Random(19,20)  // total price
+                            priceOGKtotalsellloc = priceOGKtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedOGK = stock_OGKWeed - nOGK
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stock_OGKWeed, countWeedOGK)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceOGKtotalsell  
+                        
+                            "You were able to sell <nOGK> grams of your weeds for <priceOGKtotalsellloc>. <countWeedOGK> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                            
+                        EndIf
+
+                    Elseif 2 
+                        
+                        if stash_OGKWeed < 10
+                            "You got not enough OG Kush to sell in your stash. You need at leat 10g! Better go find some more!"
+                            
+                        Else
+                        
+                            If stash_OGKWeed >= 10 && stash_OGKWeed <= 27
+                                nOGK = Random(1,10)  // number of g
+                            Elseif stash_OGKWeed >= 28 && stash_OGKWeed <= 447
+                                nOGK = Random(1,28)  // number of g
+                            Elseif stash_OGKWeed >= 448 && stash_OGKWeed <= 4479
+                                nOGK = Random(1,448)  // number of g
+                            Elseif stash_OGKWeed >= 4480 && stash_OGKWeed <= 44799
+                                nOGK = Random(1,4480)  // number of g
+                            Elseif stash_OGKWeed >= 44800 && stash_OGKWeed <= 493835
+                                nOGK = Random(1,44800)  // number of g
+                            Elseif stash_OGKWeed >= 493836 && stash_OGKWeed <= 987671
+                                nOGK = Random(1,493836)  // number of g
+                            Elseif stash_OGKWeed >= 987672
+                                nOGK = Random(1,987672)  // number of g
+                            EndIf
+                        
+                            priceOGKtotalsell = nOGK * Random(19,20)  // total price
+                            priceOGKtotalsellloc = priceOGKtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedOGK = stash_OGKWeed - nOGK
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stash_OGKWeed, countWeedOGK)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceOGKtotalsell  
+                        
+                            "You were able to sell <nOGK> grams of your weeds for <priceOGKtotalsellloc>. <countWeedOGK> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        EndIf
+    
+                    EndIf
+
+                Elseif 5 
+
+                    Player::"In which reserve I'm gonna dig?"
+                    1::"From my Pockets: <stock_GSCWeed>g"
+                    2::"From my Stash: <stash_GSCWeed>g"
+                    99:: "Bah! I changed my mind!"
+                    
+                    If 1
+                
+                        If stock_GSCWeed < 10
+                            "You got not enough Girl Scout Cookies to sell. You need at leat 10g! Better go find some more!" 
+                        Else
+ 
+                            nGSC = Random(1,10)  // number of g
+                            priceGSCtotalsell = nGSC * Random(21,22)  // total price
+                            priceGSCtotalsellloc = priceGSCtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedGSC = stock_GSCWeed - nGSC
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stock_GSCWeed, countWeedGSC)
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceGSCtotalsell  
+                        
+                            "You were able to sell <nGSC> grams of your weeds for <priceGSCtotalsellloc>. <countWeedGSC> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        EndIf
+                            
+                    Elseif 2
+                    
+                        If stash_GSCWeed < 10
+                            "You got not enough Girl Scout Cookies to sell. You need at leat 10g! Better go find some more!"
+
+                        Else    
+                    
+                            If stash_GSCWeed >= 10 && stash_GSCWeed <= 27
+                                nGSC = Random(1,10)  // number of g
+                            Elseif stash_GSCWeed >= 28 && stash_GSCWeed <= 447
+                                nGSC = Random(1,28)  // number of g
+                            Elseif stash_GSCWeed >= 448 && stash_GSCWeed <= 4479 
+                                nGSC = Random(1,448)  // number of g
+                            Elseif stash_GSCWeed >= 4480 && stash_GSCWeed <= 44799
+                                nGSC = Random(1,4480)  // number of g
+                            Elseif stash_GSCWeed >= 44800 && stash_GSCWeed <= 493835
+                                nGSC = Random(1,44800)  // number of g
+                            Elseif stash_GSCWeed >= 493836 && stash_GSCWeed <= 987671
+                                nGSC = Random(1,493836)  // number of g
+                            Elseif stash_GSCWeed >= 987672
+                                nGSC = Random(1,987672)  // number of g
+                            EndIf
+                        
+                            priceGSCtotalsell = nGSC * Random(21,22)  // total price
+                            priceGSCtotalsellloc = priceGSCtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedGSC = stash_GSCWeed - nGSC
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stash_GSCWeed, countWeedGSC)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceGSCtotalsell  
+                        
+                            "You were able to sell <nGSC> grams of your weeds for <priceGSCtotalsellloc>. <countWeedGSC> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        EndIf
+                    EndIf
+
+                Elseif 6 
+
+                    Player::"In which reserve I'm gonna dig?"
+                    1::"From my Pockets: <stock_BBWeed>g"
+                    2::"From my Stash: <stash_BBWeed>g"
+                    99:: "Bah! I changed my mind!"
+                    
+                    If 1
+                
+                        If stock_BBWeed < 10
+                            "You got not enough Bruce Banner to sell. You need at leat 10g! Better go find some more!"
+                         
+                        Else
+                            
+                            nBBW = Random(1,10)  // number of g
+                            priceBBWtotalsell = nBBW * Random(23,24)  // total price
+                            priceBBWtotalsellloc = priceBBWtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedBBW = stock_BBWeed - nBBW
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stock_BBWeed, countWeedBBW)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceBBWtotalsell
+                        
+                            "You were able to sell <nBBW> grams of your weeds for <priceBBWtotalsellloc>. <countWeedBBW> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                            
+                        EndIf
+                
+                    Elseif 2 
+                    
+                        If stash_BBWeed < 10
+                            "You got not enough Bruce Banner to sell. You need at leat 10g! Better go find some more!"
+                            
+                        Else    
+                    
+                            If stash_BBWeed >= 10 && stash_BBWeed <= 27
+                                nBBW = Random(1,10)  // number of g
+                            Elseif stash_BBWeed >= 28 && stash_BBWeed <= 447
+                                nBBW = Random(1,28)  // number of g
+                            Elseif stash_BBWeed >= 448 && stash_BBWeed <= 4479
+                                nBBW = Random(1,448)  // number of g
+                            Elseif stash_BBWeed >= 4480 && stash_BBWeed <= 44799
+                                nBBW = Random(1,4480)  // number of g
+                            Elseif stash_BBWeed >= 44800 && stash_BBWeed <= 493835
+                                nBBW = Random(1,44800)  // number of g
+                            Elseif stash_BBWeed >= 493836 && stash_BBWeed <= 987671
+                                nBBW = Random(1,493836)  // number of g
+                            Elseif stash_BBWeed >= 987672
+                                nBBW = Random(1,987672)  // number of g
+                            EndIf
+
+                            priceBBWtotalsell = nBBW * Random(23,24)  // total price
+                            priceBBWtotalsellloc = priceBBWtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedBBW = stash_BBWeed - nBBW
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stash_BBWeed, countWeedBBW)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceBBWtotalsell
+                        
+                            "You were able to sell <nBBW> grams of your weeds for <priceBBWtotalsellloc>. <countWeedBBW> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        EndIf
+                    EndIf
+                    
+                Elseif 7 
+
+                    Player::"In which reserve I'm gonna dig?"
+                    1::"From my Pockets: <stock_GGWeed>g"
+                    2::"From my Stash: <stash_GGWeed>g"
+                    99:: "Bah! I changed my mind!"
+                    
+                    If 1
+                
+                        If stock_GGWeed < 10
+                            "You got not enough Gorilla Glue to sell. You need at leat 10g! Better go find some more!" 
+
+                        Else
+                        
+                            nGG = Random(1,10)  // number of g
+                            priceGGtotalsell = nGG * Random(25,26)  // total price
+                            priceGGtotalsellloc = priceGGtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedGG = stock_GGWeed - nGG
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stock_GGWeed, countWeedGG)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceGGtotalsell
+                        
+                            "You were able to sell <nGG> grams of your weeds for <priceGGtotalsellloc>. <countWeedGG> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+
+                        EndIf
+                            
+                
+                    Elseif 2
+                    
+                        If stash_GGWeed < 10
+                            "You got not enough Gorilla Glue to sell. You need at leat 10g! Better go find some more!"
+                    
+                        Else
+                        
+                            If stash_GGWeed >= 10 && stash_GGWeed <= 27
+                                nGG = Random(1,10)  // number of g
+                            Elseif stash_GGWeed >= 28 && stash_GGWeed <= 447
+                                nGG = Random(1,28)  // number of g
+                            Elseif stash_GGWeed >= 448 && stash_GGWeed <= 4479 
+                                nGG = Random(1,448)  // number of g
+                            Elseif stash_GGWeed >= 4480 && stash_GGWeed <= 44799
+                                nGG = Random(1,4480)  // number of g
+                            Elseif stash_GGWeed >= 44800 && stash_GGWeed <= 493835
+                                nGG = Random(1,44800)  // number of g
+                            Elseif stash_GGWeed >= 493836 && stash_GGWeed <= 987671
+                                nGG = Random(1,493836)  // number of g
+                            Elseif stash_GGWeed >= 987672
+                                nGG = Random(1,987672)  // number of g
+                            EndIf
+
+                            priceGGtotalsell = nGG * Random(25,26)  // total price
+                            priceGGtotalsellloc = priceGGtotalsell.convertToLocalCurrency()  // total price local
+                            countWeedGG = stash_GGWeed - nGG
+                   
+                            "You spend some hours selling your weeds."
+                        
+                            Player.setActorVar(stash_GGWeed, countWeedGG)
+
+                            passTime(2,4)
+                            energy -= Random(5,10)
+                            money += priceGGtotalsell
+                        
+                            "You were able to sell <nGG> grams of your weeds for <priceGGtotalsellloc>. <countWeedGG> grams remain."
+                            "+1 added to your weed dealer level"
+                            Player.modifyActorVar(weeddealerLvl, 1)
+                        
+                        EndIf
+                    
+                    EndIf
+ 
+                EndIf 
+            
+        EndIf   
+    Else
+        "You need to enable the mod nn_GangsOfLifePlay, before beginning to sell drugs !"   
+            
+    EndIf
+    
+    SceneEnd()

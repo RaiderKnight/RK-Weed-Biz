@@ -1,0 +1,83 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    //setBackground(street)
+    
+    If isModEnabled(nn_GangsOfLifePlay)
+        bmState = Player.getActorVar(GL_BM_state)
+    
+        If bmState < 4
+            "You do not have skills about black market yet."
+            "Try to get more info about it by using the 'Visit Black Market' action."
+        
+        Elseif weeddealerLvl <= 9
+            "You need the 'weed dealer level 10', before calling a dealer or starting a business! Try to make more sales and come back after 10 sales!"
+            "Ask for Johnny, the weed dealer, he likes to be at the bar, biergarten, nightclub or the pub."
+            "Your weed dealer level is <weeddealerLvl>"
+
+        Else
+    
+            price = 5000
+            priceLocal = price.convertToLocalCurrency(true)
+            "Should I get a licence from the mafia to open my own weed business?"
+            0:: money>price::"Yes (<priceLocal>)"
+            99:: "No"
+        
+            If 0
+            
+                JohnActor = generatePersonTemporary(rk_ModelM_Johnny_Boy)
+                JohnActor.dress()
+                dressFormal()
+                JohnActor.show(3)
+                JohnActor.hide()
+            
+                Player(Excited)::"Why not? This is an adult game, selling weed will give me more cash..."
+                Player(Excited)::"Let's start making real money!"
+            
+                Player:rkOpenedWeedCartel => 1
+            
+                // Set the next possible reporting date to today
+                daysSinceBirth = (Player:Age * 365)
+                Player.setActorVar(rk_LastWeedBusinessCheck, daysSinceBirth)
+            
+                money -= price
+            
+                Player(Serene):: "Will this be my main job from now on?"
+                0:: "No, I will do my regular job as well"
+                1:: "Yes, no other job needed"
+            
+                If 1
+                    salary = 1  // setting the salary to 1 will disable "need to find a job" nag screens
+                    Player.setBoss()
+                EndIf
+            
+                JohnActor.show(1)
+                dressFormal()
+                JohnActor(Happy)::"Howdy! My name is <JohnActor.name>. You already saw at the bar or pub...,anyway, I am proud to be your official weed dealer."
+                JohnActor.show(2)
+                dressFormal()
+                JohnActor(Happy)::"I always have 8 varieties of weeds available. Your customers will love the flavor of my weeds!"
+                JohnActor.show(3)
+                dressFormal()
+                JohnActor(Happy)::"My stash is always full. So you can call me at any time."
+                JohnActor.show(4)
+                dressFormal()
+                JohnActor(Serene)::"All right <Player.name>. Now get your business up and running. See you later!"
+                JohnActor.hide()
+            
+                Player(Serene):: "<JohnActor.name> look nice, but something remember me, don't pissed him off..."
+                Player(Serene):: "Now I should have more weeds and start selling a little!"
+            
+            Else
+                "Not at the moment. Maybe later !"
+            EndIf
+        EndIf
+    Else
+        "You need to enable the mod nn_GangsOfLifePlay, before beginning to sell drugs !"   
+        
+    EndIf
+    SceneEnd()

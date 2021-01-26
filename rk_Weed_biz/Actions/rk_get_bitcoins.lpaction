@@ -1,0 +1,12 @@
+ACTION_UNIQUEID: rk_get_bitcoins
+ACTION_NAME: Buy - trade BitCoins (WD)
+WHERE: bank
+WHEN: 0 - 24
+MINUTES: 5
+TIMEOUT_MINUTES: 
+ALSO_TIMEOUT: 
+EFFECTS:
+CONDITIONS: rkOpenedWeedCartel < 1 (STAT_COMPARE)
+MOVE_FIRST: false
+SCENE_ALWAYS: rk_get_bitcoins
+ANIMATION:   

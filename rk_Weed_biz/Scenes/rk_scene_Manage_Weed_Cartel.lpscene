@@ -1,0 +1,94 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    
+    If isModEnabled(nn_GangsOfLifePlay)
+        bmState = Player.getActorVar(GL_BM_state)
+        
+        stock_AK47weed = Player.getActorVar(stock_AK47weed)
+        stock_SSweed = Player.getActorVar(stock_SSweed)
+        stock_WWweed = Player.getActorVar(stock_WWweed)
+        stock_PEweed = Player.getActorVar(stock_PEweed)
+        stock_OGKweed = Player.getActorVar(stock_OGKweed)
+        stock_GSCweed = Player.getActorVar(stock_GSCweed)
+        stock_BBweed = Player.getActorVar(stock_BBweed)
+        stock_GGweed = Player.getActorVar(stock_GGweed)
+        
+        weedstck = stock_AK47weed + stock_SSweed + stock_WWweed + stock_PEweed + stock_OGKweed + stock_GSCweed + stock_BBweed + stock_GGweed
+    
+        If bmState < 4
+            "You do not have skills about black market yet."
+            "Try to get more info about it by using the 'Visit Black Market' action."
+            
+        Else
+
+            officeSize = Player.getActorVar(rk_PlayerOfficeLocationSize)
+            If officeSize > 0
+                moveTo(Home)
+                setBackground3D(Modules/vin_Base/World/bar___vin01.lpworld)
+            EndIf
+    
+            "What do you want to do?"
+    
+            stayInMenu = true
+            
+            While stayInMenu
+            
+                9:: "Show weed inside my pockets"
+                10:: "Show weed Stash"
+                11:: "Show Bitcoin inventory"
+                20:: "Buy new equipment"
+                30:: "Rent an office"
+                90:: "Close your weed business down"
+                99:: "Exit"
+                
+                If 9
+                    If weedstck  < 1
+                        Player(Anxious)::"Ok, I don't have any weed! Damn! I have to go shopping to the tobacco store to rebatch!"
+                    Else
+            
+                        0:: "<stock_AK47weed> gram(s) of AK 47"
+                        0:: "<stock_SSweed> gram(s) of Sunset Sherbet"
+                        0:: "<stock_WWweed> gram(s) of White Widow"
+                        0:: "<stock_PEweed> gram(s) of Pineapple Express"
+                        0:: "<stock_OGKweed> gram(s) of OG Kush"
+                        0:: "<stock_GSCweed> gram(s) of Girl Scout Cookies"
+                        0:: "<stock_BBweed> gram(s) of Bruce Banner"
+                        0:: "<stock_GGweed> gram(s) of Gorilla Glue"
+                        99:: "Go back !"
+                
+                    Endif
+                    stayInMenu = false
+        
+                ElseIf 10
+                    followUp(stock_weed_stash)
+                    stayInMenu = false
+                ElseIf 11
+                    "You have <stock_Bitcoins> Bitcoin(s)"
+                    "If you need more bitcoins, visit the bank!"
+                    stayInMenu = false
+                ElseIf 20
+                    followUp(weed_scene_buy_equipment)
+                    stayInMenu = false
+                ElseIf 30
+                    followUp(weed_scene_rent_office)
+                    stayInMenu = false
+                ElseIf 90
+                    followUp(rk_scene_close_Weed_Cartel)
+                    stayInMenu = false
+                Else
+                    stayInMenu = false
+                EndIf
+                
+            EndWhile
+            
+        EndIf
+    Else
+        "You need to enable the mod nn_GangsOfLifePlay, before beginning to sell drugs !"   
+    EndIf   
+    
+    SceneEnd()

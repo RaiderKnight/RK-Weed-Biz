@@ -1,0 +1,467 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+
+    JohnActor = generatePerson(rk_ModelM_Johnny_Boy)
+    JohnActor.dress()
+    dressFormal()
+    JohnActor.hide()
+    weeddealerLvl = Player.getActorVar(weeddealerLvl)
+    
+    If isModEnabled(nn_GangsOfLifePlay)
+        bmState = Player.getActorVar(GL_BM_state)
+    
+        If bmState < 4
+            "You do not have skills about black market yet."
+            "Try to get more info about it by using the 'Visit Black Market' action."
+        
+        Elseif rkOpenedWeedCartel<1
+            "You need to start your weed business first!"
+            
+        Elseif weeddealerLvl <= 9
+            "You need the 'weed dealer level 10', before calling a dealer! Try to make more sales and come back after 10 sales!"
+            "Ask for Johnny, the weed dealer, he likes to be at the bar, biergarten, nightclub or the pub."
+            "Your weed dealer level is <weeddealerLvl>"
+        
+        Else
+        
+            Player.show()
+            Player.animate(call)
+            "Let's call <JohnActor.name> to see what he has!"
+            passTime(2,4)
+            
+            Player.show()
+            Player.animate(call)
+            "...After a while, he finally answers his phone."
+            JohnActor(Curious)::"Hey <Player.name>! What do you want ?"
+            passTime(1,2)
+            
+            Player.show()
+            Player.animate(call)
+            Player(Curious)::"Do you have any weed ? I am a little bit short !"
+            JohnActor(Happy)::"Yes, absolutely, my stash is always full!"
+            Player(Curious)::"Nice I'm going to your place right now!"
+            passTime(1,2)
+            
+            Player.show()
+            Player.dress()
+            dressFormal()
+            Player.animate(walk)
+            "...After a while I finally make it to <JohnActor.name>'s house!"
+            passTime(5,20)
+            
+            setBackground(work)
+            
+            JohnActor.show()
+            JohnActor.dress()
+            dressFormal()
+            JohnActor(Happy)::"Hey <Player.name>, nice to see you! Like I said, I have 8 varieties of weed, so how many do you want?"
+            Player(Curious)::"May I take a look at your stock first!"
+            passTime(1,2)
+            
+            stash_AK47weed = Player.getActorVar(stash_AK47weed)
+            stash_SSweed = Player.getActorVar(stash_SSweed)
+            stash_WWweed = Player.getActorVar(stash_WWweed)
+            stash_PEweed = Player.getActorVar(stash_PEweed)
+            stash_OGKweed = Player.getActorVar(stash_OGKweed)
+            stash_GSCweed = Player.getActorVar(stash_GSCweed)
+            stash_BBweed = Player.getActorVar(stash_BBweed)
+            stash_GGweed = Player.getActorVar(stash_GGweed)
+            
+            stock_weed_stash = stash_AK47weed + stash_SSweed + stash_WWweed + stash_PEweed + stash_OGKweed + stash_GSCweed + stash_BBweed + stash_GGweed
+        
+            If money >= 120
+            
+                If weeddealerLvl >= 10 && weeddealerLvl =< 19
+                    JohnActor::"For small dealers, my big boss only lets me sell 28g at a time, sorry bro !" //ajouter une note comme quoi stock limiter a 1lb
+                    Player::"That's ok, I understand!"
+                Elseif weeddealerLvl >= 20 && weeddealerLvl =< 49
+                    JohnActor::"For Nightclub dealers, my big boss only lets me sell 448g at a time, sorry bro !"
+                    Player::"That's ok, I understand!"
+                Elseif weeddealerLvl >= 50 && weeddealerLvl =< 149
+                    JohnActor::"For Big dealers, my big boss only lets me sell 10lb at a time, sorry bro !"
+                    Player::"That's ok, I understand!"
+                Elseif weeddealerLvl >= 150 && weeddealerLvl =< 299
+                    JohnActor::"For small dealers, my big boss only lets me sell 109lb at a time, sorry bro !"
+                    Player::"That's ok, I understand!"
+                Elseif weeddealerLvl >= 300 && weeddealerLvl =< 599
+                    JohnActor::"For small dealers, my big boss only lets me sell 1/2ton at a time, sorry bro !"
+                    Player::"That's ok, I understand!"
+                Endif
+            
+                "Hmm! Which strain I will buy?"
+                0:: "Buy some AK 47 (13-20%)"
+                1:: "Buy some Sunset Sherbet (15-19%)"
+                2:: "Buy some White Widow (18-25%)"
+                3:: "Buy some Pineapple Express (19-25%)"
+                4:: "Buy some OG Kush (20-25%)"
+                5:: "Buy some Girl Scout Cookies (25-28%)"
+                6:: "Buy some Bruce Banner (25-29%)"
+                7:: "Buy some Gorilla Glue (25-30%)"
+                8:: "Bah! I changed my mind!"
+
+                If 0
+                
+                    price_AK4728Weed = Random(120, 130) // 120 - 130 for 1
+                    price_AK4728Weed_local = price_AK4728Weed.convertToLocalCurrency()
+                    price_AK471LWeed = Random(1840, 2000) // 115 - 125 for 1 16x28
+                    price_AK471LWeed_local = price_AK471LWeed.convertToLocalCurrency()
+                    price_AK4710LWeed = Random(16000, 18400) // 100 - 115 for 1 160x28
+                    
+                    Player::"Show me your AK 47!"
+                    JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
+                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of AK 47 for <price_AK4728Weed_local>"
+                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of AK 47 for <price_AK471LWeed_local>"
+                    2:: weeddealerLvl >= 50 ::"Buy 10lb of AK 47 for <price_AK4710LWeed_local>"
+                    8:: ::"Bah! I changed my mind!"
+                
+                    If 0 
+                    
+                        Player.modifyActorVar(stash_AK47weed, 28)
+                        mood += 1
+                        money -= price_AK4728Weed
+                        
+                        Player::"Oh yeah! 28g of AK 47 added to my weed stash!"
+                            
+                    Elseif 1
+                    
+                        Player.modifyActorVar(stash_AK47weed, 448)
+                        mood += 1
+                        money -= price_AK471LWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 448g of AK 47 added to my weed stash!"
+                        
+                    Elseif 2
+                    
+                        Player.modifyActorVar(stash_AK47weed, 4480)
+                        mood += 1
+                        money -= price_AK4710LWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 4535g of AK 47 added to my weed stash!"
+
+                    Endif   
+                
+                Elseif 1
+                
+                    price_SS28Weed = Random(250, 280)  // 250 - 280 for 1
+                    price_SS28Weed_local = price_SS28Weed.convertToLocalCurrency()
+                    price_SS1lbWeed = Random(3920, 4000) // 245 - 250 for 1 16x28
+                    price_SS1lbWeed_local = price_SS1lbWeed.convertToLocalCurrency()
+                    price_SS10lbWeed = Random(36800, 39200) // 230 - 245 for 1 160x28
+                    price_SS10lbWeed_local = price_SS10lbWeed.convertToLocalCurrency()
+
+                    Player::"Show me your Sunset Sherbet!"
+                    JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
+                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Sunset Sherbet for <price_SS28Weed_local>"
+                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Sunset Sherbet for <price_SS1lbWeed_local>"
+                    2:: weeddealerLvl >= 50 ::"Buy 10lb of Sunset Sherbet for <price_SS10lbWeed_local>"
+                    8:: ::"Bah! I changed my mind!"
+                
+                    If 0 
+                    
+                        Player.modifyActorVar(stash_SSweed, 28)
+                        mood += 1
+                        money -= price_SS28Weed
+                        Player::"Oh yeah! 28g of Sunset Sherbet added to my weed stash!"
+                            
+                    Elseif 1
+                    
+                        Player.modifyActorVar(stash_SSweed, 448)
+                        mood += 1
+                        money -= price_SS1lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 448g of Sunset Sherbet added to my weed stash!"
+                        
+                    Elseif 2
+                    
+                        Player.modifyActorVar(stash_SSweed, 4480)
+                        mood += 1
+                        money -= price_SS10lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 4535g of Sunset Sherbet added to my weed stash!"
+
+                    Endif
+                
+                Elseif 2
+                
+                    price_WW28Weed = Random(335, 390) // 335 - 390 for 1
+                    price_WW28Weed_local = price_WW28Weed.convertToLocalCurrency()
+                    price_WW1lbWeed = Random(5280, 5360) // 330 - 335 for 1 16x28
+                    price_WW1lbWeed_local = price_WW1lbWeed.convertToLocalCurrency()
+                    price_WW10lbWeed = Random(51200, 52800) // 320 - 330 for 1 160x28
+                    price_WW10lbWeed_local = price_WW10lbWeed.convertToLocalCurrency()
+
+                    Player::"Show me your White Widow!"
+                    JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
+                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of White Widow for <price_WW28Weed_local>"
+                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of White Widow for <price_WW1lbWeed_local>"
+                    2:: weeddealerLvl >= 50 ::"Buy 10lb of White Widow for <price_WW10lbWeed_local>"
+                    8:: ::"Bah! I changed my mind!"
+                
+                    If 0 
+                    
+                        Player.modifyActorVar(stash_WWweed, 28)
+                        mood += 1
+                        money -= price_WW28Weed
+                        
+                        Player::"Oh yeah! 28g of White Widow added to my weed stash!"
+                            
+                    Elseif 1
+                    
+                        Player.modifyActorVar(stash_WWweed, 448)
+                        mood += 1
+                        money -= price_WW1lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 448g of White Widow added to my weed stash!"
+                        
+                    Elseif 2
+                    
+                        Player.modifyActorVar(stash_WWweed, 4480)
+                        mood += 1
+                        money -= price_WW10lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 4535g of White Widow added to my weed stash!"
+            
+                    Endif
+                
+                Elseif 3
+                
+                    price_PE28Weed = Random(365, 420) // 365 - 420 for 1
+                    price_PE28Weed_local = price_PE28Weed.convertToLocalCurrency()
+                    price_PE1lbWeed = Random(5760, 5840) // 360 - 365 for 1 16x28
+                    price_PE1lbWeed_local = price_PE1lbWeed.convertToLocalCurrency()
+                    price_PE10lbWeed = Random(56000, 57600) // 350 - 360 for 1 160x28
+                    price_PE10lbWeed_local = price_PE10lbWeed.convertToLocalCurrency()
+
+                    Player::"Show me your Pineapple Express!"
+                    JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
+                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Pineapple Express for <price_PE28Weed_local>"
+                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Pineapple Express for <price_PE1lbWeed_local>"
+                    2:: weeddealerLvl >= 50::"Buy 10lb of Pineapple Express for <price_PE10lbWeed_local>"
+                    8:: ::"Bah! I changed my mind!"
+                
+                    If 0 
+                    
+                        Player.modifyActorVar(stash_PEWeed, 28)
+                        mood += 1
+                        money -= price_PE28Weed
+                        
+                        Player::"Oh yeah! 28g of Pineapple Express added to my weed stash!"
+                            
+                    Elseif 1
+                    
+                        Player.modifyActorVar(stash_PEWeed, 448)
+                        mood += 1
+                        money -= price_PE1lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 448g of Pineapple Express added to my weed stash!"
+                        
+                    Elseif 2
+                    
+                        Player.modifyActorVar(stash_PEWeed, 4480)
+                        mood += 1
+                        money -= price_PE10lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 4535g of Pineapple Express added to my weed stash!"
+            
+                    Endif
+                
+                Elseif 4
+                
+                    price_OGK28Weed = Random(450, 475) // 450 - 475 for 1
+                    price_OGK28Weed_local = price_OGK28Weed.convertToLocalCurrency()
+                    price_OGK1lbWeed = Random(7120, 7200) // 445 - 450 for 1 16x28
+                    price_OGK1lbWeed_local = price_OGK1lbWeed.convertToLocalCurrency()
+                    price_OGK10lbWeed = Random(70400, 71200) // 440 - 445 for 1 160x28
+                    price_OGK10lbWeed_local = price_OGK10lbWeed.convertToLocalCurrency()
+
+                    Player::"Show me your OG Kush!"
+                    JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
+                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of OG Kush for <price_OGK28Weed_local>"
+                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of OG Kush for <price_OGK1lbWeed_local>"
+                    2:: weeddealerLvl >= 50::"Buy 10lb of OG Kush for <price_OGK10lbWeed_local>"
+                    8:: ::"Bah! I changed my mind!"
+                
+                    If 0 
+                    
+                        Player.modifyActorVar(stash_OGKWeed, 28)
+                        mood += 1
+                        money -= price_OGK28Weed
+                        
+                        Player::"Oh yeah! 28g of OG Kush added to my weed stash!"
+                            
+                    Elseif 1
+                    
+                        Player.modifyActorVar(stash_OGKWeed, 448)
+                        mood += 1
+                        money -= price_OGK1lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 448g of OG Kush added to my weed stash!"
+                        
+                    Elseif 2
+                    
+                        Player.modifyActorVar(stash_OGKWeed, 4480)
+                        mood += 1
+                        money -= price_OGK10lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 4535g of OG Kush added to my weed stash!"
+            
+                    Endif
+                
+                Elseif 5
+                    
+                    price_GSC28Weed = Random(500, 530) // 500 - 530 for 1
+                    price_GSC28Weed_local = price_GSC28Weed.convertToLocalCurrency()
+                    price_GSC1lbWeed = Random(7920, 8000) // 495 - 500 for 1 16x28
+                    price_GSC1lbWeed_local = price_GSC1lbWeed.convertToLocalCurrency()
+                    price_GSC10lbWeed = Random(77600, 79360) // 485 - 495 for 1 160x28
+                    price_GSC10lbWeed_local = price_GSC10lbWeed.convertToLocalCurrency()
+
+                    Player::"Show me your Girl Scout Cookies!"
+                    JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
+                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Girl Scout Cookies for <price_GSC28Weed_local>"
+                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Girl Scout Cookies for <price_GSC1lbWeed_local>"
+                    2:: weeddealerLvl >= 50::"Buy 10lb of Girl Scout Cookies for <price_GSC10lbWeed_local>"
+                    8:: ::"Bah! I changed my mind!"
+                
+                    If 0 
+                    
+                        Player.modifyActorVar(stash_GSCWeed, 28)
+                        mood += 1
+                        money -= price_GSC28Weed
+                        
+                        Player::"Oh yeah! 28g of Girl Scout Cookies added to my weed stash!"
+                            
+                    Elseif 1
+                    
+                        Player.modifyActorVar(stash_GSCWeed, 448)
+                        mood += 1
+                        money -= price_GSC1lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 448g of Girl Scout Cookies added to my weed stash!"
+                        
+                    Elseif 2
+                    
+                        Player.modifyActorVar(stash_GSCWeed, 4480)
+                        mood += 1
+                        money -= price_GSC10lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 4535g of Girl Scout Cookies added to my weed stash!"
+                        
+                    Endif
+                
+                Elseif 6
+                
+                    price_BB28Weed = Random(560, 585) // 560 - 585 for 1
+                    price_BB28Weed_local = price_BB28Weed.convertToLocalCurrency()
+                    price_BB1lbWeed = Random(8880, 8960) // 555 - 560 for 1 16x28
+                    price_BB1lbWeed_local = price_BB1lbWeed.convertToLocalCurrency()
+                    price_BB10lbWeed = Random(87200, 88800) // 545 - 555 for 1 160x28
+                    price_BB10lbWeed_local = price_BB10lbWeed.convertToLocalCurrency()
+
+                    Player::"Show me your Bruce Banner!"
+                    JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
+                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Bruce Banner for <price_BB28Weed_local>"
+                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Bruce Banner for <price_BB1lbWeed_local>"
+                    2:: weeddealerLvl >= 50::"Buy 10lb of Bruce Banner for <price_BB10lbWeed_local>"
+                    8:: ::"Bah! I changed my mind!"
+                
+                    If 0 
+                    
+                        Player.modifyActorVar(stash_BBWeed, 28)
+                        mood += 1
+                        money -= price_BB28Weed
+                        
+                        Player::"Oh yeah! 28g of Bruce Banner added to my weed stash!"
+                            
+                    Elseif 1
+                    
+                        Player.modifyActorVar(stash_BBWeed, 448)
+                        mood += 1
+                        money -= price_BB1lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 448g of Bruce Banner added to my weed stash!"
+                        
+                    Elseif 2
+                    
+                        Player.modifyActorVar(stash_BBWeed, 4480)
+                        mood += 1
+                        money -= price_BB10lbWeed_local
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 4535g of Bruce Banner added to my weed stash!"
+
+                    Endif
+                
+                Elseif 7
+                
+                    price_GG28Weed = Random(590, 600) // 590 - 600 for 1 1x28
+                    price_GG28Weed_local = price_GG28Weed.convertToLocalCurrency()
+                    price_GG1lbWeed = Random(9360, 9440) // 585 - 590 for 1 16x28
+                    price_GG1lbWeed_local = price_GG1lbWeed.convertToLocalCurrency()
+                    price_GG10lbWeed = Random(92000, 93600) // 575 - 585 for 1 160x28
+                    price_GG10lbWeed_local = price_GG10lbWeed.convertToLocalCurrency()
+
+                    Player::"Show me your Gorilla Glue!"
+                    JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
+                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Gorilla Glue for <price_GG28Weed_local>"
+                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Gorilla Glue for <price_GG1lbWeed_local>"
+                    2:: weeddealerLvl >= 50::"Buy 10lb of Gorilla Glue for <price_GG10lbWeed_local>"
+                    8:: ::"Bah! I changed my mind!"
+                
+                    If 0 
+                    
+                        Player.modifyActorVar(stash_GGWeed, 28)
+                        mood += 1
+                        money -= price_GG28Weed
+                        
+                        Player::"Oh yeah! 28g of Gorilla Glue added to my weed stash!"
+                            
+                    Elseif 1
+                    
+                        Player.modifyActorVar(stash_GGWeed, 448)
+                        mood += 1
+                        money -= price_GG1lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 448g of Gorilla Glue added to my weed stash!"
+                        
+                    Elseif 2
+                    
+                        Player.modifyActorVar(stash_GGWeed, 4480)
+                        mood += 1
+                        money -= price_GG10lbWeed
+                        JohnActor:rapportwithplayer += Random(0, 0.2)
+                        Player::"Oh yeah! 4535g of Gorilla Glue added to my weed stash!"
+                    
+                    Endif
+
+                EndIf
+
+            Else
+            
+                "You got not enough money for buying weed. Better go find a new vocation, because now your dealer his pissed off!"
+                setBackground(work)
+                JohnActor.show()
+                JohnActor.animate(call)
+                
+                Random
+                JohnActor(Angry)::"Damn <Player.name>! Your loosing my time bro, don't call me if you don't have money !"
+                JohnActor(Angry)::"Fuck <Player.name>! Don't call me if you don't have any money !"
+                JohnActor(Angry)::"Hey looser! Your loosing my time bro, don't call me if you don't have any money !"
+                EndRandom
+                
+                JohnActor:rapportwithplayer -= Random(1, 5)
+                passTime(1,2)
+                
+            EndIf
+            
+        EndIf   
+    Else
+        "You need to enable the mod nn_GangsOfLifePlay, before beginning to sell drugs !"   
+        
+    EndIf
+    
+    SceneEnd()

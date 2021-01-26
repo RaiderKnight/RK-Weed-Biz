@@ -1,0 +1,97 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    
+    If money < -50000 
+        Player(Anxious)::"I am in debt. I can't afford a new place!"
+        Player(Curious)::"Let's try to make some money with what is left instead!"
+    Else
+    
+        // Go to the office if any
+        officeSize = Player.getActorVar(rk_PlayerOfficeLocationSize)
+        If officeSize > 0
+            moveTo(Home)
+            setBackground3D(Modules/vin_Base/World/bar___vin01.lpworld)
+        EndIf
+        
+        Player(Curious)::"There is a lot of cool stuff I can buy for my bunker." 
+        Player(Wink)::"If I get better equipment my place will get better and secure."
+        
+        // Get current equipment types
+        videoCamType = Player.getActorVar(rk_VideoCameraEquipmentType)
+        lightType = Player.getActorVar(rk_LightEquipmentType)
+        
+        Player(Curious)::"Which type of equipment shall I buy?"
+        1:: "Security cameras"
+        3:: "Buy a knife"
+        4:: "Buy a baseball bat"
+        5:: "Visit black market"
+        99:: "Don't buy anything"
+        
+        If 1
+            If videoCamType >= 4
+                Player(Sad)::"I already own the best security cam equipment that exists on this planet - at least for now."
+            Else
+                price1 = 499.convertToLocalCurrency(true)
+                price2 = 699.convertToLocalCurrency(true)
+                price3 = 1899.convertToLocalCurrency(true)
+                price4 = 2600.convertToLocalCurrency(true)
+                Player(Excited)::"Which security cam upgrade should I get?"
+                1:: videoCamType == 0:: "Spy Ultra Watch security cameras (<price1>)"
+                2:: videoCamType == 1:: "Deep Sentinel security cameras (<price2>)"
+                3:: videoCamType == 2:: "16-Channel Fusion NVR System with Sixteen 4K (8MP) IP Cameras (<price3>)"
+                4:: videoCamType == 3:: "4K 8MP Hikvision 36X Outdoor Smart IR PTZ Camera/Smart Tracking/Smart Detection (<price4>)"
+                5:: "Don't buy anything"
+                
+                If 1
+                    Player.setActorVar(rk_VideoCameraEquipmentType, 1)
+                    money -= 499;
+                    Player(Excited)::"Maybe not the top, but its an improvement on security efficiency!"
+                    
+                ElseIf 2
+                    Player.setActorVar(rk_VideoCameraEquipmentType, 2)
+                    money -= 699;
+                    Player(Excited)::"A better improvement on security efficiency!"
+                    
+                ElseIf 3
+                    Player.setActorVar(rk_VideoCameraEquipmentType, 3)
+                    money -= 1899;
+                    Player(Excited)::"That one is special, it can engage potential criminals with two-way audio and contact me within seconds, not minutes."
+                    Player(Excited)::"That's a great improvement on security efficiency!"
+                    
+                ElseIf 4
+                    Player.setActorVar(rk_VideoCameraEquipmentType, 4)
+                    money -= 2600;
+                    Player(Excited)::"Now we talk!"
+                    Player(Excited)::"Top security cam. I can't get better than that!"
+                    
+                EndIf
+            EndIf
+          
+            followUp(weed_scene_buy_equipment)
+            
+        ElseIf 3
+            
+            followUp(nn_gl_buyKnife)
+            
+        ElseIf 4
+
+            followUp(nn_gl_buyBaseballBat)
+            
+        ElseIf 5    
+
+            followUp(nn_gl_visit_black_market)
+            
+        Else
+            followUp(rk_scene_Manage_Weed_Cartel)
+        EndIf
+        
+    EndIf
+    
+    passTime(2, 3)
+    
+    SceneEnd()

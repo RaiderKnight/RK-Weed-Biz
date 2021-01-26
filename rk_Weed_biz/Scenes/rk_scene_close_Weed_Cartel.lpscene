@@ -1,0 +1,20 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    //setBackground(street)
+    "Should I stop dealing weeds and close down my well running weed business?"
+    0:: "Yes"
+    1:: "No"
+    
+    If 0
+        "Well I want to start a new life. I'll give up on that shit and its more safe for me."
+        Player:rkOpenedWeedCartel => 0
+    Else
+        "Nah !, I'm just on a bad day? Giving up that easy is not my style."
+    Endif
+    
+    SceneEnd()

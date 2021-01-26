@@ -1,0 +1,12 @@
+ACTION_UNIQUEID: rk_call_weed_dealer
+ACTION_NAME: Call weed dealer (WD)
+WHERE: crime
+WHEN: 0 - 24
+MINUTES: 3 - 5
+TIMEOUT_MINUTES: 0
+ALSO_TIMEOUT: 
+EFFECTS: mood -5 (INTERRUPTED)
+CONDITIONS: energy >= 5 (STAT_COMPARE), rkOpenedWeedCartel >= 1 (STAT_COMPARE)
+MOVE_FIRST: false
+SCENE_ALWAYS: weed_dealer
+ANIMATION: socialize

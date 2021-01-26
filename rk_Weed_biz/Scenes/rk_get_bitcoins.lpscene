@@ -1,0 +1,104 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    If isModEnabled(nn_GangsOfLifePlay)
+        bmState = Player.getActorVar(GL_BM_state)
+    
+        If bmState < 4
+            "You do not have skills about black market yet."
+            "Try to get more info about it by using the 'Visit Black Market' action."
+        
+        ElseIf money < -1
+            "You are in debt my friend. No money, no candies!"
+            
+        Else
+    
+            Player(Happy)::"Let's trade some money for Bitcoins!"
+            "Bitcoins are used to store your extras money. Because if you exceed the limit LifePlay put on money, you will loose your money..."           
+        
+            // Get current bitcoin prices 
+            price_bitcoin1 = 10000
+            price_bitcoin1_local = price_bitcoin1.convertToLocalCurrency()
+            price_bitcoin2 = 50000
+            price_bitcoin2_local = price_bitcoin2.convertToLocalCurrency()
+            price_bitcoin3 = 100000
+            price_bitcoin3_local = price_bitcoin3.convertToLocalCurrency()
+            price_bitcoin4 = 1000000
+            price_bitcoin4_local = price_bitcoin4.convertToLocalCurrency()
+            stock_Bitcoins = Player.getActorVar(stock_Bitcoins)
+
+            Player(Curious)::"How many Bitcoins I will buy?"
+            0:: money >= 9999 ::"Buy 1 Bitcoin for <price_bitcoin1_local>"
+            1:: money >= 49999 ::"Buy 5 Bitcoins for <price_bitcoin2_local>"
+            2:: money >= 99999 ::"Buy 10 Bitcoins for <price_bitcoin3_local>"
+            3:: money >= 99999 ::"Buy 100 Bitcoins for <price_bitcoin4_local>"
+            4:: stock_Bitcoins >= 1 ::"Trade 1 Bitcoin for <price_bitcoin1_local>"
+            5:: stock_Bitcoins >= 5 ::"Trade 5 Bitcoins for <price_bitcoin2_local>"
+            6:: stock_Bitcoins >= 10 ::"Trade 10 Bitcoins for <price_bitcoin3_local>"
+            7:: stock_Bitcoins >= 100 ::"Trade 100 Bitcoins for <price_bitcoin4_local>"
+            99:: "Don't buy anything"
+               
+            If 0
+                money -= price_bitcoin1
+                "<price_bitcoin1_local> on the side! Let's make more cash!"
+                Player.modifyActorVar(stock_Bitcoins, 1)
+                "1 Bitcoin added to your inventory (WD)!"
+                    
+            ElseIf 1
+
+                money -= price_bitcoin2
+                "<price_bitcoin2_local> on the side! Let's do more business!"
+                Player.modifyActorVar(stock_Bitcoins, 5)
+                "5 Bitcoin added to your inventory (WD)!"
+                    
+            ElseIf 2
+
+                money -= price_bitcoin3
+                "When you put <price_bitcoin3_local> on the side! Now you can say that you are rich!"
+                Player.modifyActorVar(stock_Bitcoins, 10)
+                "10 Bitcoin added to your inventory (WD)!"
+                
+            ElseIf 3
+
+                money -= price_bitcoin4
+                "When you put <price_bitcoin4_local> on the side! Now you can say that you are millionaire!"
+                Player.modifyActorVar(stock_Bitcoins, 100)
+                "100 Bitcoin added to your inventory (WD)!"
+            
+            ElseIf 4
+                
+                money += price_bitcoin1
+                "<price_bitcoin1_local> added to your wallet!"
+                Player.modifyActorVar(stock_Bitcoins, -1)
+                    
+            ElseIf 5
+                
+                money += price_bitcoin2
+                "<price_bitcoin2_local> added to your wallet!"
+                Player.modifyActorVar(stock_Bitcoins, -5)
+                    
+            ElseIf 6
+
+                money += price_bitcoin3
+                "<price_bitcoin3_local> added to your money!"
+                Player.modifyActorVar(stock_Bitcoins, -10)
+            
+            ElseIf 7
+
+                money += price_bitcoin4
+                "<price_bitcoin4_local> added to your money!"
+                Player.modifyActorVar(stock_Bitcoins, -100)
+   
+            EndIf
+        EndIf
+        
+    Else
+        "You need to enable the mod nn_GangsOfLifePlay, before using Bitcoins !"    
+        
+    EndIf
+    
+    SceneEnd()

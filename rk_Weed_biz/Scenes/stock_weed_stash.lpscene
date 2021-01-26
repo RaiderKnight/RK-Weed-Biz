@@ -1,0 +1,43 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+        
+        // Get current items inside inventory
+        stash_AK47weed = Player.getActorVar(stash_AK47weed)
+        stash_SSweed = Player.getActorVar(stash_SSweed)
+        stash_WWweed = Player.getActorVar(stash_WWweed)
+        stash_PEweed = Player.getActorVar(stash_PEweed)
+        stash_OGKweed = Player.getActorVar(stash_OGKweed)
+        stash_GSCweed = Player.getActorVar(stash_GSCweed)
+        stash_BBweed = Player.getActorVar(stash_BBweed)
+        stash_GGweed = Player.getActorVar(stash_GGweed)
+ 
+        stock_weed_stash = stash_AK47weed + stash_SSweed + stash_WWweed + stash_PEweed + stash_OGKweed + stash_GSCweed + stash_BBweed + stash_GGweed
+
+    If stock_weed_stash < 1 
+        Player(Anxious)::"I got nothing inside my reserve !"
+    Else
+
+        If stock_weed_stash  < 1
+            Player(Anxious)::"Ok, I don't have any weed! Damn! I better my dealer for a rebatch!"
+        Else
+            
+            0:: "<stash_AK47weed> gram(s) of AK 47"
+            0:: "<stash_SSweed> gram(s) of Sunset Sherbet"
+            0:: "<stash_WWweed> gram(s) of White Widow"
+            0:: "<stash_PEweed> gram(s) of Pineapple Express"
+            0:: "<stash_OGKweed> gram(s) of OG Kush"
+            0:: "<stash_GSCweed> gram(s) of Girl Scout Cookies"
+            0:: "<stash_BBweed> gram(s) of Bruce Banner"
+            0:: "<stash_GGweed> gram(s) of Gorilla Glue"
+            99:: "Go back !"
+            
+        Endif
+
+    Endif
+    
+    SceneEnd()
