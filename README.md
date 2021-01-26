@@ -19,6 +19,8 @@
 <br>
 <p>Optional Mod: <a href="https://github.com/RaiderKnight/RK-Weed-Shop" title="Rk-Weed-Shop">rk_WeedShop</a></p>
 <br>
+<hr>
+<br>
 <h3>How to install</h3>
 <p>Download the mod and add it to : ..\LifePlay\Content\Modules</p>
 <p>Make sure you don't leave an extra directory level for the mod. For example, it should go like this:</p>
