@@ -4,7 +4,7 @@
 <br>
 <h3>rk_Weed_biz :</h3>
 <p>Start your own business as a dealer.</p>
-<p>8 types of strains.</p>
+<p>8 types of strains to buy and sell.</p>
 <p>Contain 10 scenes. </p>
 <p>Buy or trade bitcoins</p>
 <p>1 stash for your goods</p>
@@ -15,6 +15,9 @@
 <br>
 <h3>Module requirements</h3>
 <p>At least LifePlay 3.18</p>
+<p>Mod: nn_GangsOfLifePlay</p>
+<br>
+<p>Optional Mod: <a href="https://github.com/RaiderKnight/RK-Weed-Shop" title="Rk-Weed-Shop">rk_WeedShop</a></p>
 <br>
 <h3>How to install</h3>
 <p>Download the mod and add it to : ..\LifePlay\Content\Modules</p>
