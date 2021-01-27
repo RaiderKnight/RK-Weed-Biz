@@ -1,0 +1,12 @@
+ACTION_UNIQUEID: smoke_blunt
+ACTION_NAME: Smoke a blunt
+WHERE: home, bar, biergarten, cafe, coffee, hotel, nightclub, place_of_worship, pub, tobacco, fraternity, university, brothel, stripclub, prison
+WHEN: 0 - 24
+MINUTES: 0 - 1
+TIMEOUT_MINUTES: 1
+ALSO_TIMEOUT: 
+EFFECTS: 
+CONDITIONS: 
+MOVE_FIRST: true
+SCENE_ALWAYS: smoke_blunt
+ANIMATION: 

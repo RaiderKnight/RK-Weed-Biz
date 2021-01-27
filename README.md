@@ -5,9 +5,10 @@
 <h3>rk_Weed_biz :</h3>
 <p>Start your own business as a dealer.</p>
 <p>8 types of strains to buy and sell.</p>
-<p>Contain 10 scenes. </p>
+<p>Contain 11 scenes. </p>
 <p>Buy or trade bitcoins</p>
 <p>1 stash for your goods</p>
+<p>Smoke blunts</p>
 <p>Buy equipements (little bit empty)</p>
 <p>Rent a bunker (background missing)</p>
 <br>
@@ -26,7 +27,7 @@
 <p>Make sure you don't leave an extra directory level for the mod. For example, it should go like this:</p>
 <p>c:\..\LifePlay\Content\Modules\rk_Weed_biz </p>
 <p><strong>NOT</strong></p>
-<p>c:\..\LifePlay\Content\Modules\RK-Bakery-Shop\rk_Weed_biz</p>
+<p>c:\..\LifePlay\Content\Modules\RK-Weed-Biz\rk_Weed_biz</p>
 <p>After the mod have been installed, make sure the mod is active in the Mod Manager. </p>
 <br>
 <hr>
