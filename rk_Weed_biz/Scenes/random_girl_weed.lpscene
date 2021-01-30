@@ -1852,3 +1852,4 @@ sceneStart()
         EndIf
 
 sceneEnd()
+timeout(200, random_girl_weed)
