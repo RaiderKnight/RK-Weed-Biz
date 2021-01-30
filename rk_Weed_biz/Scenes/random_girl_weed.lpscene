@@ -1,0 +1,1854 @@
+WHAT: all, -sleep
+WHERE: home
+WHEN: 18 - 22
+WHO: 
+OTHER: isAtHome()
+
+sceneStart()
+
+        bmState = Player.getActorVar(GL_BM_state)
+        stock_AK47weed = Player.getActorVar(stock_AK47weed)
+        stock_SSweed = Player.getActorVar(stock_SSweed)
+        stock_WWweed = Player.getActorVar(stock_WWweed)
+        stock_PEweed = Player.getActorVar(stock_PEweed)
+        stock_OGKweed = Player.getActorVar(stock_OGKweed)
+        stock_GSCweed = Player.getActorVar(stock_GSCweed)
+        stock_BBweed = Player.getActorVar(stock_BBweed)
+        stock_GGweed = Player.getActorVar(stock_GGweed)
+        weeddealerLvl = Player.getActorVar(weeddealerLvl)
+        stash_AK47weed = Player.getActorVar(stash_AK47weed)
+        stash_SSweed = Player.getActorVar(stash_SSweed)
+        stash_WWweed = Player.getActorVar(stash_WWweed)
+        stash_PEweed = Player.getActorVar(stash_PEweed)
+        stash_OGKweed = Player.getActorVar(stash_OGKweed)
+        stash_GSCweed = Player.getActorVar(stash_GSCweed)
+        stash_BBweed = Player.getActorVar(stash_BBweed)
+        stash_GGweed = Player.getActorVar(stash_GGweed)
+
+        stock_weed_stash = stash_AK47weed + stash_SSweed + stash_WWweed + stash_PEweed + stash_OGKweed + stash_GSCweed + stash_BBweed + stash_GGweed
+        weedstck = stock_AK47weed + stock_SSweed + stock_WWweed + stock_PEweed + stock_OGKweed + stock_GSCweed + stock_BBweed + stock_GGweed
+        weedbundle = stock_weed_stash + weedstck
+
+        Valerie = generatePerson(rk_sc_model_Valerie_Dior)
+        Valerie.hide()
+        AngryNoYes = Random(1,80)
+        
+        "My phone rang ... It's <Valerie.name> calling. I guess she needs weed again, she's one of my best client, sexy but weirdo!"
+        Player(Curious):: "Hi <Valerie.name>, why your calling me, everything ok?"
+        
+        Valerie(Flirty):: "Hi <Player.name>, hmm! yeah, but I need you to do me a favor, I have nothing to smoke and I have no cash. So do you think you could help me?"
+        Player(Curious):: "Maybe, but it depends, How many you want ?"
+        
+        Valerie(Flirty):: "Basically I'm going to a party and it would be cool to have, I don't know, 5grams?"
+        Player(Curious):: "Ok, but that much, it depends on what you offer me in exchange?"
+        passTime(0.05, 0.10)
+
+        If AngryNoYes <= 10
+        
+            Valerie(Angry):: "Fuck you! I'm not that kind of slut!"
+            Player(Annoyed)::"Damn! That bitch is crazy! Usualy she like to have some fun!"
+            Player(Annoyed)::"I tell you! She'll call me back, begging again for weed! I know her...!"
+            
+        ElseIf AngryNoYes >= 11 && AngryNoYes <= 20
+
+            Valerie(Disgusted):: "Damn! In fact, I was thinking you would like my brother's knife, but forget it!"
+            Player(Annoyed)::"What ever ??"
+            
+        ElseIf AngryNoYes >= 21 && AngryNoYes <= 30
+            Valerie(Flirty):: "Bah! I can suck your dick if you want! I don't know, I just want to smoke a big bat!"
+            "What do you say?"
+            1::"Ok, come to my place!"
+            2::"Hmm! That's not enough lovely ?"
+            99::"Sorry, I have no weed!"
+            
+            If 1
+                passTime(0.10, 0.15)
+                "She finally arrive at my place! I let her in."
+                Valerie.show()
+                Valerie.dress()
+                
+                Valerie(Flirty):: "Before I suck your dick, give me the weed first!"
+                
+                Player::"In which reserve I'm gonna dig?"
+                1::"From my Pockets: <weedstck>g"
+                2::"From my Stash: <stock_weed_stash>g"
+                99::"Damn, I have no weed left!"
+
+                If 1
+                    If stock_AK47weed >= 6
+                
+                        Player.modifyActorVar(stock_AK47weed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                    ElseIf stock_SSweed >= 6
+                
+                        Player.modifyActorVar(stock_SSweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                    ElseIf stock_WWweed >= 6
+                
+                        Player.modifyActorVar(stock_WWweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                    ElseIf stock_PEweed >= 6
+                
+                        Player.modifyActorVar(stock_PEweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                    ElseIf stock_OGKweed >= 6
+                
+                        Player.modifyActorVar(stock_OGKweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                    ElseIf stock_GSCweed >= 6
+                
+                        Player.modifyActorVar(stock_GSCweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                    ElseIf stock_BBweed >= 6
+                
+                        Player.modifyActorVar(stock_BBweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                    ElseIf stock_GGweed >= 6
+                
+                        Player.modifyActorVar(stock_GGweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                
+                ElseIf 2
+                
+                    If stash_AK47weed >= 6
+                
+                        Player.modifyActorVar(stash_AK47weed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                
+                    ElseIf stash_SSweed >= 6
+                
+                        Player.modifyActorVar(stash_SSweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                
+                    ElseIf stash_WWweed >= 6
+                
+                        Player.modifyActorVar(stash_WWweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                
+                    ElseIf stash_PEweed >= 6
+                
+                        Player.modifyActorVar(stash_PEweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                
+                    ElseIf stash_OGKweed >= 6
+                
+                        Player.modifyActorVar(stash_OGKweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                
+                    ElseIf stash_GSCweed >= 6
+                
+                        Player.modifyActorVar(stash_GSCweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                
+                    ElseIf stash_BBweed >= 6
+                
+                        Player.modifyActorVar(stash_BBweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+            
+                
+                    ElseIf stash_GGweed >= 6
+                
+                        Player.modifyActorVar(stash_GGweed, -5)
+                        Valerie(Flirty):: "Good, now show me your dick so I can go to my party!"
+                        Player(Happy)::"Oh yeah babe! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                    
+                ElseIf 99
+                
+                    Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                    Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                    Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                EndIf
+
+            ElseIf 2
+                
+                Valerie(Disgusted):: "Hey, you know what? nevermind!"
+                
+            EndIf
+            
+        ElseIf AngryNoYes >= 31 && AngryNoYes <= 40
+        
+            Valerie(Angry):: "Fuck off! Your just a weed dealer! I only fuck with rich guy!"        
+            Player(Annoyed)::"Damn! That bitch is crazy! Sometime she say yes or 'fuck off', like right now!"
+            Player(Annoyed)::"I tell you! She'll call me back, begging for weed! I know her...!"
+            
+        ElseIf AngryNoYes >= 41 && AngryNoYes <= 50
+
+            Valerie(Flirty):: "Bah! A handjob is it enough! I don't know, I just want some weeds!"
+            "What do you say?"
+            1::"Ok, come to my place!"
+            2::"Hmm! That's not enough lovely ?"
+            99::"Sorry, I have no weed!"
+            
+            If 1
+                passTime(0.10, 0.15)
+                "She finally arrive at my place! I let her in."
+                Valerie.show()
+                Valerie.dress()
+                
+                Valerie(Flirty):: "Before, doing anything, give me the weed first!"
+                
+                Player(Happy)::"All right! Here we go!"
+                "In which reserve I'm gonna dig?"
+                1::"From my Pockets: <weedstck>g"
+                2::"From my Stash: <stock_weed_stash>g"
+                99::"Damn, I have no weed left!"
+
+                If 1
+                
+                    If stock_AK47weed >= 6
+                        
+                        Player.modifyActorVar(stock_AK47weed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                    ElseIf stock_SSweed >= 6
+                        
+                        Player.modifyActorVar(stock_SSweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_WWweed >= 6
+                        
+                        Player.modifyActorVar(stock_WWweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_PEweed >= 6
+                        
+                        Player.modifyActorVar(stock_PEweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_OGKweed >= 6
+                        
+                        Player.modifyActorVar(stock_OGKweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_GSCweed >= 6
+                        
+                        Player.modifyActorVar(stock_GSCweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_BBweed >= 6
+                        
+                        Player.modifyActorVar(stock_BBweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_GGweed >= 6
+                        
+                        Player.modifyActorVar(stock_GGweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                     
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                    
+                ElseIf 2
+                
+                    If stash_AK47weed >= 6
+                    
+                        Player.modifyActorVar(stash_AK47weed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_SSweed >= 6
+                    
+                        Player.modifyActorVar(stash_SSweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_WWweed >= 6
+                    
+                        Player.modifyActorVar(stash_WWweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_PEweed >= 6
+                    
+                        Player.modifyActorVar(stash_PEweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_OGKweed >= 6
+                    
+                        Player.modifyActorVar(stash_OGKweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_GSCweed >= 6
+                    
+                        Player.modifyActorVar(stash_GSCweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_BBweed >= 6
+                    
+                        Player.modifyActorVar(stash_BBweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_GGweed >= 6
+                    
+                        Player.modifyActorVar(stash_GGweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your rod!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                
+                ElseIf 99
+                
+                    Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                    Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                    Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                EndIf
+            
+            ElseIf 2
+                Valerie(Curious):: "What do you want?"
+                Player(Happy)::"I want to feel you from the inside!"
+                Valerie(Curious):: "Ok but, I have a boyfriend, so anal only, is it ok?"
+                Player(Happy)::"That's perfect!"
+                
+                passTime(0.10, 0.15)
+                "She finally arrive at my place! I let her in."
+                Valerie.show()
+                Valerie.dress()
+                
+                Valerie(Flirty):: "Before, doing anything, give me my weed first!"
+                
+                Player(Happy)::"All right! Here we go!"
+                "In which reserve I'm gonna dig?"
+                1::"From my Pockets: <weedstck>g"
+                2::"From my Stash: <stock_weed_stash>g"
+                99::"Damn, I have no weed left!"
+
+                If 1
+                
+                    If stock_AK47weed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_AK47weed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                    ElseIf stock_SSweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_SSweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_WWweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_WWweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_PEweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_PEweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_OGKweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_OGKweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_GSCweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_GSCweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_BBweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_BBweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_GGweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_GGweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                    
+                    
+
+                ElseIf 2
+                
+                    If stash_AK47weed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_AK47weed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_SSweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_SSweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_WWweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_WWweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_PEweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_PEweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_OGKweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_OGKweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_GSCweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_GSCweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_BBweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_BBweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_GGweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_GGweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+            
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                
+                ElseIf 99
+                
+                    Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                    Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                    Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                EndIf
+                
+            EndIf
+            
+        ElseIf AngryNoYes >= 51 && AngryNoYes <= 60
+        
+            Valerie(Disgusted):: "You know what? nevermind! I'm gonna call someone else!"
+            Player(Annoyed)::"What ever ??"
+
+        ElseIf AngryNoYes >= 61 && AngryNoYes <= 70
+          
+            Valerie(Angry):: "Fuck you! I'm not that kind of slut!"
+            Player(Annoyed)::"Damn! That bitch is crazy! The fact is, yes she is!"
+            Player(Annoyed)::"I tell you! She'll call me back, begging again for weed! I know her...!"
+
+        ElseIf AngryNoYes >= 71 && AngryNoYes <= 80
+        
+            Valerie(Flirty):: "Bah! I guess it's your lucky day because I'm fucking horny right now! You got 3 choices !"
+            "What do you choose?"
+            2::"A handjob"
+            1::"A blowjob"
+            3::"Lick her pussy"
+            4::"Penetrate her ass"
+            99::"Sorry, I have no weed!"
+            
+            Valerie(Flirty):: "Ok my little cocky, I will arrive in a few!"
+            
+            If 1
+                passTime(0.10, 0.15)
+                "She finally arrive at my place! I let her in."
+                Valerie.show()
+                Valerie.dress()
+                
+                Valerie(Happy):: "Ok I'm here, first, show me the weed!"
+                Player(Happy)::"All right! Here we go!"
+                "In which reserve I'm gonna dig?"
+                1::"From my Pockets: <weedstck>g"
+                2::"From my Stash: <stock_weed_stash>g"
+                99::"Damn, I have no weed left!"
+
+                If 1
+                
+                    If stock_AK47weed >= 6
+                
+                        Player.modifyActorVar(stock_AK47weed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+            
+                    ElseIf stock_SSweed >= 6
+
+                        Player.modifyActorVar(stock_SSweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stock_WWweed >= 6
+
+                        Player.modifyActorVar(stock_WWweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stock_PEweed >= 6
+
+                        Player.modifyActorVar(stock_PEweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stock_OGKweed >= 6
+
+                        Player.modifyActorVar(stock_OGKweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stock_GSCweed >= 6
+
+                        Player.modifyActorVar(stock_GSCweed, -5)
+                
+                            Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stock_BBweed >= 6
+
+                        Player.modifyActorVar(stock_BBweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stock_GGweed >= 6
+
+                        Player.modifyActorVar(stock_GGweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                
+                ElseIf 2
+                
+                    If stash_AK47weed >= 6
+
+                        Player.modifyActorVar(stash_AK47weed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_SSweed >= 6
+
+                        Player.modifyActorVar(stash_SSweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_WWweed >= 6
+
+                        Player.modifyActorVar(stash_WWweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_PEweed >= 6
+
+                        Player.modifyActorVar(stash_PEweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_OGKweed >= 6
+
+                        Player.modifyActorVar(stash_OGKweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_GSCweed >= 6
+
+                        Player.modifyActorVar(stash_GSCweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_BBweed >= 6
+
+                        Player.modifyActorVar(stash_BBweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_GGweed >= 6
+
+                        Player.modifyActorVar(stash_GGweed, -5)
+                
+                        Valerie(Flirty):: "Smell good! I'm hurry to smoke a big bat!"
+                        Player(Happy)::"But right now! Instead of smoking a big bat, you will suck my big bat!"
+                        Player.strip()
+
+                        sex(Valerie, Player)
+                        Filter(Blowjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                
+                ElseIf 99
+                
+                    Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                    Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                    Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                EndIf
+            
+            ElseIf 2
+                passTime(0.10, 0.15)
+                "She finally arrive at my place! I let her in."
+                Valerie.show()
+                Valerie.dress()
+                
+                Valerie(Flirty):: "Before, doing anything, give me the weed first!"
+                
+                Player(Happy)::"All right! Here we go!"
+                "In which reserve I'm gonna dig?"
+                1::"From my Pockets: <weedstck>g"
+                2::"From my Stash: <stock_weed_stash>g"
+                99::"Damn, I have no weed left!"
+
+                If 1
+                
+                    If stock_AK47weed >= 6
+                        
+                        Player.modifyActorVar(stock_AK47weed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                    ElseIf stock_SSweed >= 6
+                        
+                        Player.modifyActorVar(stock_SSweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_WWweed >= 6
+                        
+                        Player.modifyActorVar(stock_WWweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_PEweed >= 6
+                        
+                        Player.modifyActorVar(stock_PEweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_OGKweed >= 6
+                        
+                        Player.modifyActorVar(stock_OGKweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_GSCweed >= 6
+                        
+                        Player.modifyActorVar(stock_GSCweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_BBweed >= 6
+                        
+                        Player.modifyActorVar(stock_BBweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                        
+                
+                    ElseIf stock_GGweed >= 6
+                        
+                        Player.modifyActorVar(stock_GGweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                     
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                    
+                ElseIf 2
+                
+                    If stash_AK47weed >= 6
+                    
+                        Player.modifyActorVar(stash_AK47weed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_SSweed >= 6
+                    
+                        Player.modifyActorVar(stash_SSweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_WWweed >= 6
+                    
+                        Player.modifyActorVar(stash_WWweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_PEweed >= 6
+                    
+                        Player.modifyActorVar(stash_PEweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_OGKweed >= 6
+                    
+                        Player.modifyActorVar(stash_OGKweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_GSCweed >= 6
+                    
+                        Player.modifyActorVar(stash_GSCweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_BBweed >= 6
+                    
+                        Player.modifyActorVar(stash_BBweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                
+                    ElseIf stash_GGweed >= 6
+                    
+                        Player.modifyActorVar(stash_GGweed, -5)
+                        Valerie(Flirty):: "Ok I guess, it's hanjob time, show me your dick!"
+                        "You strip down and Valerie begin to grab your dick and rub it like a real pro!"
+                        Player.strip()
+                        
+                        sex(Valerie, Player)
+                        Filter(Handjob)
+                        
+                        perversion += 1
+                        Player.arousal -= 5
+                
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                
+                ElseIf 99
+                
+                    Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                    Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                    Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                EndIf
+                
+            ElseIf 3
+                passTime(0.10, 0.15)
+                "She finally arrive at my place! I let her in."
+                Valerie.show()
+                Valerie.dress()
+                
+                Valerie(Flirty):: "So, you'd rather lick my pussy! How nice!"
+                "It is then that she lowers her panties and said to me: Come and lick my pussy!"
+                Player.strip()
+                Valerie.strip()
+                
+                sex(Player, Valerie)
+                Filter(Licking)
+                perversion += 1
+                
+                "hey ho !"
+            
+            ElseIf 4
+                passTime(0.10, 0.15)
+                "She finally arrive at my place! I let her in."
+                Valerie.show()
+                Valerie.dress()
+                
+                Valerie(Flirty):: "Before, doing anything, give me my weed first!"
+                
+                Player(Happy)::"All right! Here we go!"
+                "In which reserve I'm gonna dig?"
+                1::"From my Pockets: <weedstck>g"
+                2::"From my Stash: <stock_weed_stash>g"
+                99::"Damn, I have no weed left!"
+
+                If 1
+                
+                    If stock_AK47weed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_AK47weed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                    ElseIf stock_SSweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_SSweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_WWweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_WWweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_PEweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_PEweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_OGKweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_OGKweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_GSCweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_GSCweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_BBweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_BBweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stock_GGweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stock_GGweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                    
+                    
+
+                ElseIf 2
+                
+                    If stash_AK47weed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_AK47weed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_SSweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_SSweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_WWweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_WWweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_PEweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_PEweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_OGKweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_OGKweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_GSCweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_GSCweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_BBweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_BBweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                
+                    ElseIf stash_GGweed >= 6
+                        
+                        Valerie(Flirty):: "Thanks! So, where you want to do that?"
+                        Player.modifyActorVar(stash_GGweed, -5)
+                        Player(Happy)::"Righ here, right now!"
+                
+                        "You both strip down and start doing sex!"
+                
+                        Player.strip()
+                        Valerie.strip()
+                
+                        sex(Player, Valerie)
+                        Filter(Anal)
+                        
+                        perversion += 2
+                        Player.arousal -= 5
+                    
+                    Else
+                        
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                        Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                    EndIf
+                
+                ElseIf 99
+                
+                    Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                    Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
+                    Valerie(Angry):: "Stupid fuck!! Buy!"
+                    
+                EndIf
+                
+            EndIf
+
+        EndIf
+
+sceneEnd()

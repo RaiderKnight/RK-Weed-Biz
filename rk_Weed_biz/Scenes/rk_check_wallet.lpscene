@@ -1,0 +1,47 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    
+    If isModEnabled(nn_GangsOfLifePlay)
+
+        If bmState < 4
+            "You do not have skills about black market yet."
+            "Try to get more info about it by using the 'Visit Black Market' action."
+            
+        Else
+
+            officeSize = Player.getActorVar(rk_PlayerOfficeLocationSize)
+            If officeSize > 0
+                moveTo(Home)
+                setBackground3D(Modules/vin_Base/World/bar___vin01.lpworld)
+            EndIf
+    
+            "What do you want to do?"
+    
+            stayInMenu = true
+            
+            While stayInMenu
+            
+                11:: "Show Bitcoin inventory"
+                99:: "Exit"
+                
+                If  11
+                    "You have <stock_Bitcoins> Bitcoin(s)"
+                    "If you need more bitcoins, visit the bank!"
+                    stayInMenu = false
+                Else
+                    stayInMenu = false
+                EndIf
+                
+            EndWhile
+            
+        EndIf
+    Else
+        "You need to enable the mod nn_GangsOfLifePlay, before beginning to sell drugs !"   
+    EndIf   
+    
+    SceneEnd()

@@ -9,7 +9,8 @@ OTHER: none
     
     If isModEnabled(nn_GangsOfLifePlay)
         bmState = Player.getActorVar(GL_BM_state)
-    
+        weeddealerLvl = Player.getActorVar(weeddealerLvl)
+        
         If bmState < 4
             "You do not have skills about black market yet."
             "Try to get more info about it by using the 'Visit Black Market' action."

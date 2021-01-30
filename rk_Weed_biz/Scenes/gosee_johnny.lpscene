@@ -7,14 +7,26 @@ OTHER: none
     SceneStart()
     
     If money < -5
-        Player(Anxious)::"I am in debt. The store will not sell me any weed."
+        Player(Anxious)::"I am in debt. The dealer will never sell me weed."
         
     Else
-            JohnActor = generatePerson(rk_ModelM_Johnny_Boy)
-            JohnActor.show()
-            JohnActor.dress()
-            dressFormal()
+        JohnActor = generatePerson(rk_ModelM_Johnny_Boy)
+        JohnActor.show()
+        JohnActor.dress()
+        Bar_Owner = generatePersonTemporary()
+        Bar_Owner.show()
+        Bar_Owner.dress()
+        dressFormal()
             
+        "I approach the bar owner and ask him:"
+        Player::"Can I talk to Johnny?"
+        Bar_Owner(Curious)::"Who's asking?"
+        Player::"<Player.name>"  
+        Bar_Owner(Curious)::"You doesn't look like a dog so, let me check! Sometime he's left, but he will come back if he is!"
+        JNoYes = Random(1,2)
+        
+        If JNoYes == 1
+        
             JohnActor(Curious)::"Yes, what can I do for you?"
             
             Player::"Do you have any weed to sell?"
@@ -124,5 +136,13 @@ OTHER: none
                 passTime(1,2)
                 
             Endif
+            
+        Else
+        
+            "After few minutes!"
+            Bar_Owner(Curious)::"Sorry, Johnny is not here! Come back later!"
+            Player::"Ok, thanks!"
+        
+        Endif
     Endif
 SceneEnd()
