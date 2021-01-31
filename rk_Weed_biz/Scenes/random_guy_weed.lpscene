@@ -1,0 +1,335 @@
+WHAT: all, -sleep
+WHERE: home
+WHEN: 15 - 24
+WHO: 
+OTHER: isAtHome()
+
+sceneStart()
+
+    bmState = Player.getActorVar(GL_BM_state)
+    stock_AK47weed = Player.getActorVar(stock_AK47weed)
+    stock_SSweed = Player.getActorVar(stock_SSweed)
+    stock_WWweed = Player.getActorVar(stock_WWweed)
+    stock_PEweed = Player.getActorVar(stock_PEweed)
+    stock_OGKweed = Player.getActorVar(stock_OGKweed)
+    stock_GSCweed = Player.getActorVar(stock_GSCweed)
+    stock_BBweed = Player.getActorVar(stock_BBweed)
+    stock_GGweed = Player.getActorVar(stock_GGweed)
+    weeddealerLvl = Player.getActorVar(weeddealerLvl)
+    stash_AK47weed = Player.getActorVar(stash_AK47weed)
+    stash_SSweed = Player.getActorVar(stash_SSweed)
+    stash_WWweed = Player.getActorVar(stash_WWweed)
+    stash_PEweed = Player.getActorVar(stash_PEweed)
+    stash_OGKweed = Player.getActorVar(stash_OGKweed)
+    stash_GSCweed = Player.getActorVar(stash_GSCweed)
+    stash_BBweed = Player.getActorVar(stash_BBweed)
+    stash_GGweed = Player.getActorVar(stash_GGweed)
+    stock_Bitcoins = Player.getActorVar(stock_Bitcoins)
+
+    stock_weed_stash = stash_AK47weed + stash_SSweed + stash_WWweed + stash_PEweed + stash_OGKweed + stash_GSCweed + stash_BBweed + stash_GGweed
+    weedstck = stock_AK47weed + stock_SSweed + stock_WWweed + stock_PEweed + stock_OGKweed + stock_GSCweed + stock_BBweed + stock_GGweed
+    weedbundle = stock_weed_stash + weedstck
+    
+    Actor = generatePersonTemporary()
+    Actor.hide()
+    
+    Steal4Weed = Random(1,20)
+
+    "My phone rang ... It's one of my weed client calling!"
+    Player(Curious):: "Hi <Actor.name>, why your calling me?"
+    
+    If Steal4Weed >= 0 && Steal4Weed <= 10
+        Actor(Curious):: "Hi <Player.name>, I call you because I have few things to trade for weed, if you want. Can I come to your place?"
+    
+        "What do you say?"
+        1::"Ok, come !"
+        2::"Call me later!"
+    
+        If 1
+            
+            Price2 = 400*Random(4, 10)
+            Price3 = 150*Random(4, 10)
+            Actor.show()
+            Actor.dress()
+            
+            "<Actor.name> finally arrive at my place! I let <Actor.him_or_her> in."
+            Player(Curious):: "So, what do you got for me?"
+            Actor(Happy):: "Not a lot but I think you will like! See..."
+            "What do you choose?"
+            0:: stash_AK47weed >= 1 || stock_AK47weed >= 1::"6 alcohol drinks for 1g of AK47"
+            1:: stash_BBweed >= 3 || stock_BBweed >= 3::"60 tobacco for 3g of Bruce Banner"
+            2:: stash_GGweed >= 7 || stock_GGweed >= 7::"3 gifts for 7g of Gorilla Glue"
+            3:: stash_GSCweed >= 14 || stock_GSCweed >= 14::" for 14g of Girl Scout Cookies"
+            4:: stash_WWweed >= 28 || stock_WWweed >= 28::"A computer for 28g of White Widow"
+            5:: stash_BBweed >= 448 || stock_BBweed >= 448::"1 Bitcoins for 448g of Bruce Banner"
+            6::"I don't have anything to trade!"
+            
+            If 0
+            
+                Player(Happy)::"Here's your 1g of AK47!"
+                
+                If stock_AK47weed >= 1
+                
+                    Player.modifyActorVar(stock_AK47weed, -1)
+                    Actor(Happy)::"Here's your 6 alcohol drinks!"
+                    Player:stock_alcohol += 6
+                
+                Elseif stash_AK47weed >= 1
+                    
+                    Player.modifyActorVar(stash_AK47weed, -1)
+                    Actor(Happy)::"Here's your 6 alcohol drinks!"
+                    Player:stock_alcohol += 6
+                    
+                Else
+                
+                    Player(Confused)::"Fuck, I don't know what to say, I don't have any weed left!"
+                    Actor(Confused)::"Ok, I'll come back later!"
+                
+                Endif
+            
+            ElseIf 1
+            
+                Player(Happy)::"Here's your 3g of Bruce Banner!"
+                
+                If stock_BBweed >= 3
+                
+                    Player.modifyActorVar(stock_BBweed, -3)
+                    Actor(Happy)::"Here's your 60 tobacco!"
+                    Player:stock_tobacco += 60
+                
+                Elseif stash_BBweed >= 3
+                
+                    Player.modifyActorVar(stash_BBweed, -3)
+                    Actor(Happy)::"Here's your 60 tobacco!"
+                    Player:stock_tobacco += 60
+                
+                Else
+                
+                    Player(Confused)::"Fuck, I don't know what to say, I don't have any weed left!"
+                    Actor(Confused)::"Ok, I'll come back later!"
+                
+                Endif
+            
+            ElseIf 2
+            
+                Player(Happy)::"Here's your 7g of Gorilla Glue!"
+                
+                If stock_GGweed >= 7
+                
+                    Player.modifyActorVar(stock_GGweed, -7)
+                    Actor(Happy)::"Here's your 3 gifts!"
+                    Player:stock_gift += 3
+                
+                Elseif stash_GGweed >= 7
+                
+                    Player.modifyActorVar(stash_GGweed, -7)
+                    Actor(Happy)::"Here's your 3 gifts!"
+                    Player:stock_gift += 3
+                
+                Else
+                
+                    Player(Confused)::"Fuck, I don't know what to say, I don't have any weed left!"
+                    Actor(Confused)::"Ok, I'll come back later!"
+                
+                Endif
+            
+            ElseIf 3
+            
+                Player(Happy)::"Here's your 14g of Girl Scout Cookies!"
+                
+                If stock_GSCweed >= 14
+                
+                    Player.modifyActorVar(stock_GSCweed, -14)
+                    Actor(Happy)::"Here's your Luxury product!"
+                    Player:furniture_value += Price3
+                
+                Elseif stash_GSCweed >= 14
+                
+                    Player.modifyActorVar(stash_GSCweed, -14)
+                    Actor(Happy)::"Here's your Luxury product!"
+                    Player:furniture_value += Price3
+                
+                Else
+                
+                    Player(Confused)::"Fuck, I don't know what to say, I don't have any weed left!"
+                    Actor(Confused)::"Ok, I'll come back later!"
+                
+                Endif
+            
+            ElseIf 4
+            
+                Player(Happy)::"Here's your 28g of White Widow!"
+
+                If stock_WWweed >= 28
+                
+                    Player.modifyActorVar(stock_WWweed, -28)
+                    Actor(Happy)::"Here's your computer!"
+                    Player:appliance_value += Price2
+                
+                Elseif stash_WWweed >= 28
+                
+                    Player.modifyActorVar(stash_WWweed, -28)
+                    Actor(Happy)::"Here's your computer!"
+                    Player:appliance_value += Price2
+                
+                Else
+                
+                    Player(Confused)::"Fuck, I don't know what to say, I don't have any weed left!"
+                    Actor(Confused)::"Ok, I'll come back later!"
+                
+                Endif
+            
+            ElseIf 5
+            
+                Player(Happy)::"Here's your 448g of Bruce Banner!"
+                    
+                If stock_BBweed >= 448
+                
+                    Player.modifyActorVar(stock_BBweed, -448)
+                    Actor(Happy)::"Here's your Bitcoin!"
+                    Player.modifyActorVar(stock_Bitcoins, 1)
+                
+                Elseif stash_BBweed >= 448
+                
+                    Player.modifyActorVar(stash_BBweed, -448)
+                    Actor(Happy)::"Here's your Bitcoin!"
+                    Player.modifyActorVar(stock_Bitcoins, 1)
+                
+                Else
+                
+                    Player(Confused)::"Fuck, I don't know what to say, I don't have any weed left!"
+                    Actor(Confused)::"Ok, I'll come back later!"
+                
+                Endif
+            
+            Endif
+            
+        Endif
+        
+        
+    ElseIf Steal4Weed >= 11 && Steal4Weed <= 20
+    
+        Actor(Curious):: "Hi <Player.name>, I call you because I found something you might want. Can I come to your place?"
+    
+        "What do you say?"
+        1::"Ok, come !"
+        2::"Call me later!"
+        
+        If 1
+           
+            Actor.show()
+            Actor.dress()
+            "<Actor.name> finally arrive at my place! I let <Actor.him_or_her> in."
+            Actor(Happy)::"<Player.name>, look I found, a pack of 25 bullets."
+            Actor(Happy)::"If you want it, I want 10g of any weed for a pack of 25 bullets."
+           
+            "What do you say?"
+            1::"Ok, that can be useful!"
+            2::"Refuse!"
+           
+            If 1
+            
+                Actor(Happy)::"Here's your pack of 25 bullets!"
+                Player:glGunAmmo += 25
+                
+                "In which reserve I'm gonna dig?"
+                1::"From my Pockets: <weedstck>g"
+                2::"From my Stash: <stock_weed_stash>g"
+                99::"I have no weed !"
+                    
+                If 1
+
+                    If stock_AK47weed >= 10
+                        Player(Happy)::"Here's your 10g of AK 47!"
+                        Player.modifyActorVar(stock_AK47weed, -10)
+                    
+                    ElseIf stock_SSweed >= 10
+                        Player(Happy)::"Here's your 10g of Sunset Sherbet!"
+                        Player.modifyActorVar(stock_SSweed, -10)
+                    
+                    ElseIf stock_WWweed >= 10
+                        Player(Happy)::"Here's your 10g of White Widow!"
+                        Player.modifyActorVar(stock_WWweed, -10)
+                    
+                    ElseIf stock_PEweed >= 10
+                        Player(Happy)::"Here's your 10g of Pineapple Express!"
+                        Player.modifyActorVar(stock_PEweed, -10)
+                    
+                    ElseIf stock_OGKweed >= 10
+                        Player(Happy)::"Here's your 10g of OG Kush!"
+                        Player.modifyActorVar(stock_OGKweed, -10)
+                    
+                    ElseIf stock_GSCweed >= 10
+                        Player(Happy)::"Here's your 10g of Girl Scout Cookies!"
+                        Player.modifyActorVar(stock_GSCweed, -10)
+                    
+                    ElseIf stock_BBweed >= 10
+                        Player(Happy)::"Here's your 10g of Bruce Banner!"
+                        Player.modifyActorVar(stock_BBweed, -10)
+                    
+                    ElseIf stock_GGweed >= 10
+                        Player(Happy)::"Here's your 10g of Gorilla Glue!"
+                        Player.modifyActorVar(stock_GGweed, -10)
+                    
+                    EndIf
+                    
+                Elseif 2
+                
+                    If stash_AK47weed >= 10
+                        Player(Happy)::"Here's your 10g of AK 47!"
+                        Player.modifyActorVar(stash_AK47weed, -10)
+                    
+                    ElseIf stash_SSweed >= 10
+                        Player(Happy)::"Here's your 10g of Sunset Sherbet!"
+                        Player.modifyActorVar(stash_SSweed, -10)
+                    
+                    ElseIf stash_WWweed >= 10
+                        Player(Happy)::"Here's your 10g of White Widow!"
+                        Player.modifyActorVar(stash_WWweed, -10)
+                    
+                    ElseIf stash_PEweed >= 10
+                        Player(Happy)::"Here's your 10g of Pineapple Express!"
+                        Player.modifyActorVar(stash_PEweed, -10)
+                    
+                    ElseIf stash_OGKweed >= 10
+                        Player(Happy)::"Here's your 10g of OG Kush!"
+                        Player.modifyActorVar(stash_OGKweed, -10)
+                    
+                    ElseIf stash_GSCweed >= 10
+                        Player(Happy)::"Here's your 10g of Girl Scout Cookies!"
+                        Player.modifyActorVar(stash_GSCweed, -10)
+                    
+                    ElseIf stash_BBweed >= 10
+                        Player(Happy)::"Here's your 10g of Bruce Banner!"
+                        Player.modifyActorVar(stash_BBweed, -10)
+                    
+                    ElseIf stash_GGweed >= 10
+                        Player(Happy)::"Here's your 10g of Gorilla Glue!"
+                        Player.modifyActorVar(stash_GGweed, -10)
+            
+                    EndIf
+                    
+                Elseif 99
+                
+                    Player(Confused)::"Fuck, I don't know what to say, I don't have any weed left!"
+                    Actor(Happy)::"It's all right, give me back my 25 bullets!"
+                    Player:glGunAmmo += 25
+                    
+                    Actor(Happy)::"Thanks, see you later!"
+                
+                Endif
+                    
+            Endif
+        
+        Endif
+    
+    ElseIf Steal4Weed >= 21 && Steal4Weed <= 30
+    ElseIf Steal4Weed >= 31 && Steal4Weed <= 40
+    ElseIf Steal4Weed >= 41 && Steal4Weed <= 50
+    ElseIf Steal4Weed >= 51 && Steal4Weed <= 60
+    ElseIf Steal4Weed >= 61 && Steal4Weed <= 70
+    ElseIf Steal4Weed >= 71 && Steal4Weed <= 80
+    Endif
+
+sceneEnd()
+timeout(200, random_guy_weed)

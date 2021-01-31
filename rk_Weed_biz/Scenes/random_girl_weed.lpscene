@@ -43,7 +43,7 @@ sceneStart()
         Player(Curious):: "Ok, but that much, it depends on what you offer me in exchange?"
         passTime(0.05, 0.10)
 
-        If AngryNoYes <= 10
+        If AngryNoYes >= 0 && AngryNoYes <= 10
         
             Valerie(Angry):: "Fuck you! I'm not that kind of slut!"
             Player(Annoyed)::"Damn! That bitch is crazy! Usualy she like to have some fun!"
