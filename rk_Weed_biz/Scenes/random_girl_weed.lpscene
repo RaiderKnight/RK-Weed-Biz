@@ -2,7 +2,7 @@ WHAT: all, -sleep
 WHERE: home
 WHEN: 18 - 22
 WHO: 
-OTHER: isAtHome()
+OTHER: isAtHome() && isMale()
 
 sceneStart()
 
@@ -37,7 +37,7 @@ sceneStart()
         Player(Curious):: "Hi <Valerie.name>, why your calling me, everything ok?"
         
         Valerie(Flirty):: "Hi <Player.name>, hmm! yeah, but I need you to do me a favor, I have nothing to smoke and I have no cash. So do you think you could help me?"
-        Player(Curious):: "Maybe, but it depends, How many you want ?"
+        Player(Curious):: "Maybe, but it depends, How many you want?"
         
         Valerie(Flirty):: "Basically I'm going to a party and it would be cool to have, I don't know, 5grams?"
         Player(Curious):: "Ok, but that much, it depends on what you offer me in exchange?"
@@ -52,7 +52,7 @@ sceneStart()
         ElseIf AngryNoYes >= 11 && AngryNoYes <= 20
 
             Valerie(Disgusted):: "Damn! In fact, I was thinking you would like my brother's knife, but forget it!"
-            Player(Annoyed)::"What ever ??"
+            Player(Annoyed)::"Whatever ??"
             
         ElseIf AngryNoYes >= 21 && AngryNoYes <= 30
             Valerie(Flirty):: "Bah! I can suck your dick if you want! I don't know, I just want to smoke a big bat!"
@@ -181,7 +181,7 @@ sceneStart()
                         
                     Else
                         
-                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!"
                         Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
                         Valerie(Angry):: "Stupid fuck!! Buy!"
                     
@@ -1833,7 +1833,7 @@ sceneStart()
                     
                     Else
                         
-                        Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                        Valerie(Angry):: "What! Are you telling me that I came for nothing!"
                         Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
                         Valerie(Angry):: "Stupid fuck!! Buy!"
                     
@@ -1841,7 +1841,7 @@ sceneStart()
                 
                 ElseIf 99
                 
-                    Valerie(Angry):: "What! Are you telling me that I came for nothing!" 
+                    Valerie(Angry):: "What! Are you telling me that I came for nothing!"
                     Player(Annoyed)::"I tell you! I'm sorry, I didn't check before, I...!"
                     Valerie(Angry):: "Stupid fuck!! Buy!"
                     

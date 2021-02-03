@@ -5,15 +5,19 @@
 <h3>rk_Weed_biz :</h3>
 <p>Start your own business as a dealer.</p>
 <p>8 types of strains to buy and sell.</p>
-<p>Contain 14 scenes. </p>
+<p>Contain 15 scenes. </p>
 <p>Buy or trade bitcoins</p>
 <p>1 wallet for your Bitcoins</p>
 <p>1 stash for your goods</p>
 <p>Smoke blunts</p>
 <p>Buy equipements (little bit empty)</p>
 <p>Rent a bunker (background missing)</p>
-<p>2 new characters</p>
-<p>Extra Scenes: 2 (Valerie + Random)</p>
+<p>2 new characters (Valerie + Johnny)</p>
+<br>
+<p>Popup scenes: 3</p>
+<p>1 scene for "Females"</p>
+<p>1 scene for "Males"</p>
+<p>1 scene for both</p>
 <br>
 <hr>
 <br>
