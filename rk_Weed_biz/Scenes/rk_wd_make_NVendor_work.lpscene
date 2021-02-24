@@ -1,0 +1,545 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+SceneStart()
+    
+    stock_AK47weed = Player.getActorVar(stock_AK47weed)
+    stock_SSweed = Player.getActorVar(stock_SSweed)
+    stock_WWweed = Player.getActorVar(stock_WWweed)
+    stock_PEweed = Player.getActorVar(stock_PEweed)
+    stock_OGKweed = Player.getActorVar(stock_OGKweed)
+    stock_GSCweed = Player.getActorVar(stock_GSCweed)
+    stock_BBweed = Player.getActorVar(stock_BBweed)
+    stock_GGweed = Player.getActorVar(stock_GGweed)
+    MweeddealerLvl = MainActor.getActorVar(MweeddealerLvl)
+    stash_AK47weed = Player.getActorVar(stash_AK47weed)
+    stash_SSweed = Player.getActorVar(stash_SSweed)
+    stash_WWweed = Player.getActorVar(stash_WWweed)
+    stash_PEweed = Player.getActorVar(stash_PEweed)
+    stash_OGKweed = Player.getActorVar(stash_OGKweed)
+    stash_GSCweed = Player.getActorVar(stash_GSCweed)
+    stash_BBweed = Player.getActorVar(stash_BBweed)
+    stash_GGweed = Player.getActorVar(stash_GGweed)
+
+    stock_weed_stash = stash_AK47weed + stash_SSweed + stash_WWweed + stash_PEweed + stash_OGKweed + stash_GSCweed + stash_BBweed + stash_GGweed
+    weedstck = stock_AK47weed + stock_SSweed + stock_WWweed + stock_PEweed + stock_OGKweed + stock_GSCweed + stock_BBweed + stock_GGweed
+    weedbundle = stock_weed_stash + weedstck
+    Mrk_askingPercent = MainActor.getActorVar(rk_EmployeeSalary)
+    Mstock_AK47weed = MainActor.getActorVar(Mstock_AK47weed)
+    Mstock_SSweed = MainActor.getActorVar(Mstock_SSweed)
+    Mstock_WWweed = MainActor.getActorVar(Mstock_WWweed)
+    Mstock_PEweed = MainActor.getActorVar(Mstock_PEweed)
+    Mstock_OGKweed = MainActor.getActorVar(Mstock_OGKweed)
+    Mstock_GSCweed = MainActor.getActorVar(Mstock_GSCweed)
+    Mstock_BBweed = MainActor.getActorVar(Mstock_BBweed)
+    Mstock_GGweed = MainActor.getActorVar(Mstock_GGweed)
+    
+    Mweedstck = Mstock_AK47weed + Mstock_SSweed + Mstock_WWweed + Mstock_PEweed + Mstock_OGKweed + Mstock_GSCweed + Mstock_BBweed + Mstock_GGweed
+
+    
+    // Go to the office if any
+    officeSize = Player.getActorVar(rk_PlayerOfficeLocationSize)
+    If officeSize > 0
+        moveTo(Home)
+        setBackground3D(Modules/vin_Base/World/bar___vin01.lpworld)
+    EndIf
+    
+    rk_manageEmployeeType = WDManageEmployeeJobType.getGlobal()
+    
+    If rk_manageEmployeeType == 11
+        rk_txtJobTitle = "Nightclubs vendor"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedRunnerId)
+        rk_askingPercent = MainActor.getActorVar(rk_EmployeeSalary)
+        tag_WDNVendor = MainActor.getActorVar(tag_WDNVendor)
+    Else
+        "PANIC!! rk_wd_make_runner_work.lpscene called with unknown job type (<rk_manageEmployeeType>)!"
+    EndIf
+
+    If weedbundle >= 112
+        // get the stat that controls the skill level
+        If rk_manageEmployeeType == 11
+            // "Nightclubs vendor"
+            rk_employeeSkillLvl = MainActor.getActorVar(MweeddealerLvl)
+        EndIf
+        
+        "What should I do?"
+        1:: "Give <MainActor.Name> weeds to sell?"
+        2:: "Offer sex to <MainActor.Name> for <MainActor.his_or_her> good work?"
+        99::"Nothing"
+        
+        If 1
+
+            If MainActor.isValid()
+                rk_lastSale = MainActor.getActorVar(rk_LastSaleMade)
+                daysSinceBirth = (Player:Age * 365) // get the current date 
+                MainActor.setActorVar(rk_LastSaleMade, daysSinceBirth) // remember last negotiation
+                rk_delta = daysSinceBirth - rk_lastSale
+                If rk_delta < 3
+                    rk_timeToWait = 3 - rk_delta
+                    Player(Annoyed)::"I already sale 112g to <MainActor.Name> this week. I will have to wait <rk_timeToWait> days."
+                Else
+                    Player::"Hi <MainActor.Name>! I got some work for you!"
+                    MainActor(Happy)::"Cool, I'm coming right away !"
+                    "<MainActor.Name> is finally here!"
+                    MainActor:rapportwithplayer += Random(0, 2)
+                
+                    MainActor.dress()
+                    MainActor.show(1)
+            
+                    Player::"Nice to see you my friend! I got new weed for you! It will sell like hot cakes ..."
+                    Player::"Ok, which strain I'm gonna give <MainActor.him_or_her> to sell?"
+                    0:: stock_AK47weed > 112 || stash_AK47weed > 112:: "Give AK 47 (Pockets: <stock_AK47weed>g || Stash: <stash_AK47weed>g)"
+                    1:: stock_SSweed > 112 || stash_SSweed > 112:: "Give Sunset Sherbet (Pockets: <stock_SSweed>g || Stash: <stash_SSweed>g)"
+                    2:: stock_WWweed > 112 || stash_WWweed > 112:: "Give White Widow (Pockets: <stock_WWweed>g || Stash: <stash_WWweed>g)"
+                    3:: stock_PEWeed > 112 || stash_PEweed > 112:: "Give Pineapple Express (Pockets: <stock_PEWeed>g || Stash: <stash_PEWeed>g)"
+                    4:: stock_OGKWeed > 112 || stash_OGKweed > 112:: "Give OG Kush (Pockets: <stock_OGKWeed>g || Stash: <stash_OGKWeed>g)"
+                    5:: stock_GSCWeed > 112 || stash_GSCweed > 112:: "Give Girl Scout Cookies (Pockets: <stock_GSCWeed>g || Stash: <stash_GSCWeed>g)"
+                    6:: stock_BBWeed > 112 || stash_BBweed > 112:: "Give Bruce Banner (Pockets: <stock_BBWeed>g || Stash: <stash_BBWeed>g)"
+                    7:: stock_GGWeed > 112 || stash_GGweed > 112:: "Give Gorilla Glue (Pockets: <stock_GGWeed>g || Stash: <stash_GGWeed>g)"
+                    8:: "Sorry, I checked wrong, I don't have enough for you!"
+            
+                    If 0
+                        Player::"In which reserve I'm gonna dig?"
+                        1::"From my Pockets: <stock_AK47weed>g"
+                        2::"From my Stash: <stash_AK47weed>g"
+                        99:: "Sorry, I checked wrong, I don't have enough for you!"
+                
+                        If 1
+                            If stock_AK47weed < 112 
+                                "I got not enough AK 47 to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your pockets to grab your bag of weeds."
+                                WeedAKgive = stock_AK47weed - 112
+                                Player.setActorVar(stock_AK47weed, WeedAKgive)
+                        
+                                Player::"Here your 112g of AK 47!"
+                                priceAKtotalsell = (112 * Random(7,11)) - (Mrk_askingPercent/100)  // total price
+                                priceAKtotalsellloc = priceAKtotalsell.convertToLocalCurrency()
+                                money += priceAKtotalsell
+                                "<priceAKtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        
+                        ElseIf 2
+                
+                            If stash_AK47weed < 112 
+                                "I got not enough AK 47 to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedAKgive = stash_AK47weed - 112
+                                Player.setActorVar(stash_AK47weed, WeedAKgive)
+                        
+                                Player::"Here your 112g of AK 47!"
+                                priceAKtotalsell = (112 * Random(7,11)) - (Mrk_askingPercent/100)  // total price
+                                priceAKtotalsellloc = priceAKtotalsell.convertToLocalCurrency()
+                                money += priceAKtotalsell
+                                "<priceAKtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                
+                        EndIf
+                
+                    ElseIf 1
+                        Player::"In which reserve I'm gonna dig?"
+                        1::"From my Pockets: <stock_SSweed>g"
+                        2::"From my Stash: <stash_SSweed>g"
+                        99:: "Sorry, I checked wrong, I don't have enough for you!"
+                
+                        If 1
+                
+                            If stock_SSweed < 112 
+                                "I got not enough Sunset Sherbet to sell. I need at leat 112g! Better go find some more!"
+    
+                            Else
+                                "You look inside your pockets to grab your bag of weeds."
+                                WeedSSgive = stock_SSweed - 112
+                                Player.setActorVar(stock_SSweed, WeedSSgive)
+                        
+                                Player::"Here your 112g of Sunset Sherbet!"
+                                priceSSwtotalsell = (112 * Random(12,13)) - (Mrk_askingPercent/100)  // total price
+                                priceSSwtotalsellloc = priceSSwtotalsell.convertToLocalCurrency()
+                                money += priceSSwtotalsell
+                                "<priceSSwtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        ElseIf 2
+                
+                            If stash_SSweed < 112 
+                                "I got not enough Sunset Sherbet to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedSSgive = stash_SSweed - 112
+                                Player.setActorVar(stash_SSweed, WeedSSgive)
+                        
+                                Player::"Here your 112g of Sunset Sherbet!"
+                                priceSSwtotalsell = (112 * Random(12,13)) - (Mrk_askingPercent/100)  // total price
+                                priceSSwtotalsellloc = priceSSwtotalsell.convertToLocalCurrency()
+                                money += priceSSwtotalsell
+                                "<priceSSwtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        EndIf
+                
+                    ElseIf 2
+                        Player::"In which reserve I'm gonna dig?"
+                        1::"From my Pockets: <stock_WWweed>g"
+                        2::"From my Stash: <stash_WWweed>g"
+                        99:: "Sorry, I checked wrong, I don't have enough for you!"
+                
+                        If 1
+                
+                            If stock_WWweed < 112 
+                                "I got not enough White Widow to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your pockets to grab your bag of weeds."
+                                WeedWWgive = stock_WWweed - 112
+                                Player.setActorVar(stock_WWweed, WeedWWgive)
+                        
+                                Player::"Here your 112g of White Widow!"
+                                priceWWwtotalsell = (112 * Random(14,16)) - (Mrk_askingPercent/100)  // total price
+                                priceWWwtotalsellloc = priceWWwtotalsell.convertToLocalCurrency()
+                                money += priceWWwtotalsell
+                                "<priceWWwtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        ElseIf 2
+                
+                            If stash_WWweed < 112 
+                                "I got not enough White Widow to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedWWgive = stash_WWweed - 112
+                                Player.setActorVar(stash_WWweed, WeedWWgive)
+                        
+                                Player::"Here your 112g of White Widow!"
+                                priceWWwtotalsell = (112 * Random(14,16)) - (Mrk_askingPercent/100)  // total price
+                                priceWWwtotalsellloc = priceWWwtotalsell.convertToLocalCurrency()
+                                money += priceWWwtotalsell
+                                "<priceWWwtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        EndIf
+                
+                    ElseIf 3
+                        Player::"In which reserve I'm gonna dig?"
+                        1::"From my Pockets: <stock_PEWeed>g"
+                        2::"From my Stash: <stash_PEweed>g"
+                        99:: "Sorry, I checked wrong, I don't have enough for you!"
+                
+                        If 1
+                
+                            If stock_PEWeed < 112 
+                                "I got not enough Pineapple Express to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedPEgive = stock_PEWeed - 112
+                                Player.setActorVar(stock_PEWeed, WeedPEgive)
+                        
+                                Player::"Here your 112g of Pineapple Express!"
+                                pricePEWtotalsell = (112 * Random(17,18)) - (Mrk_askingPercent/100)  // total price
+                                pricePEWtotalsellloc = pricePEWtotalsell.convertToLocalCurrency()
+                                money += pricePEWtotalsell
+                                "<pricePEWtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        ElseIf 2
+                
+                            If stash_PEweed < 112 
+                                "I got not enough Pineapple Express to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedPEgive = stash_PEweed - 112
+                                Player.setActorVar(stash_PEweed, WeedPEgive)
+                        
+                                Player::"Here your 112g of Pineapple Express!"
+                                pricePEWtotalsell = (112 * Random(17,18)) - (Mrk_askingPercent/100)  // total price
+                                pricePEWtotalsellloc = pricePEWtotalsell.convertToLocalCurrency()
+                                money += pricePEWtotalsell
+                                "<pricePEWtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        EndIf
+                
+                    ElseIf 4
+                        Player::"In which reserve I'm gonna dig?"
+                        1::"From my Pockets: <stock_OGKWeed>g"
+                        2::"From my Stash: <stash_OGKweed>g"
+                        99:: "Sorry, I checked wrong, I don't have enough for you!"
+                
+                        If 1
+                
+                            If stock_OGKWeed < 112 
+                                "I got not enough OG Kush to sell. I need at leat 112g! Better go find some more!"
+
+                           Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedOGKgive = stock_OGKWeed - 112
+                                Player.setActorVar(stock_OGKWeed, WeedOGKgive)
+                        
+                                Player::"Here your 112g of OG Kush!"
+                                priceOGKtotalsell = (112 * Random(19,20)) - (Mrk_askingPercent/100)  // total price
+                                priceOGKtotalsellloc = priceOGKtotalsell.convertToLocalCurrency()
+                                money += priceOGKtotalsell
+                                "<priceOGKtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        ElseIf 2
+                
+                            If stash_OGKweed < 112 
+                                "I got not enough OG Kush to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedOGKgive = stash_OGKweed - 112
+                                Player.setActorVar(stash_OGKweed, WeedOGKgive)
+                        
+                                Player::"Here your 112g of OG Kush!"
+                                priceOGKtotalsell = (112 * Random(19,20)) - (Mrk_askingPercent/100)  // total price
+                                priceOGKtotalsellloc = priceOGKtotalsell.convertToLocalCurrency()
+                                money += priceOGKtotalsell
+                                "<priceOGKtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        EndIf
+                
+                    ElseIf 5
+                        Player::"In which reserve I'm gonna dig?"
+                        1::"From my Pockets: <stock_GSCWeed>g"
+                        2::"From my Stash: <stash_GSCweed>g"
+                        99:: "Sorry, I checked wrong, I don't have enough for you!"
+                
+                        If 1
+                
+                            If stock_GSCWeed < 112 
+                                "I got not enough Girl Scout Cookies to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedGSCgive = stock_GSCWeed - 112
+                                Player.setActorVar(stock_GSCWeed, WeedGSCgive)
+                        
+                                Player::"Here your 112g of Girl Scout Cookies!"
+                                priceGSCtotalsell = (112 * Random(21,22)) - (Mrk_askingPercent/100)  // total price
+                                priceGSCtotalsellloc = priceGSCtotalsell.convertToLocalCurrency()
+                                money += priceGSCtotalsell
+                                "<priceGSCtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        ElseIf 2
+                
+                            If stash_GSCweed < 112 
+                                "I got not enough Girl Scout Cookies to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedGSCgive = stash_GSCweed - 112
+                                Player.setActorVar(stash_GSCweed, WeedGSCgive)
+                        
+                                Player::"Here your 112g of Girl Scout Cookies!"
+                                priceGSCtotalsell = (112 * Random(21,22)) - (Mrk_askingPercent/100)  // total price
+                                priceGSCtotalsellloc = priceGSCtotalsell.convertToLocalCurrency()
+                                money += priceGSCtotalsell
+                                "<priceGSCtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        EndIf
+                
+                    ElseIf 6
+                        Player::"In which reserve I'm gonna dig?"
+                        1::"From my Pockets: <stock_BBWeed>g"
+                        2::"From my Stash: <stash_BBweed>g"
+                        99:: "Sorry, I checked wrong, I don't have enough for you!"
+                
+                        If 1
+                
+                            If stock_BBWeed < 112 
+                                "I got not enough Bruce Banner to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedBBgive = stock_BBWeed - 112
+                                Player.setActorVar(stock_BBWeed, WeedBBgive)
+                        
+                                Player::"Here your 112g of Bruce Banner!"
+                                priceBBWtotalsell = (112 * Random(23,24)) - (Mrk_askingPercent/100)  // total price
+                                priceBBWtotalsellloc = priceBBWtotalsell.convertToLocalCurrency()
+                                money += priceBBWtotalsell
+                                "<priceBBWtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        ElseIf 2
+                
+                            If stash_BBweed < 112 
+                                "I got not enough Bruce Banner to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedBBgive = stash_BBweed - 112
+                                Player.setActorVar(stash_BBweed, WeedBBgive)
+                        
+                                Player::"Here your 112g of Bruce Banner!"
+                                priceBBWtotalsell = (112 * Random(23,24)) - (Mrk_askingPercent/100)  // total price
+                                priceBBWtotalsellloc = priceBBWtotalsell.convertToLocalCurrency()
+                                money += priceBBWtotalsell
+                                "<priceBBWtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        EndIf
+                
+                    ElseIf 7
+                        Player::"In which reserve I'm gonna dig?"
+                        1::"From my Pockets: <stock_GGWeed>g"
+                        2::"From my Stash: <stash_GGweed>g"
+                        99:: "Sorry, I checked wrong, I don't have enough for you!"
+                
+                        If 1
+                    
+                            If stock_GGWeed < 112 
+                                "I got not enough Gorilla Glue to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedGGgive = stock_GGWeed - 112
+                                Player.setActorVar(stock_GGWeed, WeedGGgive)
+                        
+                                Player::"Here your 112g of Gorilla Glue!"
+                                priceGGtotalsell = (112 * Random(25,26)) - (Mrk_askingPercent/100)  // total price
+                                priceGGtotalsellloc = priceGGtotalsell.convertToLocalCurrency()
+                                money += priceGGtotalsell
+                                "<priceGGtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        ElseIf 2
+                
+                            If stash_GGweed < 112 
+                                "I got not enough Gorilla Glue to sell. I need at leat 112g! Better go find some more!"
+
+                            Else
+                                "You look inside your stash to grab your bag of weeds."
+                                WeedGGgive = stash_GGweed - 112
+                                Player.setActorVar(stash_GGweed, WeedGGgive)
+                        
+                                Player::"Here your 112g of Gorilla Glue!"
+                                priceGGtotalsell = (112 * Random(25,26)) - (Mrk_askingPercent/100)  // total price
+                                priceGGtotalsellloc = priceGGtotalsell.convertToLocalCurrency()
+                                money += priceGGtotalsell
+                                "<priceGGtotalsellloc> more in my pocket"
+                                Player.modifyActorVar(weeddealerLvl, 1)
+                                
+                                MainActor(Happy)::"Cool thanks! I'll call you soon!"
+                                MainActor.modifyActorVar(MweeddealerLvl, 3)
+                        
+                            EndIf
+                        EndIf
+                
+                    ElseIf 8
+                        Player::"Sorry, I checked wrong, I don't have enough weed for you!"
+                        MainActor(sad)::"Oh well! ..."
+                        MainActor:rapportwithplayer -= Random(0.5, 2)
+                
+                    EndIf
+                EndIf
+            EndIf
+        ElseIf 2
+
+            If MainActor.isValid()
+                rk_lastfuckNV = MainActor.getActorVar(rk_lastfuckNVMade)
+                daysSinceBirth = (Player:Age * 365) // get the current date 
+                MainActor.setActorVar(rk_lastfuckNVMade, daysSinceBirth) // remember last negotiation
+                rk_delta = daysSinceBirth - rk_lastfuckNV
+                If rk_delta < 3
+                    rk_timeToWait = 3 - rk_delta
+                    Player(Annoyed)::"I already sale 28g to <MainActor.Name> this week. I will have to wait <rk_timeToWait> days."
+                Else
+                    MainActor:rapportwithplayer += Random(0.5, 2)
+                    Player::"Hi <MainActor.Name>! I want you to come at my place and have some fun, if you know what I mean...!"
+        
+                    If MainActor:rapportwithplayer > 50
+                        MainActor(Happy)::"Cool, I'm coming right now!"
+                        "<MainActor.Name> is finally here! We strip right away!"
+                        Player.strip()
+                        MainActor.strip()
+            
+                        Sex(MainActor, Player)
+                    Else
+                        MainActor(Confused)::"Thanks, but I have things to do right now!"
+                    EndIf   
+                EndIf
+            EndIf
+        EndIf
+        
+    Else
+        "I don't have enough weeds to make my runner starting selling."
+    EndIf
+    
+SceneEnd()

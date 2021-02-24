@@ -76,20 +76,20 @@ OTHER: none
         
             If money >= 120
             
-                If weeddealerLvl >= 10 && weeddealerLvl =< 19
-                    JohnActor::"For small dealers, my big boss only lets me sell 28g at a time, sorry bro !" //ajouter une note comme quoi stock limiter a 1lb
+                If weeddealerLvl >= 10 && weeddealerLvl <= 19
+                    JohnActor::"For small dealers, my big boss only lets me sell 28g at a time, sorry <Player.bro_or_honey>!" //ajouter une note comme quoi stock limiter a 1lb
                     Player::"That's ok, I understand!"
-                Elseif weeddealerLvl >= 20 && weeddealerLvl =< 49
-                    JohnActor::"For Nightclub dealers, my big boss only lets me sell 448g at a time, sorry bro !"
+                Elseif weeddealerLvl >= 20 && weeddealerLvl <= 49
+                    JohnActor::"For Nightclub dealers, my big boss only lets me sell 448g at a time, sorry <Player.bro_or_honey>!"
                     Player::"That's ok, I understand!"
-                Elseif weeddealerLvl >= 50 && weeddealerLvl =< 149
-                    JohnActor::"For Big dealers, my big boss only lets me sell 10lb at a time, sorry bro !"
+                Elseif weeddealerLvl >= 50 && weeddealerLvl <= 149
+                    JohnActor::"For Big dealers, my big boss only lets me sell 10lb at a time, sorry <Player.bro_or_honey>!"
                     Player::"That's ok, I understand!"
-                Elseif weeddealerLvl >= 150 && weeddealerLvl =< 299
-                    JohnActor::"For small dealers, my big boss only lets me sell 109lb at a time, sorry bro !"
+                Elseif weeddealerLvl >= 150 && weeddealerLvl <= 299
+                    JohnActor::"For dealers like you, my big boss only lets me sell 109lb at a time, sorry <Player.bro_or_honey>!"
                     Player::"That's ok, I understand!"
-                Elseif weeddealerLvl >= 300 && weeddealerLvl =< 599
-                    JohnActor::"For small dealers, my big boss only lets me sell 1/2ton at a time, sorry bro !"
+                Elseif weeddealerLvl >= 300 && weeddealerLvl <= 599
+                    JohnActor::"Because you bring me a lot of money, my big boss only lets me sell 1/2ton at a time, sorry <Player.bro_or_honey>!"
                     Player::"That's ok, I understand!"
                 Endif
             
@@ -114,8 +114,8 @@ OTHER: none
                     
                     Player::"Show me your AK 47!"
                     JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
-                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of AK 47 for <price_AK4728Weed_local>"
-                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of AK 47 for <price_AK471LWeed_local>"
+                    0:: weeddealerLvl >= 1 ::"Buy 28g of AK 47 for <price_AK4728Weed_local>"
+                    1:: weeddealerLvl >= 20 ::"Buy 448g of AK 47 for <price_AK471LWeed_local>"
                     2:: weeddealerLvl >= 50 ::"Buy 10lb of AK 47 for <price_AK4710LWeed_local>"
                     8:: ::"Bah! I changed my mind!"
                 
@@ -156,8 +156,8 @@ OTHER: none
 
                     Player::"Show me your Sunset Sherbet!"
                     JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
-                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Sunset Sherbet for <price_SS28Weed_local>"
-                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Sunset Sherbet for <price_SS1lbWeed_local>"
+                    0:: weeddealerLvl >= 1 ::"Buy 28g of Sunset Sherbet for <price_SS28Weed_local>"
+                    1:: weeddealerLvl >= 20 ::"Buy 448g of Sunset Sherbet for <price_SS1lbWeed_local>"
                     2:: weeddealerLvl >= 50 ::"Buy 10lb of Sunset Sherbet for <price_SS10lbWeed_local>"
                     8:: ::"Bah! I changed my mind!"
                 
@@ -197,8 +197,8 @@ OTHER: none
 
                     Player::"Show me your White Widow!"
                     JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
-                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of White Widow for <price_WW28Weed_local>"
-                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of White Widow for <price_WW1lbWeed_local>"
+                    0:: weeddealerLvl >= 1 ::"Buy 28g of White Widow for <price_WW28Weed_local>"
+                    1:: weeddealerLvl >= 20 ::"Buy 448g of White Widow for <price_WW1lbWeed_local>"
                     2:: weeddealerLvl >= 50 ::"Buy 10lb of White Widow for <price_WW10lbWeed_local>"
                     8:: ::"Bah! I changed my mind!"
                 
@@ -239,8 +239,8 @@ OTHER: none
 
                     Player::"Show me your Pineapple Express!"
                     JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
-                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Pineapple Express for <price_PE28Weed_local>"
-                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Pineapple Express for <price_PE1lbWeed_local>"
+                    0:: weeddealerLvl >= 1 ::"Buy 28g of Pineapple Express for <price_PE28Weed_local>"
+                    1:: weeddealerLvl >= 20 ::"Buy 448g of Pineapple Express for <price_PE1lbWeed_local>"
                     2:: weeddealerLvl >= 50::"Buy 10lb of Pineapple Express for <price_PE10lbWeed_local>"
                     8:: ::"Bah! I changed my mind!"
                 
@@ -281,8 +281,8 @@ OTHER: none
 
                     Player::"Show me your OG Kush!"
                     JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
-                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of OG Kush for <price_OGK28Weed_local>"
-                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of OG Kush for <price_OGK1lbWeed_local>"
+                    0:: weeddealerLvl >= 1::"Buy 28g of OG Kush for <price_OGK28Weed_local>"
+                    1:: weeddealerLvl >= 20 ::"Buy 448g of OG Kush for <price_OGK1lbWeed_local>"
                     2:: weeddealerLvl >= 50::"Buy 10lb of OG Kush for <price_OGK10lbWeed_local>"
                     8:: ::"Bah! I changed my mind!"
                 
@@ -323,8 +323,8 @@ OTHER: none
 
                     Player::"Show me your Girl Scout Cookies!"
                     JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
-                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Girl Scout Cookies for <price_GSC28Weed_local>"
-                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Girl Scout Cookies for <price_GSC1lbWeed_local>"
+                    0:: weeddealerLvl >= 1 ::"Buy 28g of Girl Scout Cookies for <price_GSC28Weed_local>"
+                    1:: weeddealerLvl >= 20 ::"Buy 448g of Girl Scout Cookies for <price_GSC1lbWeed_local>"
                     2:: weeddealerLvl >= 50::"Buy 10lb of Girl Scout Cookies for <price_GSC10lbWeed_local>"
                     8:: ::"Bah! I changed my mind!"
                 
@@ -365,8 +365,8 @@ OTHER: none
 
                     Player::"Show me your Bruce Banner!"
                     JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
-                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Bruce Banner for <price_BB28Weed_local>"
-                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Bruce Banner for <price_BB1lbWeed_local>"
+                    0:: weeddealerLvl >= 1 ::"Buy 28g of Bruce Banner for <price_BB28Weed_local>"
+                    1:: weeddealerLvl >= 20 ::"Buy 448g of Bruce Banner for <price_BB1lbWeed_local>"
                     2:: weeddealerLvl >= 50::"Buy 10lb of Bruce Banner for <price_BB10lbWeed_local>"
                     8:: ::"Bah! I changed my mind!"
                 
@@ -407,8 +407,8 @@ OTHER: none
 
                     Player::"Show me your Gorilla Glue!"
                     JohnActor::"Here we go! As always, good stuff, good price, the best weeds !"
-                    0:: weeddealerLvl >= 1 && weeddealerLvl =< 19::"Buy 28g of Gorilla Glue for <price_GG28Weed_local>"
-                    1:: weeddealerLvl >= 20 && weeddealerLvl =< 49::"Buy 448g of Gorilla Glue for <price_GG1lbWeed_local>"
+                    0:: weeddealerLvl >= 1 ::"Buy 28g of Gorilla Glue for <price_GG28Weed_local>"
+                    1:: weeddealerLvl >= 20 ::"Buy 448g of Gorilla Glue for <price_GG1lbWeed_local>"
                     2:: weeddealerLvl >= 50::"Buy 10lb of Gorilla Glue for <price_GG10lbWeed_local>"
                     8:: ::"Bah! I changed my mind!"
                 

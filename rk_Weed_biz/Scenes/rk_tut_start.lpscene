@@ -1,0 +1,17 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    Player.hide()
+    "Welcome to the Weed Biz Tutorial mode. Click anywhere or press Space to continue to the next line of the tutorial script."
+    "To get started, you need to activate the nn_GangsOfLifePlay mod."
+    "In order to be able to sell or buy large amounts of weed, you need to have black market skills."
+    "Try to get more info about it by using the 'Visit Black Market' action."
+    "Once you get your skills on the black market, you can get started ..."
+
+    followUp(rk_tut_start_selling)
+    
+    SceneEnd()

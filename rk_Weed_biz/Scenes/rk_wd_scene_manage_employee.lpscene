@@ -1,0 +1,337 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+
+    // Go to the office if any
+    officeSize = Player.getActorVar(rk_PlayerOfficeLocationSize)
+    If officeSize > 0
+        moveTo(Home)
+        setBackground3D(Modules/vin_Base/World/bar___vin01.lpworld)
+    EndIf
+    
+    // local variables for hiring people...
+    rk_txtJobTitle = ""
+    rk_currentEmployeeId = 0
+    rk_askingPrice = 0
+    rk_employeeSkillLvl = 1
+    rk_employeeName = "nobody"
+    
+    // Find out what to hire...
+    // See rk_wd_scene_manage_employees.lpscene for values
+    rk_manageEmployeeType = WDManageEmployeeJobType.getGlobal()
+    
+    If rk_manageEmployeeType == 1
+        rk_txtJobTitle = "guard inside bunker"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedBGuardId)
+        rk_jobTrainingCost = 1000
+    ElseIf rk_manageEmployeeType == 2
+        rk_txtJobTitle = "surveillance cam operator"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedCamOperatorId)
+        rk_jobTrainingCost = 500
+    ElseIf rk_manageEmployeeType == 3
+        rk_txtJobTitle = "guard in front of the bunker"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedBGuard3Id)
+        rk_jobTrainingCost = 1000
+    
+    ElseIf rk_manageEmployeeType == 4
+        rk_txtJobTitle = "guard in the backyard of the bunker"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedBGuard4Id)
+        rk_jobTrainingCost = 1000
+    
+    ElseIf rk_manageEmployeeType == 5
+        rk_txtJobTitle = "guard on the roof of the bunker"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedBGuard5Id)
+        rk_jobTrainingCost = 1000
+        
+    Else
+        "PANIC!! rk_wd_scene_manage_employee.lpscene called with unknown job type (<rk_manageEmployeeType>)!"
+    EndIf
+   
+    rk_employeeName = "my <rk_txtJobTitle>"
+    rk_traningPrice = rk_jobTrainingCost * Random(0.8 , 1)   // Some discount?
+    
+    MainActor = getSpecific(rk_currentEmployeeId)
+    If MainActor.isValid()
+        // get the stat that controls the skill level
+        If rk_manageEmployeeType == 1
+            // "guard inside bunker"
+            rk_employeeSkillLvl = MainActor:martial
+        ElseIf rk_manageEmployeeType == 3
+            // "guard in front of the bunker"
+            rk_employeeSkillLvl = MainActor:martial
+        ElseIf rk_manageEmployeeType == 4
+            // "guard in the backyard of the bunker"
+            rk_employeeSkillLvl = MainActor:martial
+        ElseIf rk_manageEmployeeType == 5
+            // "guard on the roof of the bunker"
+            rk_employeeSkillLvl = MainActor:martial
+        ElseIf rk_manageEmployeeType == 2
+            // "Surveillance cam operator"
+            rk_employeeSkillLvl = MainActor:sneak
+        EndIf
+        
+        rk_traningPrice += rk_employeeSkillLvl * (Random(1,2)*10)   // Increase training price if employee already has good skill lvl
+        
+        MainActor.dress()
+        secondScreenIfHidden(MainActor)
+        MainActor.show()
+
+        rk_askingPrice = MainActor.getActorVar(rk_EmployeeSalary)
+        rk_askingPriceLocal = rk_askingPrice.convertToLocalCurrency(true)
+        rk_employeeName = "<MainActor.name>"
+        
+        Player()::"<MainActor.Name> is my current <rk_txtJobTitle>. <MainActor.P> current salary is <rk_askingPriceLocal>/month. <MainActor.O> skill level is <rk_employeeSkillLvl>%."
+    EndIf
+    
+    rk_traningPriceLocal = rk_traningPrice.convertToLocalCurrency(true)
+    
+    Player.dress()
+    Player.show()
+    
+    stayInMenu = true
+    While stayInMenu
+        
+        Player(Serene):: "What I want to do with my <rk_txtJobTitle>?"
+        1:: MainActor.isValid():: "Try to negotiate on salary (<rk_askingPriceLocal>/month)"
+        2:: MainActor.isValid():: "Send <rk_employeeName> to a job training for <rk_traningPriceLocal>"
+        0:: MainActor.isValid():: "Fire <rk_employeeName>"
+        10:: !MainActor.isValid()::"Hire a <rk_txtJobTitle>"
+        99:: "Back"
+        
+        If 0
+            Player(Irritated)::"Am I sure about firing <MainActor.Name>?"
+            0:: "Yes"
+            1:: "No"
+            
+            If 0
+                rk_willFireEmployee = true
+                
+                Random
+                    Player(Sad)::"Listen, <MainActor.Name>. I'm sorry to tell you, but I do not need your services any more."
+                    Player(Sad)::"<MainActor.Name>, I have bad news for you. I'm sorry to tell you, we have to part with each other."
+                    Player(Sad)::"I don't know how to start <MainActor.Name>... I will have to terminate our contract..."
+                EndRandom
+                Player(Sad)::"I wish you all the best in your future endeavours."
+                
+                Random
+                    MainActor(Sad)::"Ok why? I had so much fun working for you! I wish we can stay friend at least?"
+                    MainActor(Confused)::"What? I did my very best to suit your needs? What I did wrong?"
+                    MainActor(Confused)::"Eh, seriously, with all the things I did for you! You are joking, right?"
+                EndRandom
+                
+                Player(Bored)::"What do I tell <MainActor.Name> why I am trying to get rid of <MainActor.o>?"
+                0:: "It's not you. I cannot afford any staff at the moment."
+                1:: "To be honest, your works are pretty shitty, so I found someone who is more experienced."
+                2:: "You fucked one of my escorts. That is not your damn job and it's forbidden!"
+                
+                If 0
+                    chance = Random(1,5)
+                    If chance >= 3 && rk_askingPrice > 1500
+                        rk_cutDown = (chance * 100)
+                        rk_askingPrice -= rk_cutDown
+                        
+                        rk_askingPriceLocal = rk_askingPrice.convertToLocalCurrency(true)
+                        rk_cutDownLocal = rk_cutDown.convertToLocalCurrency(true)
+                        
+                        MainActor(Sad)::"OK boss! To show you all my gratitude, how about reducing my salary by <rk_cutDownLocal>?"
+                        
+                        Player(Serene)::"What do I reply? With the cut down <MainActor.s> will get <rk_askingPriceLocal>/month."
+                        0:: "I really appreciate your support. Thanks for helping me! Good, now, time to work!"
+                        1:: "Well that is a great offer, but I still can't afford your salary."
+                        
+                        If 0
+                            rk_willFireEmployee = false
+                            MainActor.setActorVar(rk_EmployeeSalary, rk_askingPrice)
+                            daysSinceBirth = (Player:Age * 365) // get the current date 
+                            MainActor.setActorVar(rk_LastSalaryNegotiation, daysSinceBirth) // remember last negotiation
+                        EndIf
+                    Else
+                        Random
+                            MainActor(Angry)::"Well then I will have to find a weed dealer with better management skills than you!"
+                            MainActor(Angry)::"Really? You spend hundreds on weeds and cannot pay the salary of you staff?"
+                            MainActor(Sad)::"I really need the money. It's the only job I know how to do, I have no education. I'll try to get lucky somewhere else..."
+                            MainActor(Sad)::"I really need the money. But I understand! If your business starts up again, give me a call, I'll still be available for your boss!"
+                        EndRandom
+                        
+                    EndIf
+                    
+                ElseIf 1
+                    Random
+                        MainActor(Angry)::"What? Better than me? You must be joking! Get happy with your new guy anyway. I'm out!"
+                        MainActor(Sad)::"Oh, I see. That is bad for me. Hope you will call me, if you have other jobs."
+                    EndRandom
+                    
+                ElseIf 2
+                    Random
+                        MainActor(Angry)::"Yeah, but that whore was begging for that!"
+                        MainActor(Offended)::"At least I managed to empty myself! I know it's not funny boss but, I'm already dead so ....."
+                    EndRandom
+                    
+                    Random
+                        Player(Angry)::"Woah! Be careful what you're telling me, my friend? Don't let me to put a contract on your head either! Get the fuck out of here!"
+                        Player(Angry)::"Hey small brain! You know the rules! Never fuck my escorts! Get out of here!"
+                        Player(Angry)::"She attracted you under my request! To test your loyalty, but you failed! You're just lucky you didn't get a car trunk ride ... Get out of here!"
+                    EndRandom
+                EndIf
+                
+                If rk_willFireEmployee
+                    Player(Drained)::"<MainActor.Name> accepted <MainActor.p> fate and leave."
+                    
+                    If rk_manageEmployeeType == 1
+                        Player.setActorVar(rk_EmployedBGuardId, 0)
+                        MainActor.setActorVar(tag_WDBGuard, 0)
+                    ElseIf rk_manageEmployeeType == 3
+                        Player.setActorVar(rk_EmployedBGuard3Id, 0)
+                        MainActor.setActorVar(tag_WDBGuard3, 0)
+                    ElseIf rk_manageEmployeeType == 4
+                        Player.setActorVar(rk_EmployedBGuard4Id, 0)
+                        MainActor.setActorVar(tag_WDBGuard4, 0)
+                    ElseIf rk_manageEmployeeType == 5
+                        Player.setActorVar(rk_EmployedBGuard5Id, 0)
+                        MainActor.setActorVar(tag_WDBGuard5, 0)
+                    ElseIf rk_manageEmployeeType == 2
+                        Player.setActorVar(rk_EmployedCamOperatorId, 0)
+                        MainActor.setActorVar(tag_WDCamOperator, 0)
+                    Else
+                        "PANIC!! rk_wd_scene_manage_employee.lpscene called with unknown job type (<rk_manageEmployeeType>)!"
+                    EndIf
+                    
+                    MainActor.setActorVar(rk_EmployeeSalary, 0)
+                    MainActor.setActorVar(rk_LastSalaryNegotiation, 0)
+                    MainActor.setActorVar(rk_LastJobTraining, 0)
+                    
+                    MainActor.hide()
+                    MainActor = 0
+                    
+                    rk_employeeName = "my <rk_txtJobTitle>"
+                EndIf
+            EndIf
+        ElseIf 1
+            rk_last = MainActor.getActorVar(rk_LastSalaryNegotiation)
+            daysSinceBirth = (Player:Age * 365) // get the current date 
+            MainActor.setActorVar(rk_LastSalaryNegotiation, daysSinceBirth) // remember last negotiation
+            rk_delta = daysSinceBirth - rk_last
+            If rk_delta < 30
+                rk_timeToWait = 30 - rk_delta
+                Player(Annoyed)::"I already negotiated on <MainActor.Name>'s salary this month. I will have to wait <rk_timeToWait> days."
+            Else
+                chance = Random(1,5)
+                If chance >= 3
+                    rk_askingPrice -= (chance * 100)
+                    If rk_askingPrice < 1100
+                        rk_askingPrice = 1100
+                    EndIf
+                    rk_askingPriceLocal = rk_askingPrice.convertToLocalCurrency(true)
+                    Player(Wink)::"I was able to talk to <MainActor.Name> and I convinced <MainActor.him_or_her> to reduce to <rk_askingPriceLocal>."
+                    
+                    MainActor.setActorVar(rk_EmployeeSalary, rk_askingPrice)
+                Else
+                    Random
+                        Player(Annoyed)::"<MainActor.Name> was not willing to negotiate."
+                        Player(Annoyed)::"My negotiations were unlucky."
+                        Player(Annoyed)::"<MainActor.Name> says this is <MainActor.p> minimum."
+                    EndRandom
+                EndIf
+            EndIf
+        ElseIf 2    // job training
+            rk_last = MainActor.getActorVar(rk_LastJobTraining)
+            daysSinceBirth = (Player:Age * 365) // get the current date 
+            rk_delta = daysSinceBirth - rk_last
+            
+            If rk_delta < 7
+                rk_timeToWait = 7 - rk_delta
+                Player(Annoyed)::"<MainActor.Name> already had a job training this week. I will have to wait <rk_timeToWait> days."
+            Else
+                Player(Serene)::"A job training improves <MainActor.Name>'s skills. Pay <rk_traningPriceLocal> for <MainActor.p> training?"
+                0:: "Yes"
+                1:: "No"
+                
+                If 0
+                    MainActor.setActorVar(rk_LastJobTraining, daysSinceBirth) // remember last training
+                    
+                    MainActor.dress()
+                    MainActor.show(1)
+                    
+                    Random
+                        Player(Serene)::"Listen, <MainActor.Name> I want you to attend this job training."
+                        Player(Serene)::"<MainActor.Name> I got that offering for a boot camp and want you to attend."
+                        Player(Serene)::"<MainActor.Name> how about improving your skills a little?"
+                    EndRandom
+                    
+                    money -= rk_traningPrice
+                    rk_gain = Random(0.5,5)
+                    MainActor:jobperformance += rk_gain
+                    
+                    // get the stat that controls the skill level
+                    If rk_manageEmployeeType == 1
+                        // "Bunker guard"
+                        MainActor:martial += rk_gain
+                        
+                        // Limit martial to 100%
+                        If MainActor:martial > 100
+                            MainActor:martial = 100
+                        EndIf
+                    ElseIf rk_manageEmployeeType == 3
+                        // "Bunker guard"
+                        MainActor:martial += rk_gain
+                        
+                        // Limit martial to 100%
+                        If MainActor:martial > 100
+                            MainActor:martial = 100
+                        EndIf
+                    ElseIf rk_manageEmployeeType == 4
+                        // "Bunker guard"
+                        MainActor:martial += rk_gain
+                        
+                        // Limit martial to 100%
+                        If MainActor:martial > 100
+                            MainActor:martial = 100
+                        EndIf
+                    ElseIf rk_manageEmployeeType == 5
+                        // "Bunker guard"
+                        MainActor:martial += rk_gain
+                        
+                        // Limit martial to 100%
+                        If MainActor:martial > 100
+                            MainActor:martial = 100
+                        EndIf
+                    ElseIf rk_manageEmployeeType == 2
+                        // "Surveillance cam operator"
+                        MainActor:sneak += rk_gain
+                        
+                        // Limit sneak to 100%
+                        If MainActor:sneak > 100
+                            MainActor:sneak = 100
+                        EndIf
+                    EndIf
+
+                    Random
+                        MainActor(Serene)::"Thanks for the job training. I learned a lot!"
+                        MainActor(Serene)::"That was really cool. I really need to try out the things I learned today!"
+                        MainActor(Serene)::"That was an awesome training camp. Thanks for having me attend it!"
+                    EndRandom
+                EndIf
+            EndIf
+        ElseIf 10
+            
+            // Switch scene
+            WDHireNewEmployeeJobType.setGlobal(rk_manageEmployeeType)
+            followUp(rk_wd_Hire_employees)
+            
+            sceneEnd()
+            
+        ElseIf 99
+            stayInMenu = false
+        EndIf
+    EndWhile
+    
+    secondScreen()
+    
+    // Back to main employee menu
+    followUp(rk_wd_scene_manage_employees)
+    
+    SceneEnd()

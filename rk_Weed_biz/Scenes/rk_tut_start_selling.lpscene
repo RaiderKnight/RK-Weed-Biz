@@ -1,0 +1,19 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    Player.hide()
+    "Once you're ready to start selling ... The first thing to do is to buy some weed from someone !"
+    "If you have installed the WeedShop mod, you can buy weed in several stores (tobacco store,). Otherwise, you're gonna have to look for Johnny, the town dealer, to buy him some weed."
+    "Johnny likes to be at bar, biergarten, nightclub or the pub. Buy as much weed as you can, at least 10g."
+    "You must make at least 10 sales before becoming a real weed dealer and thus have the opportunity to start your Weed Business and be able to call Johnny directly."
+    "When you call Johnny directly, that means he's always there to sell and full load of weeds..."
+    "After making your 10 sales, you can now open your Weed business and be able to call Johnny at his place."
+    "The first few times you go see Johnny at his office, he can sell you only 28g at a time. Then, at certain levels of your Weed Dealer level, you will be able to buy larger and larger quantities of weeds."
+
+    followUp(rk_tut_Weed_business)
+    
+    SceneEnd()

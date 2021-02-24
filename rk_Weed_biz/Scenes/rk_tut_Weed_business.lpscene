@@ -1,0 +1,20 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    Player.hide()
+    "'Manage Weed business', is the section to manage your weed business (inventories, hire employees,...)."
+    "'Show weed inside my pockets' and 'Show weed Stash', are for storing your weed. When you sell and use the weeds who are inside your pockets, you can only sell a small amount of weeds, but if you use your stash, you can sell a large amount of weeds."
+    "Bitcoins, are very important, because LifePlay has a money limit of 10 millions, if you reach that limit you will lose your extras money. By buying Bitcoins, you will save your extras money."
+    "To get Bitcoins, you need to go at the Bank to trade money for Bitcoins."
+    "'Show my Weed Dealer Level', is the section to show your current Weed Dealer Level."
+    "'Buy new equipment', for buying equipment -- 'Rent an office', to rent a bunker -- 'Close your weed business down', to close your weed business completely."
+    "'Manage Employees', is the section to hire/fire and manage your employees."
+    "That's it for now, have a fun!"
+    
+    followUp(rk_scene_Manage_Weed_Cartel)
+    
+    SceneEnd()

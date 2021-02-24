@@ -1,0 +1,271 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    
+    // This scene is used to hire a new employee.    
+    // local variables for hiring people...
+    rk_txtJobTitle = ""
+    rk_currentEmployeeId = 0
+    rk_actorIsGenerated = false
+    rk_askingPrice = 0
+    rk_jobBasePayment = 500
+    rk_jobRandomPayment = 0
+    rk_employeeSkillLvl = 1
+    
+    // Find out what to hire...
+    // See rk_scene_manage_employees.lpscene for values
+    WDhireType = WDHireNewEmployeeJobType.getGlobal()
+    
+    If WDhireType == 1
+        rk_txtJobTitle = "Bunker guard"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedBGuardId)
+        rk_jobBasePayment = 400
+        rk_jobRandomPayment = 2500
+    ElseIf WDhireType == 2
+        rk_txtJobTitle = "Surveillance cam operator"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedCamOperatorId)
+        rk_jobBasePayment = 250
+        rk_jobRandomPayment = 1500
+    Else
+        "PANIC!! rk_wd_Hire_employees.lpscene called with unknown job type (<WDhireType>)!"
+    EndIf
+    
+    Player.dress()
+    Player.show(0)
+    
+    // Test if we already got this employee
+    MainActor = getSpecific(rk_currentEmployeeId)
+    
+    // Already have a employee of this type?
+    If MainActor.isValid()
+        MainActor.dress()
+        secondScreenIfHidden(MainActor)
+        MainActor.show()
+        Player::"I already have hired <MainActor.Name> as <rk_txtJobTitle>."
+        Player::"If I want to hire someone else, I need to fire <MainActor.o> first."
+        
+        secondScreen()
+        MainActor.hide()
+    Else
+        
+        // Go find a new one
+        MainActor = 0
+        Player(Wink)::"Should I ask one of my contacts or hire someone?"
+        0:: "Ask one of my contacts"
+        1:: "Hire someone else"
+        2:: "I don't need a <rk_txtJobTitle>"
+        
+        If 0
+            rk_foundEmployee = false
+            While !rk_foundEmployee
+                selectNPC()
+                MainActor = getSelectedNPC()
+                
+                // Test if the selected person is already employed
+                If MainActor.isValid()
+                    rk_currentSalary = MainActor.getActorVar(rk_EmployeeSalary)
+                    If rk_currentSalary > 0 
+                        // Test if this id still is assigned to an employee slot
+                        rk_cannotHire = false
+                        If MainActor.getID() == Player.getActorVar(rk_EmployedBGuardId)
+                            rk_cannotHire = true
+
+                            //Sanity check!
+                            MainActor.setActorVar(tag_WDBGuard, 1)
+                        ElseIf MainActor.getID() == Player.getActorVar(rk_EmployedCamOperatorId)
+                            rk_cannotHire = true
+
+                            //Sanity check!
+                            MainActor.setActorVar(tag_WDCamOperator, 1)
+                        EndIf
+                        
+                        If rk_cannotHire
+                            Player::"<MainActor.Name> is already working for me. I cannot offer <MainActor.o> another job!"
+                            MainActor.hide()
+                            MainActor = 0
+                        Else
+                            rk_foundEmployee = true
+                        EndIf
+                    Else
+                        rk_foundEmployee = true
+                    EndIf
+                Else
+                    // User cancelled
+                    rk_foundEmployee = true
+                EndIf
+            EndWhile
+        ElseIf 1
+            MainActor = generatePersonTemporary()
+            
+            rk_foundEmployee = false
+            While !rk_foundEmployee
+                
+                MainActor.dress()
+                secondScreenIfHidden(MainActor)
+                MainActor.show()
+                
+                rk_employeeSkillLvl = Random(1,100)
+                rk_skillText = "has no skill"
+                
+                // write the stat that controls the skill level
+                If WDhireType == 1 
+                    MainActor:martial => rk_employeeSkillLvl
+                    
+                    rk_skillText = "completely unknown inside security agencies"
+                    If rk_employeeSkillLvl >= 90
+                        rk_skillText = "a god inside security agencies"
+                    ElseIf rk_employeeSkillLvl >= 80
+                        rk_skillText = "very famous inside security agencies"
+                    ElseIf rk_employeeSkillLvl >= 65
+                        rk_skillText = "famous inside security agencies"
+                    ElseIf rk_employeeSkillLvl >= 50
+                        rk_skillText = "well known inside security agencies"
+                    ElseIf rk_employeeSkillLvl >= 35
+                        rk_skillText = "somewhat known inside security agencies"
+                    ElseIf rk_employeeSkillLvl >= 25
+                        rk_skillText = "little known inside security agencies"
+                    ElseIf rk_employeeSkillLvl >= 10
+                        rk_skillText = "very little known inside security agencies"
+                    EndIf
+                ElseIf WDhireType == 2
+                    // "Surveillance cam operator"
+                    MainActor:sneak => rk_employeeSkillLvl
+                    
+                    rk_skillText = "is a complete dumb ass"
+                    If rk_employeeSkillLvl >= 90
+                        rk_skillText = "is a real surveillance hacker"
+                    ElseIf rk_employeeSkillLvl >= 80
+                        rk_skillText = "is a real surveillance professional"
+                    ElseIf rk_employeeSkillLvl >= 65
+                        rk_skillText = "is highly intelligent"
+                    ElseIf rk_employeeSkillLvl >= 50
+                        rk_skillText = "has a good surveillance knowledge"
+                    ElseIf rk_employeeSkillLvl >= 35
+                        rk_skillText = "a nerd with some surveillance skills"
+                    ElseIf rk_employeeSkillLvl >= 25
+                        rk_skillText = "at least knows how to turn on a camera"
+                    ElseIf rk_employeeSkillLvl >= 10
+                        rk_skillText = "does not seem to fit for the job"
+                    EndIf
+                EndIf
+                
+                Player::"<MainActor.Name> is available to hire. <MainActor.S> is <rk_skillText>. Do I offer <MainActor.o> a job?"
+                0:: "Yes"
+                1:: "No"
+                
+                If 0
+                    rk_foundEmployee = true
+                Else
+                    MainActor.hide()
+                    MainActor = generatePersonTemporary()
+                EndIf
+            EndWhile           
+            rk_actorIsGenerated = true
+        EndIf
+        
+        // If we found someone for the job
+        If MainActor.isValid()
+            
+            setBackground(home)
+            setBackground3D(Modules/vin_Base/World/bar___vin01.lpworld)
+            
+            // get the stat that controls the skill level
+            If WDhireType == 1
+                // "Bunker guard"
+                rk_employeeSkillLvl = MainActor:martial
+            ElseIf WDhireType == 2
+                // "Surveillance cam operator"
+                rk_employeeSkillLvl = MainActor:sneak
+            EndIf
+            
+            rk_askingPrice = rk_jobBasePayment + (rk_jobRandomPayment * (Random(0.35, 0.5) + (rk_employeeSkillLvl/100)))
+            rk_priceLocal = rk_askingPrice.convertToLocalCurrency(true)
+            
+            Player::"<MainActor.Name> is available to hire for <rk_priceLocal> / month. Hire <MainActor.o>?"
+            0:: "Yes, hire <MainActor.Name>"
+            1:: "Try to negotiate on salary"
+            2:: "No, look for someone else"
+            
+            If 0
+                // All good
+            ElseIf 1
+                chance = Random(1,5)
+                If chance >= 3
+                    rk_askingPrice -= (chance*100)
+                    If rk_askingPrice < 1100
+                        rk_askingPrice = 1100
+                    EndIf
+                    rk_askingPriceLocal = rk_askingPrice.convertToLocalCurrency(true)
+                    Player(Wink)::"I was able to talk to <MainActor.Name> and <MainActor.he_or_she> accepted at <rk_askingPriceLocal>."
+                Else
+                    Random
+                        Player(Annoyed)::"<MainActor.Name> was not willing to negotiate."
+                        Player(Annoyed)::"My negotiations were unlucky."
+                        Player(Annoyed)::"<MainActor.Name> says this is <MainActor.p> minimum."
+                    EndRandom
+                    
+                    Player(Annoyed)::"I will have to pay what <MainActor.o> demands or find another <rk_txtJobTitle> that I can afford."
+                    0:: "Pay what <MainActor.s> demands"
+                    1:: "Don't hire <MainActor.o>"
+                    
+                    If 1
+                        MainActor = 0
+                    Else
+                        // All good
+                    EndIf
+                EndIf
+            Else
+                MainActor = 0
+            EndIf
+        EndIf
+        
+        // Check if player can pay the negotiated salary
+        If MainActor.isValid() && money < rk_askingPrice
+            Player(Sad)::"I don't have enough money to pay <MainActor.Name>."
+            Player(Curious)::"I need make some money first!"
+            MainActor = 0
+        EndIf
+        
+        // It the actor is still valid, all checks were OK, so employ him
+        If MainActor.isValid()
+        
+            If rk_actorIsGenerated
+                MainActor.makePermanent()
+                exchangeContact(MainActor)
+            EndIf
+            
+            WDnewId = MainActor.getID()
+            MainActor.setActorVar(rk_EmployeeSalary, rk_askingPrice)
+            daysSinceBirth = (Player:Age * 365) // get the current date 
+            MainActor.setActorVar(rk_LastSalaryNegotiation, daysSinceBirth) // remember last salary negotiation
+            
+            // Persist the new employee
+            If WDhireType == 1
+                Player.setActorVar(rk_EmployedBGuardId, WDnewId)
+                MainActor.setActorVar(tag_WDBGuard, 1)
+                
+            ElseIf WDhireType == 2
+                Player.setActorVar(rk_EmployedCamOperatorId, WDnewId)
+                MainActor.setActorVar(tag_WDCamOperator, 1)
+            
+            Else
+                "PANIC!!? rk_wd_Hire_employees.lpscene called with unknown job type!"
+            EndIf
+            
+            Player(Happy)::"<MainActor.Name> and I signed the contract. <MainActor.S> is now working as my <rk_txtJobTitle>."
+            Player(Happy)::"I added <MainActor.Name> to my address book."
+        EndIf
+    EndIf
+    
+    secondScreen()
+    
+    passTime(1,2)
+    
+    // Go back to the scene that called us...
+    followUp(rk_wd_scene_manage_employees)
+    
+    SceneEnd()

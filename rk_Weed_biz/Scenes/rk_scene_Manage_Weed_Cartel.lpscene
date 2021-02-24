@@ -8,7 +8,7 @@ OTHER: none
     
     If isModEnabled(nn_GangsOfLifePlay)
         bmState = Player.getActorVar(GL_BM_state)
-        
+        weeddealerLvl = Player.getActorVar(weeddealerLvl)
         stock_AK47weed = Player.getActorVar(stock_AK47weed)
         stock_SSweed = Player.getActorVar(stock_SSweed)
         stock_WWweed = Player.getActorVar(stock_WWweed)
@@ -41,8 +41,11 @@ OTHER: none
                 9:: "Show weed inside my pockets"
                 10:: "Show weed Stash"
                 11:: "Show Bitcoin inventory"
+                40:: "Manage Employees"
+                50:: "Show my Weed Dealer Level"
                 20:: "Buy new equipment"
                 30:: "Rent an office"
+                80:: "Tutorial"
                 90:: "Close your weed business down"
                 99:: "Exit"
                 
@@ -62,33 +65,70 @@ OTHER: none
                         99:: "Go back !"
                 
                     Endif
+                    
                     stayInMenu = false
         
                 ElseIf 10
+                
                     followUp(stock_weed_stash)
+                    
                     stayInMenu = false
+                    
                 ElseIf 11
+                
                     "You have <stock_Bitcoins> Bitcoin(s)"
                     "If you need more bitcoins, visit the bank!"
+                    
                     stayInMenu = false
+                    
                 ElseIf 20
+                
                     followUp(weed_scene_buy_equipment)
+                    
                     stayInMenu = false
+                    
                 ElseIf 30
+                
                     followUp(weed_scene_rent_office)
+                    
                     stayInMenu = false
+                    
+                ElseIf 40
+                
+                    followUp(rk_wd_scene_manage_employees)
+                    
+                    stayInMenu = false
+                    
+                ElseIf 50
+                
+                    "Your Weed Dealer Level is: <weeddealerLvl>"
+                    "Your Level increases with each sale. Rendered at certain levels, you have the possibility of buying in large quantities and hire runners."
+                    "Runners will help you sell faster."
+                    
+                    stayInMenu = false
+                    
+                ElseIf 80
+                
+                    followUp(rk_tut_start)
+                    
+                    stayInMenu = false
+                    
                 ElseIf 90
+                
                     followUp(rk_scene_close_Weed_Cartel)
+                    
                     stayInMenu = false
+                    
                 Else
                     stayInMenu = false
+                    
                 EndIf
                 
             EndWhile
             
         EndIf
     Else
-        "You need to enable the mod nn_GangsOfLifePlay, before beginning to sell drugs !"   
+        "You need to enable the mod nn_GangsOfLifePlay, before beginning to sell drugs!"   
     EndIf   
     
     SceneEnd()

@@ -58,7 +58,7 @@ OTHER: none
             
                 JohnActor.show(1)
                 dressFormal()
-                JohnActor(Happy)::"Howdy! My name is <JohnActor.name>. You already saw at the bar or pub...,anyway, I am proud to be your official weed dealer."
+                JohnActor(Happy)::"Howdy! My name is <JohnActor.name>. You probably saw me at the bar or pub...,anyway, I am proud to be your official weed dealer."
                 JohnActor.show(2)
                 dressFormal()
                 JohnActor(Happy)::"I always have 8 varieties of weeds available. Your customers will love the flavor of my weeds!"

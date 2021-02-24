@@ -1,0 +1,319 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+
+    stock_AK47weed = Player.getActorVar(stock_AK47weed)
+    stock_SSweed = Player.getActorVar(stock_SSweed)
+    stock_WWweed = Player.getActorVar(stock_WWweed)
+    stock_PEweed = Player.getActorVar(stock_PEweed)
+    stock_OGKweed = Player.getActorVar(stock_OGKweed)
+    stock_GSCweed = Player.getActorVar(stock_GSCweed)
+    stock_BBweed = Player.getActorVar(stock_BBweed)
+    stock_GGweed = Player.getActorVar(stock_GGweed)
+    MweeddealerLvl = MainActor.getActorVar(MweeddealerLvl)
+    stash_AK47weed = Player.getActorVar(stash_AK47weed)
+    stash_SSweed = Player.getActorVar(stash_SSweed)
+    stash_WWweed = Player.getActorVar(stash_WWweed)
+    stash_PEweed = Player.getActorVar(stash_PEweed)
+    stash_OGKweed = Player.getActorVar(stash_OGKweed)
+    stash_GSCweed = Player.getActorVar(stash_GSCweed)
+    stash_BBweed = Player.getActorVar(stash_BBweed)
+    stash_GGweed = Player.getActorVar(stash_GGweed)
+
+    stock_weed_stash = stash_AK47weed + stash_SSweed + stash_WWweed + stash_PEweed + stash_OGKweed + stash_GSCweed + stash_BBweed + stash_GGweed
+    weedstck = stock_AK47weed + stock_SSweed + stock_WWweed + stock_PEweed + stock_OGKweed + stock_GSCweed + stock_BBweed + stock_GGweed
+    weedbundle = stock_weed_stash + weedstck
+            
+    // Go to the office if any
+    officeSize = Player.getActorVar(rk_PlayerOfficeLocationSize)
+    If officeSize > 0
+        moveTo(Home)
+        setBackground3D(Modules/vin_Base/World/bar___vin01.lpworld)
+    EndIf
+    
+    // This scene is used to hire a new runners.    
+    // local variables for hiring people...
+    rk_txtJobTitle = ""
+    rk_currentEmployeeId = 0
+    rk_actorIsGenerated = false
+    rk_askingPercent = 5
+    rk_employeeSkillLvl = 1
+    
+    // Find out what to hire...
+    // See rk_scene_manage_employees.lpscene for values
+    WDhireType = WDHireNewEmployeeJobType.getGlobal()
+    
+    If WDhireType == 9
+        rk_txtJobTitle = "Runner"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedRunnerId)
+        
+    ElseIf WDhireType == 10
+        rk_txtJobTitle = "Street vendor"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedSVendorId)
+    
+    ElseIf WDhireType == 11
+        rk_txtJobTitle = "Nightclubs vendor"
+        rk_currentEmployeeId = Player.getActorVar(rk_EmployedNVendorId)
+    
+    Else
+        "PANIC!! rk_wd_Hire_runners.lpscene called with unknown job type (<WDhireType>)!"
+    EndIf
+    
+    Player.dress()
+    Player.show(0)
+    
+    // Test if we already got this employee
+    MainActor = getSpecific(rk_currentEmployeeId)
+    
+    // Already have a employee of this type?
+    If MainActor.isValid()
+        MainActor.dress()
+        secondScreenIfHidden(MainActor)
+        MainActor.show()
+        Player::"I already have hired <MainActor.Name> as <rk_txtJobTitle>."
+        Player::"If I want to hire someone else, I need to fire <MainActor.o> first."
+        
+        secondScreen()
+        MainActor.hide()
+    Else
+        
+        // Go find a new one
+        MainActor = 0
+        Player(Wink)::"Should I ask one of my contacts or hire someone?"
+        0:: "Ask one of my contacts"
+        1:: "Hire someone else"
+        2:: "I don't need a <rk_txtJobTitle>"
+        
+        If 0
+            rk_foundEmployee = false
+            While !rk_foundEmployee
+                selectNPC()
+                MainActor = getSelectedNPC()
+                
+                // Test if the selected person is already employed
+                If MainActor.isValid()
+                    rk_currentSalary = MainActor.getActorVar(rk_EmployeeSalary)
+                    If rk_currentSalary > 0 
+                        // Test if this id still is assigned to an employee slot
+                        rk_cannotHire = false
+                        If MainActor.getID() == Player.getActorVar(rk_EmployedRunnerId)
+                            rk_cannotHire = true
+
+                            //Sanity check!
+                            MainActor.setActorVar(tag_WDRunner, 1)
+                        EndIf
+                        
+                        If rk_cannotHire
+                            Player::"<MainActor.Name> is already working for me. I cannot offer <MainActor.o> another job!"
+                            MainActor.hide()
+                            MainActor = 0
+                        Else
+                            rk_foundEmployee = true
+                        EndIf
+                    Else
+                        rk_foundEmployee = true
+                    EndIf
+                Else
+                    // User cancelled
+                    rk_foundEmployee = true
+                EndIf
+            EndWhile
+        ElseIf 1
+            MainActor = generatePersonTemporary()
+            
+            rk_foundEmployee = false
+            While !rk_foundEmployee
+                
+                MainActor.dress()
+                secondScreenIfHidden(MainActor)
+                MainActor.show()
+                
+                rk_employeeSkillLvl = Random(1,100)
+                rk_skillText = "has no skill"
+                
+                // write the stat that controls the skill level
+                If WDhireType == 9 
+                    MweeddealerLvl => rk_employeeSkillLvl
+                    
+                    rk_skillText = "completely unknown in the world of weed delivery"
+                    If rk_employeeSkillLvl >= 90
+                        rk_skillText = "a god in the world of weed delivery"
+                    ElseIf rk_employeeSkillLvl >= 80
+                        rk_skillText = "very famous in the world of weed delivery"
+                    ElseIf rk_employeeSkillLvl >= 65
+                        rk_skillText = "famous in the world of weed delivery"
+                    ElseIf rk_employeeSkillLvl >= 50
+                        rk_skillText = "well known in the world of weed delivery"
+                    ElseIf rk_employeeSkillLvl >= 35
+                        rk_skillText = "somewhat known in the world of weed delivery"
+                    ElseIf rk_employeeSkillLvl >= 25
+                        rk_skillText = "little known in the world of weed delivery"
+                    ElseIf rk_employeeSkillLvl >= 10
+                        rk_skillText = "very little known in the world of weed delivery"
+                    EndIf
+                ElseIf WDhireType == 10 
+                    MweeddealerLvl => rk_employeeSkillLvl
+                    
+                    rk_skillText = "completely unknown in the world of street sellers"
+                    If rk_employeeSkillLvl >= 90
+                        rk_skillText = "a god in the world of street sellers"
+                    ElseIf rk_employeeSkillLvl >= 80
+                        rk_skillText = "very famous in the world of street sellers"
+                    ElseIf rk_employeeSkillLvl >= 65
+                        rk_skillText = "famous in the world of street sellers"
+                    ElseIf rk_employeeSkillLvl >= 50
+                        rk_skillText = "well known in the world of street sellers"
+                    ElseIf rk_employeeSkillLvl >= 35
+                        rk_skillText = "somewhat known in the world of street sellers"
+                    ElseIf rk_employeeSkillLvl >= 25
+                        rk_skillText = "little known in the world of street sellers"
+                    ElseIf rk_employeeSkillLvl >= 10
+                        rk_skillText = "very little known in the world of street sellers"
+                    EndIf
+                ElseIf WDhireType == 11 
+                    MweeddealerLvl => rk_employeeSkillLvl
+                    
+                    rk_skillText = "completely unknown in the world of Nightclubs sellers"
+                    If rk_employeeSkillLvl >= 90
+                        rk_skillText = "a god in the world of Nightclubs sellers"
+                    ElseIf rk_employeeSkillLvl >= 80
+                        rk_skillText = "very famous in the world of Nightclubs sellers"
+                    ElseIf rk_employeeSkillLvl >= 65
+                        rk_skillText = "famous in the world of Nightclubs sellers"
+                    ElseIf rk_employeeSkillLvl >= 50
+                        rk_skillText = "well known in the world of Nightclubs sellers"
+                    ElseIf rk_employeeSkillLvl >= 35
+                        rk_skillText = "somewhat known in the world of Nightclubs sellers"
+                    ElseIf rk_employeeSkillLvl >= 25
+                        rk_skillText = "little known in the world of Nightclubs sellers"
+                    ElseIf rk_employeeSkillLvl >= 10
+                        rk_skillText = "very little known in the world of Nightclubs sellers"
+                    EndIf
+                EndIf
+                
+                Player::"<MainActor.Name> is available to hire. <MainActor.S> is <rk_skillText>. Do I offer <MainActor.o> a job?"
+                0:: "Yes"
+                1:: "No"
+                
+                If 0
+                    rk_foundEmployee = true
+                Else
+                    MainActor.hide()
+                    MainActor = generatePersonTemporary()
+                EndIf
+            EndWhile           
+            rk_actorIsGenerated = true
+        EndIf
+        
+        // If we found someone for the job
+        If MainActor.isValid()
+            
+            setBackground(home)
+            setBackground3D(Modules/vin_Base/World/bar___vin01.lpworld)
+            
+            // get the stat that controls the skill level
+            If WDhireType == 9
+                // "Runner"
+                rk_employeeSkillLvl = MainActor.getActorVar(MweeddealerLvl)
+                
+            ElseIf WDhireType == 10
+                // "Runner"
+                rk_employeeSkillLvl = MainActor.getActorVar(MweeddealerLvl)
+                
+            ElseIf WDhireType == 11
+                // "Runner"
+                rk_employeeSkillLvl = MainActor.getActorVar(MweeddealerLvl)
+                
+            EndIf
+            
+            rk_givePercent = rk_askingPercent + (rk_employeeSkillLvl/100)
+            
+            Player::"<MainActor.Name> is available to hire for <rk_givePercent>% / per 28g. Hire <MainActor.o>?"
+            0:: "Yes, hire <MainActor.Name>"
+            1:: "Try to negotiate on salary"
+            2:: "No, look for someone else"
+            
+            If 0
+                // All good
+            ElseIf 1
+                chance = Random(1,5)
+                If chance >= 3
+                    rk_askingPercent -= Random(0.5,1)
+                    If rk_askingPercent < 4
+                        rk_askingPercent = 4
+                    EndIf
+                    rk_givePercent = rk_askingPercent
+                    Player(Wink)::"I was able to talk to <MainActor.Name> and <MainActor.he_or_she> accepted at <rk_givePercent>."
+                Else
+                    Random
+                        Player(Annoyed)::"<MainActor.Name> was not willing to negotiate."
+                        Player(Annoyed)::"My negotiations were unlucky."
+                        Player(Annoyed)::"<MainActor.Name> says this is <MainActor.p> minimum."
+                    EndRandom
+                    
+                    Player(Annoyed)::"I will have to pay what <MainActor.o> demands or find another <rk_txtJobTitle> that I can afford."
+                    0:: "Pay what <MainActor.s> demands"
+                    1:: "Don't hire <MainActor.o>"
+                    
+                    If 1
+                        MainActor = 0
+                    Else
+                        // All good
+                    EndIf
+                EndIf
+            Else
+                MainActor = 0
+            EndIf
+        EndIf
+        
+        // Check if player can make my runner selling
+        If MainActor.isValid() && weedbundle < 28
+            Player(Sad)::"I don't have enough weeds to make <MainActor.Name> starting selling."
+            Player(Curious)::"I need to get more weeds! My runner need 28g to start selling!"
+            MainActor = 0
+        EndIf
+        
+        // It the actor is still valid, all checks were OK, so employ him
+        If MainActor.isValid()
+        
+            If rk_actorIsGenerated
+                MainActor.makePermanent()
+                exchangeContact(MainActor)
+            EndIf
+            
+            WDnewId = MainActor.getID()
+            MainActor.setActorVar(rk_EmployeeSalary, rk_askingPercent)
+            daysSinceBirth = (Player:Age * 365) // get the current date 
+            MainActor.setActorVar(rk_LastSalaryNegotiation, daysSinceBirth) // remember last salary negotiation
+            
+            // Persist the new employee
+            If WDhireType == 9
+                Player.setActorVar(rk_EmployedRunnerId, WDnewId)
+                MainActor.setActorVar(tag_WDRunner, 1)
+            ElseIf WDhireType == 10
+                Player.setActorVar(rk_EmployedSVendorId, WDnewId)
+                MainActor.setActorVar(tag_WDSVendor, 1)
+            ElseIf WDhireType == 11
+                Player.setActorVar(rk_EmployedNVendorId, WDnewId)
+                MainActor.setActorVar(tag_WDNVendor, 1)
+            Else
+                "PANIC!!? rk_wd_Hire_runners.lpscene called with unknown job type!"
+            EndIf
+            
+            Player(Happy)::"<MainActor.Name> and I signed the contract. <MainActor.S> is now working as my <rk_txtJobTitle>."
+            Player(Happy)::"I added <MainActor.Name> to my address book."
+        EndIf
+    EndIf
+    
+    secondScreen()
+    
+    passTime(1,2)
+    
+    // Go back to manage employees
+    followUp(rk_wd_scene_manage_employees)
+    
+    SceneEnd()

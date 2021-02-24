@@ -5,7 +5,7 @@ WHEN: 0 - 24
 MINUTES: 5
 TIMEOUT_MINUTES: 
 ALSO_TIMEOUT: 
-EFFECTS: energy -5 (DURATION), mood -5 (INTERRUPTED)
+EFFECTS: energy -2 (DURATION), mood -2 (INTERRUPTED)
 CONDITIONS: energy >= 10 (STAT_COMPARE), rkOpenedWeedCartel >= 1 (STAT_COMPARE)
 MOVE_FIRST: false
 SCENE_ALWAYS: rk_scene_Manage_Weed_Cartel
