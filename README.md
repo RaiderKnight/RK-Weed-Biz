@@ -5,28 +5,26 @@
 <h3>rk_Weed_biz :</h3>
 <p>Version: 1.0.1</p>
 <br>
-<p>Start your own business as a dealer.</p>
-<p>Contain 29 scenes. </p>
-<p>8 types of strains to buy and sell.</p>
-<p>Buy or trade bitcoins</p>
-<p>1 wallet for your Bitcoins</p>
-<p>1 stash for your goods</p>
-<p>Smoke blunts</p>
-<p>Buy equipements (little bit empty)</p>
-<p>Rent a bunker (background missing)</p>
-<p>2 new characters (Valerie + Johnny)</p>
-<p>A tutorial (wip) and cheats.</p>
+<ul style="dotted"><li>Start your own business as a dealer.</li>
+<li>Contain 29 scenes. </li>
+<li>8 types of strains to buy and sell.</li>
+<li>Buy or trade bitcoins</li>
+<li>1 wallet for your Bitcoins</li>
+<li>1 stash for your goods</li>
+<li>Smoke blunts</li>
+<li>Buy equipements (little bit empty)</li>
+<li>Rent a bunker (background missing)</li>
+<li>2 new characters (Valerie + Johnny)</li>
+<li>A tutorial (wip) and cheats.</li></ul>
 <br>
 <p>Popup scenes: 3</p>
-<p>1 scene for "Females"</p>
-<p>1 scene for "Males"</p>
-<p>1 scene for both</p>
+<ul style="dotted"><li>1 scene for "Females"</li>
+<li>1 scene for "Males"</li>
+<li>1 scene for both</li></ul>
 <br>
-<p>Office jobs:</p>
-<p>Bunker guards (4) and surveillance cam operator (1).</p>
+<p>Office jobs: Bunker guards (4) and surveillance cam operator (1).</p>
 <br>
-<p>Vendor jobs:</p>
-<p>Street vendor (28g), Nightclubs vendor (112g) and Runner (224g).</p>
+<p>Vendor jobs: Street vendor (28g), Nightclubs vendor (112g) and Runner (224g).</p>
 <br>
 <hr>
 <br>
