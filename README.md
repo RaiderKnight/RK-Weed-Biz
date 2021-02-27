@@ -3,17 +3,19 @@
 <p>https://github.com/vinfamy/LifePlay</p>
 <br>
 <h3>rk_Weed_biz :</h3>
+<p>Version: 1.0.1</p>
+<br>
 <p>Start your own business as a dealer.</p>
+<p>Contain 29 scenes. </p>
 <p>8 types of strains to buy and sell.</p>
-<p>Contain 26 scenes. </p>
 <p>Buy or trade bitcoins</p>
 <p>1 wallet for your Bitcoins</p>
 <p>1 stash for your goods</p>
 <p>Smoke blunts</p>
 <p>Buy equipements (little bit empty)</p>
 <p>Rent a bunker (background missing)</p>
-<p>A tutorial (wip).</p>
 <p>2 new characters (Valerie + Johnny)</p>
+<p>A tutorial (wip) and cheats.</p>
 <br>
 <p>Popup scenes: 3</p>
 <p>1 scene for "Females"</p>
@@ -32,7 +34,7 @@
 <p>At least LifePlay 3.18</p>
 <p>Mod: nn_GangsOfLifePlay</p>
 <br>
-<p>Optional Mod: <a href="https://github.com/RaiderKnight/RK-Weed-Shop" title="Rk-Weed-Shop">rk_WeedShop</a></p>
+<p>Optional Mod: <a href="https://github.com/RaiderKnight/RK-Weed-Shop" title="Rk-Weed-Shop">rk_WeedShop</a> - To get more locations to buy.</p>
 <br>
 <hr>
 <br>
