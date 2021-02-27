@@ -1,0 +1,102 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    
+    stock_AK47weed = Player.getActorVar(stock_AK47weed)
+    stock_SSweed = Player.getActorVar(stock_SSweed)
+    stock_WWweed = Player.getActorVar(stock_WWweed)
+    stock_PEweed = Player.getActorVar(stock_PEweed)
+    stock_OGKweed = Player.getActorVar(stock_OGKweed)
+    stock_GSCweed = Player.getActorVar(stock_GSCweed)
+    stock_BBweed = Player.getActorVar(stock_BBweed)
+    stock_GGweed = Player.getActorVar(stock_GGweed)
+    weeddealerLvl = Player.getActorVar(weeddealerLvl)
+    stash_AK47weed = Player.getActorVar(stash_AK47weed)
+    stash_SSweed = Player.getActorVar(stash_SSweed)
+    stash_WWweed = Player.getActorVar(stash_WWweed)
+    stash_PEweed = Player.getActorVar(stash_PEweed)
+    stash_OGKweed = Player.getActorVar(stash_OGKweed)
+    stash_GSCweed = Player.getActorVar(stash_GSCweed)
+    stash_BBweed = Player.getActorVar(stash_BBweed)
+    stash_GGweed = Player.getActorVar(stash_GGweed)
+    stock_Bitcoins = Player.getActorVar(stock_Bitcoins)
+            
+    "Welcome to Weed Biz Cheats list!"
+
+        0:: "Add 10 points to your WD level"
+        1:: "Add 28g of weeds to your pockets"
+        2:: "Get 1 Bitcoin"
+        99:: "Back to game"
+        
+        If 0
+            
+            Player.modifyActorVar(weeddealerLvl, 10)
+            "You have just added 10 points to your Weed Dealer level!"
+ 
+        ElseIf 1
+            
+            "Which strain you gonna add to your pockets?"
+            0:: "Get 28g of AK 47"
+            1:: "Get 28g of Sunset Sherbet"
+            2:: "Get 28g of White Widow"
+            3:: "Get 28g of Pineapple Express"
+            4:: "Get 28g of OG Kush"
+            5:: "Get 28g of Girl Scout Cookies"
+            6:: "Get 28g of Bruce Banner"
+            7:: "Get 28g of Gorilla Glue"
+            8:: "Go Back"
+            
+            If 0
+            
+                Player.modifyActorVar(stock_AK47weed, 28)
+                "28g of AK 47 added to your pockets!"
+            
+            ElseIf 1
+            
+                Player.modifyActorVar(stock_SSweed, 28)
+                "28g of Sunset Sherbet added to your pockets!"
+            
+            ElseIf 2
+            
+                Player.modifyActorVar(stock_WWweed, 28)
+                "28g of White Widow added to your pockets!"
+            
+            ElseIf 3
+            
+                Player.modifyActorVar(stock_PEweed, 28)
+                "28g of Pineapple Express added to your pockets!"
+            
+            ElseIf 4
+            
+                Player.modifyActorVar(stock_OGKweed, 28)
+                "28g of OG Kush added to your pockets!"
+            
+            ElseIf 5
+            
+                Player.modifyActorVar(stock_GSCweed, 28)
+                "28g of Girl Scout Cookies added to your pockets!"
+            
+            ElseIf 6
+            
+                Player.modifyActorVar(stock_BBweed, 28)
+                "28g of Bruce Banner added to your pockets!"
+            
+            ElseIf 7
+            
+                Player.modifyActorVar(stock_GGweed, 28)
+                "28g of Gorilla Glue added to your pockets!"
+             
+            EndIf
+
+        ElseIf 2
+        
+            Player.modifyActorVar(stock_Bitcoins, 1)
+            "You have just added 1 Bitcoin to your wallet!"
+
+        EndIf
+
+    SceneEnd()

@@ -1,0 +1,30 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    
+    "Welcome to Weed Biz Cheats and tutorial!"
+        
+        0:: "How to start (mini tutorial)"
+        1:: "Big tutorial"
+        10:: "Cheating"
+        99:: "Back to game"
+        
+        If 0
+        
+            followUp(rk_tut_start)
+ 
+        ElseIf 1
+        
+            followUp(rk_tut_WDBigTutos)
+
+        ElseIf 10
+        
+            followUp(rk_wd_CheatList)
+
+        EndIf
+    
+    SceneEnd()

@@ -15,7 +15,17 @@ OTHER: none
         stash_GSCweed = Player.getActorVar(stash_GSCweed)
         stash_BBweed = Player.getActorVar(stash_BBweed)
         stash_GGweed = Player.getActorVar(stash_GGweed)
- 
+        stock_AK47weed = Player.getActorVar(stock_AK47weed)
+        stock_SSweed = Player.getActorVar(stock_SSweed)
+        stock_WWweed = Player.getActorVar(stock_WWweed)
+        stock_PEweed = Player.getActorVar(stock_PEweed)
+        stock_OGKweed = Player.getActorVar(stock_OGKweed)
+        stock_GSCweed = Player.getActorVar(stock_GSCweed)
+        stock_BBweed = Player.getActorVar(stock_BBweed)
+        stock_GGweed = Player.getActorVar(stock_GGweed)
+        
+        weedstck = stock_AK47weed + stock_SSweed + stock_WWweed + stock_PEweed + stock_OGKweed + stock_GSCweed + stock_BBweed + stock_GGweed
+
         stock_weed_stash = stash_AK47weed + stash_SSweed + stash_WWweed + stash_PEweed + stash_OGKweed + stash_GSCweed + stash_BBweed + stash_GGweed
 
     If stock_weed_stash < 1 
@@ -34,7 +44,536 @@ OTHER: none
             0:: "<stash_GSCweed> gram(s) of Girl Scout Cookies"
             0:: "<stash_BBweed> gram(s) of Bruce Banner"
             0:: "<stash_GGweed> gram(s) of Gorilla Glue"
+            1:: stock_weed_stash >= 1 ::"Put some weed in your pockets"
+            2:: weedstck >= 1 ::"Put some weed of your pockets inside your stash"
             99:: "Go back !"
+            
+            If 1
+            
+                "Hmm! Which strain I will take?"
+                0:: stash_AK47weed >= 1::"AK 47"
+                1:: stash_SSweed >= 1::"Sunset Sherbet"
+                2:: stash_WWweed >= 1::"White Widow"
+                3:: stash_PEweed >= 1::"Pineapple Express"
+                4:: stash_OGKweed >= 1::"OG Kush"
+                5:: stash_GSCweed >= 1::"Girl Scout Cookies"
+                6:: stash_BBweed >= 1::"Bruce Banner"
+                7:: stash_GGweed >= 1::"Gorilla Glue"
+                99:: "Go back !" 
+                
+                if 0
+                
+                    "How much I want to transfer to my pockets?"
+                    0::stash_AK47weed >= 1::"Transfer 1g"
+                    1::stash_AK47weed >= 5::"Transfer 5g"
+                    2::stash_AK47weed >= 10::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stash_AK47weed - 1
+                        Player.setActorVar(stash_AK47weed, transfWeed)
+                        "I decided to transfer 1g of Ak 47 to my pockets!"
+                        Player.modifyActorVar(stock_AK47weed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stash_AK47weed - 5
+                        Player.setActorVar(stash_AK47weed, transfWeed5)
+                        "I decided to transfer 5g of Ak 47 to my pockets!"
+                        Player.modifyActorVar(stock_AK47weed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stash_AK47weed - 10
+                        Player.setActorVar(stash_AK47weed, transfWeed10)
+                        "I decided to transfer 10g of Ak 47 to my pockets!"
+                        Player.modifyActorVar(stock_AK47weed, 10)
+                        
+                    Endif
+                    
+                ElseIf 1
+                
+                    "How much I want to transfer to my pockets?"
+                    0:: stash_SSweed >= 1 ::"Transfer 1g"
+                    1:: stash_SSweed >= 5 ::"Transfer 5g"
+                    2:: stash_SSweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stash_SSweed - 1
+                        Player.setActorVar(stash_SSweed, transfWeed)
+                        "I decided to transfer 1g of Sunset Sherbet to my pockets!"
+                        Player.modifyActorVar(stock_SSweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stash_SSweed - 5
+                        Player.setActorVar(stash_SSweed, transfWeed5)
+                        "I decided to transfer 5g of Sunset Sherbet to my pockets!"
+                        Player.modifyActorVar(stock_SSweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stash_SSweed - 10
+                        Player.setActorVar(stash_SSweed, transfWeed10)
+                        "I decided to transfer 10g of Sunset Sherbet to my pockets!"
+                        Player.modifyActorVar(stock_SSweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 2
+                
+                    "How much I want to transfer to my pockets?"
+                    0:: stash_WWweed >= 1 ::"Transfer 1g"
+                    1:: stash_WWweed >= 5 ::"Transfer 5g"
+                    2:: stash_WWweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stash_WWweed - 1
+                        Player.setActorVar(stash_WWweed, transfWeed)
+                        "I decided to transfer 1g of White Widow to my pockets!"
+                        Player.modifyActorVar(stock_WWweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stash_WWweed - 5
+                        Player.setActorVar(stash_WWweed, transfWeed5)
+                        "I decided to transfer 5g of White Widow to my pockets!"
+                        Player.modifyActorVar(stock_WWweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stash_WWweed - 10
+                        Player.setActorVar(stash_WWweed, transfWeed10)
+                        "I decided to transfer 10g of White Widow to my pockets!"
+                        Player.modifyActorVar(stock_WWweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 3
+                
+                    "How much I want to transfer to my pockets?"
+                    0:: stash_PEweed >= 1::"Transfer 1g"
+                    1:: stash_PEweed >= 5::"Transfer 5g"
+                    2:: stash_PEweed >= 10::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stash_PEweed - 1
+                        Player.setActorVar(stash_PEweed, transfWeed)
+                        "I decided to transfer 1g of Pineapple Express to my pockets!"
+                        Player.modifyActorVar(stock_PEweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stash_PEweed - 5
+                        Player.setActorVar(stash_PEweed, transfWeed5)
+                        "I decided to transfer 5g of Pineapple Express to my pockets!"
+                        Player.modifyActorVar(stock_PEweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stash_PEweed - 10
+                        Player.setActorVar(stash_PEweed, transfWeed10)
+                        "I decided to transfer 10g of Pineapple Express to my pockets!"
+                        Player.modifyActorVar(stock_PEweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 4
+                
+                    "How much I want to transfer to my pockets?"
+                    0:: stash_OGKweed >= 1::"Transfer 1g"
+                    1:: stash_OGKweed >= 5::"Transfer 5g"
+                    2:: stash_OGKweed >= 10::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stash_OGKweed - 1
+                        Player.setActorVar(stash_OGKweed, transfWeed)
+                        "I decided to transfer 1g of OG Kush to my pockets!"
+                        Player.modifyActorVar(stock_OGKweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stash_OGKweed - 5
+                        Player.setActorVar(stash_OGKweed, transfWeed5)
+                        "I decided to transfer 5g of OG Kush to my pockets!"
+                        Player.modifyActorVar(stock_OGKweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stash_OGKweed - 10
+                        Player.setActorVar(stash_OGKweed, transfWeed10)
+                        "I decided to transfer 10g of OG Kush to my pockets!"
+                        Player.modifyActorVar(stock_OGKweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 5
+                
+                    "How much I want to transfer to my pockets?"
+                    0:: stash_GSCweed >= 1::"Transfer 1g"
+                    1:: stash_GSCweed >= 5::"Transfer 5g"
+                    2:: stash_GSCweed >= 10::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stash_GSCweed - 1
+                        Player.setActorVar(stash_GSCweed, transfWeed)
+                        "I decided to transfer 1g of Girl Scout Cookies to my pockets!"
+                        Player.modifyActorVar(stock_GSCweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stash_GSCweed - 5
+                        Player.setActorVar(stash_GSCweed, transfWeed5)
+                        "I decided to transfer 5g of Girl Scout Cookies to my pockets!"
+                        Player.modifyActorVar(stock_GSCweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stash_GSCweed - 10
+                        Player.setActorVar(stash_GSCweed, transfWeed10)
+                        "I decided to transfer 10g of Girl Scout Cookies to my pockets!"
+                        Player.modifyActorVar(stock_GSCweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 6
+                
+                    "How much I want to transfer to my pockets?"
+                    0:: stash_BBweed >= 1::"Transfer 1g"
+                    1:: stash_BBweed >= 5::"Transfer 5g"
+                    2:: stash_BBweed >= 10::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stash_BBweed - 1
+                        Player.setActorVar(stash_BBweed, transfWeed)
+                        "I decided to transfer 1g of Bruce Banner to my pockets!"
+                        Player.modifyActorVar(stock_BBweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stash_BBweed - 5
+                        Player.setActorVar(stash_BBweed, transfWeed5)
+                        "I decided to transfer 5g of Bruce Banner to my pockets!"
+                        Player.modifyActorVar(stock_BBweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stash_BBweed - 10
+                        Player.setActorVar(stash_BBweed, transfWeed10)
+                        "I decided to transfer 10g of Bruce Banner to my pockets!"
+                        Player.modifyActorVar(stock_BBweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 7
+                
+                    "How much I want to transfer to my pockets?"
+                    0:: stash_GGweed >= 1 ::"Transfer 1g"
+                    1:: stash_GGweed >= 5 ::"Transfer 5g"
+                    2:: stash_GGweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stash_GGweed - 1
+                        Player.setActorVar(stash_GGweed, transfWeed)
+                        "I decided to transfer 1g of Gorilla Glue to my pockets!"
+                        Player.modifyActorVar(stock_GGweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stash_GGweed - 5
+                        Player.setActorVar(stash_GGweed, transfWeed5)
+                        "I decided to transfer 5g of Gorilla Glue to my pockets!"
+                        Player.modifyActorVar(stock_GGweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stash_GGweed - 10
+                        Player.setActorVar(stash_GGweed, transfWeed10)
+                        "I decided to transfer 10g of Gorilla Glue to my pockets!"
+                        Player.modifyActorVar(stock_GGweed, 10)
+                        
+                    Endif
+                    
+                Endif
+            
+            ElseIf 2
+            
+                0:: stock_AK47weed >= 1::"AK 47"
+                1:: stock_SSweed >= 1::"Sunset Sherbet"
+                2:: stock_WWweed >= 1::"White Widow"
+                3:: stock_PEweed >= 1::"Pineapple Express"
+                4:: stock_OGKweed >= 1::"OG Kush"
+                5:: stock_GSCweed >= 1::"Girl Scout Cookies"
+                6:: stock_BBweed >= 1::"Bruce Banner"
+                7:: stock_GGweed >= 1::"Gorilla Glue"
+                8::"Go back !" 
+                
+                if 0
+                
+                    "How much I want to transfer to my weed stash?"
+                    0:: stock_AK47weed >= 1::"Transfer 1g"
+                    1:: stock_AK47weed >= 5::"Transfer 5g"
+                    2:: stock_AK47weed >= 10::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stock_AK47weed - 1
+                        Player.setActorVar(stock_AK47weed, transfWeed)
+                        "I decided to transfer 1g of Ak 47 to my weed stash!"
+                        Player.modifyActorVar(stash_AK47weed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stock_AK47weed - 5
+                        Player.setActorVar(stock_AK47weed, transfWeed5)
+                        "I decided to transfer 5g of Ak 47 to my weed stash!"
+                        Player.modifyActorVar(stash_AK47weed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stock_AK47weed - 10
+                        Player.setActorVar(stock_AK47weed, transfWeed10)
+                        "I decided to transfer 10g of Ak 47 to my weed stash!"
+                        Player.modifyActorVar(stash_AK47weed, 10)
+                        
+                    Endif
+                    
+                ElseIf 1
+                
+                    "How much I want to transfer to my weed stash?"
+                    0:: stock_SSweed >= 1 ::"Transfer 1g"
+                    1:: stock_SSweed >= 5 ::"Transfer 5g"
+                    2:: stock_SSweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stock_SSweed - 1
+                        Player.setActorVar(stock_SSweed, transfWeed)
+                        "I decided to transfer 1g of Sunset Sherbet to my weed stash!"
+                        Player.modifyActorVar(stash_SSweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stock_SSweed - 5
+                        Player.setActorVar(stock_SSweed, transfWeed5)
+                        "I decided to transfer 5g of Sunset Sherbet to my weed stash!"
+                        Player.modifyActorVar(stash_SSweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stock_SSweed - 10
+                        Player.setActorVar(stock_SSweed, transfWeed10)
+                        "I decided to transfer 10g of Sunset Sherbet to my weed stash!"
+                        Player.modifyActorVar(stash_SSweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 2
+                
+                    "How much I want to transfer to my weed stash?"
+                    0:: stock_WWweed >= 1 ::"Transfer 1g"
+                    1:: stock_WWweed >= 5 ::"Transfer 5g"
+                    2:: stock_WWweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stock_WWweed - 1
+                        Player.setActorVar(stock_WWweed, transfWeed)
+                        "I decided to transfer 1g of White Widow to my weed stash!"
+                        Player.modifyActorVar(stash_WWweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stock_WWweed - 5
+                        Player.setActorVar(stock_WWweed, transfWeed5)
+                        "I decided to transfer 5g of White Widow to my weed stash!"
+                        Player.modifyActorVar(stash_WWweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stock_WWweed - 10
+                        Player.setActorVar(stock_WWweed, transfWeed10)
+                        "I decided to transfer 10g of White Widow to my weed stash!"
+                        Player.modifyActorVar(stash_WWweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 3
+                
+                    "How much I want to transfer to my weed stash?"
+                    0:: stock_PEweed >= 1 ::"Transfer 1g"
+                    1:: stock_PEweed >= 5 ::"Transfer 5g"
+                    2:: stock_PEweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stock_PEweed - 1
+                        Player.setActorVar(stock_PEweed, transfWeed)
+                        "I decided to transfer 1g of Pineapple Express to my weed stash!"
+                        Player.modifyActorVar(stash_PEweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stock_PEweed - 5
+                        Player.setActorVar(stock_PEweed, transfWeed5)
+                        "I decided to transfer 5g of Pineapple Express to my weed stash!"
+                        Player.modifyActorVar(stash_PEweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stock_PEweed - 10
+                        Player.setActorVar(stock_PEweed, transfWeed10)
+                        "I decided to transfer 10g of Pineapple Express to my weed stash!"
+                        Player.modifyActorVar(stash_PEweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 4
+                
+                    "How much I want to transfer to my weed stash?"
+                    0:: stock_OGKweed >= 1 ::"Transfer 1g"
+                    1:: stock_OGKweed >= 5 ::"Transfer 5g"
+                    2:: stock_OGKweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stock_OGKweed - 1
+                        Player.setActorVar(stock_OGKweed, transfWeed)
+                        "I decided to transfer 1g of OG Kush to my weed stash!"
+                        Player.modifyActorVar(stash_OGKweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stock_OGKweed - 5
+                        Player.setActorVar(stock_OGKweed, transfWeed5)
+                        "I decided to transfer 5g of OG Kush to my weed stash!"
+                        Player.modifyActorVar(stash_OGKweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stock_OGKweed - 10
+                        Player.setActorVar(stock_OGKweed, transfWeed10)
+                        "I decided to transfer 10g of OG Kush to my weed stash!"
+                        Player.modifyActorVar(stash_OGKweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 5
+                
+                    "How much I want to transfer to my weed stash?"
+                    0:: stock_GSCweed >= 1 ::"Transfer 1g"
+                    1:: stock_GSCweed >= 5 ::"Transfer 5g"
+                    2:: stock_GSCweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stock_GSCweed - 1
+                        Player.setActorVar(stock_GSCweed, transfWeed)
+                        "I decided to transfer 1g of Girl Scout Cookies to my weed stash!"
+                        Player.modifyActorVar(stash_GSCweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stock_GSCweed - 5
+                        Player.setActorVar(stock_GSCweed, transfWeed5)
+                        "I decided to transfer 5g of Girl Scout Cookies to my weed stash!"
+                        Player.modifyActorVar(stash_GSCweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stock_GSCweed - 10
+                        Player.setActorVar(stock_GSCweed, transfWeed10)
+                        "I decided to transfer 10g of Girl Scout Cookies to my weed stash!"
+                        Player.modifyActorVar(stash_GSCweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 6
+                
+                    "How much I want to transfer to my weed stash?"
+                    0:: stock_BBweed >= 1 ::"Transfer 1g"
+                    1:: stock_BBweed >= 5 ::"Transfer 5g"
+                    2:: stock_BBweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stock_BBweed - 1
+                        Player.setActorVar(stock_BBweed, transfWeed)
+                        "I decided to transfer 1g of Bruce Banner to my weed stash!"
+                        Player.modifyActorVar(stash_BBweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stock_BBweed - 5
+                        Player.setActorVar(stock_BBweed, transfWeed5)
+                        "I decided to transfer 5g of Bruce Banner to my weed stash!"
+                        Player.modifyActorVar(stash_BBweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stock_BBweed - 10
+                        Player.setActorVar(stock_BBweed, transfWeed10)
+                        "I decided to transfer 10g of Bruce Banner to my weed stash!"
+                        Player.modifyActorVar(stash_BBweed, 10)
+                        
+                    Endif
+                    
+                ElseIf 7
+                
+                    "How much I want to transfer to my weed stash?"
+                    0:: stock_GGweed >= 1 ::"Transfer 1g"
+                    1:: stock_GGweed >= 5 ::"Transfer 5g"
+                    2:: stock_GGweed >= 10 ::"Transfer 10g"
+                    99:: "Go back !"
+                        
+                    If 0
+                        
+                        transfWeed = stock_GGweed - 1
+                        Player.setActorVar(stock_GGweed, transfWeed)
+                        "I decided to transfer 1g of Gorilla Glue to my weed stash!"
+                        Player.modifyActorVar(stash_GGweed, 1)
+                        
+                    ElseIf 1
+                        
+                        transfWeed5 = stock_GGweed - 5
+                        Player.setActorVar(stock_GGweed, transfWeed5)
+                        "I decided to transfer 5g of Gorilla Glue to my weed stash!"
+                        Player.modifyActorVar(stash_GGweed, 5)
+                        
+                    ElseIf 2
+                        
+                        transfWeed10 = stock_GGweed - 10
+                        Player.setActorVar(stock_GGweed, transfWeed10)
+                        "I decided to transfer 10g of Gorilla Glue to my weed stash!"
+                        Player.modifyActorVar(stash_GGweed, 10)
+                        
+                    Endif
+                    
+                Endif
+            
+            Endif
             
         Endif
 

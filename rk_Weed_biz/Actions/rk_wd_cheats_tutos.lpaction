@@ -1,0 +1,12 @@
+ACTION_UNIQUEID: rk_wd_cheats_tutos
+ACTION_NAME: Cheats and Tutos (WD)
+WHERE: crime
+WHEN: 0 - 24
+MINUTES: 3 - 5
+TIMEOUT_MINUTES: 0
+ALSO_TIMEOUT: 
+EFFECTS: 
+CONDITIONS: 
+MOVE_FIRST: false
+SCENE_ALWAYS: rk_wd_cheats_tutos
+ANIMATION:

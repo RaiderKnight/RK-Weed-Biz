@@ -1,0 +1,96 @@
+WHAT: none
+WHERE: none
+WHEN: 0 - 24
+WHO: none
+OTHER: none
+
+    SceneStart()
+    
+    "Welcome to Weed Biz long version tutorial! The work in progress version..."
+
+    stayInMenu = true
+    While stayInMenu
+        
+        "What information I want to read?"
+        10:: "The inventories"
+        20:: "Equipment"
+        30:: "Office/Bunker"
+        60:: "Employees"
+        70:: "Vendors"
+        99:: "Back to game"
+        
+        If 10
+            
+            "There are three types of inventories inside the Weed-Biz mod."
+            "'Check your Wallet (WD)': For checking how much Bitcoins you have."
+            "'Show weed inside my pockets': For checking how much weed inside your pockets."
+            "'Show weed Stash': For checking how much weed inside your stash."
+            "Also in 'Show weed Stash', you can transfer your weeds to your pockets or to your stash."
+        
+        ElseIf 20
+            "At the moment, equipments have no effects. Soon, I will add some scenes to make it useful!"
+
+        ElseIf 30
+            "At the moment, the bunker have no effects. Soon, I will add some scenes to make it useful!"
+
+        ElseIf 60
+            
+            "Which of these employees do you want more information?"
+            0:: "Guards"
+            1:: "Surveillance cam operator"
+            
+            If 0
+            
+                "At the moment, the guards have no use except spending your excess money."
+                "Soon, I will add some scenes to make them useful!"
+                "'Guard inside bunker' is unlock after 50 sales made"
+                "'Guard in front of the bunker' is unlock after 75 sales made"
+                "'Guard in the backyard of the bunker' is unlock after 100 sales made"
+                "'Guard on the roof of the bunker' is unlock after 150 sales made"
+                "Future goals: They will protect the bunker, have certain fights with rivals and various actions."
+            
+            ElseIf 1
+            
+                "At the moment, the Surveillance cam operator have no use except spending your excess money."
+                "Soon, I will add some scenes to make it useful!"
+                "Future goals: the security guy in all its forms, at the IT level. Can hack, search, crack, ... but is primary job is to protect guards and the bunker via security cams."
+            
+            EndIf
+
+        
+        ElseIf 70
+            
+            "Which of these vendors do you want more information?"
+            0:: "Street vendor"
+            1:: "Nightclubs vendor"
+            2:: "Runner"
+            
+            If 0
+            
+                "The street vendor is a person who sells in the street, parks, .. all outdoor public spaces."
+                "The street vendor only sell 28g at the time."
+                "You can call him/her every seven days."
+                "The street vendor is unlock after 10 sales made"
+            
+            ElseIf 1
+            
+                "The nightclubs vendor is a person who sells inside bars, nightclubs, cafes, ..."
+                "The nightclubs vendor only sell 112g at the time."
+                "You can call him/her every five days."
+                "The nightclubs vendor is unlock after 20 sales made"
+            
+            ElseIf 2
+            
+                "The runner vendor is a person who sells with is 'car', so is able to sell more weeds than the other vendors."
+                "The runner vendor only sell 224g at the time."
+                "You can call him/her every three days."
+                "The runner vendor is unlock after 50 sales made"
+            
+            EndIf
+            
+        Else
+            stayInMenu = false
+        EndIf
+    EndWhile
+    
+    SceneEnd()

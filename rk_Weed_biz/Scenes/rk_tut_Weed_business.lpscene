@@ -15,6 +15,6 @@ OTHER: none
     "'Manage Employees', is the section to hire/fire and manage your employees."
     "That's it for now, have a fun!"
     
-    followUp(rk_scene_Manage_Weed_Cartel)
+    followUp(rk_wd_cheats_tutos)
     
     SceneEnd()

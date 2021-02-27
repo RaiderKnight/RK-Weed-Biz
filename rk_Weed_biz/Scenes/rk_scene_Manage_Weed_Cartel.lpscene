@@ -39,13 +39,12 @@ OTHER: none
             While stayInMenu
             
                 9:: "Show weed inside my pockets"
-                10:: "Show weed Stash"
+                10:: "Show Stash / Transfer Weed"
                 11:: "Show Bitcoin inventory"
                 40:: "Manage Employees"
                 50:: "Show my Weed Dealer Level"
                 20:: "Buy new equipment"
                 30:: "Rent an office"
-                80:: "Tutorial"
                 90:: "Close your weed business down"
                 99:: "Exit"
                 
@@ -104,12 +103,6 @@ OTHER: none
                     "Your Weed Dealer Level is: <weeddealerLvl>"
                     "Your Level increases with each sale. Rendered at certain levels, you have the possibility of buying in large quantities and hire runners."
                     "Runners will help you sell faster."
-                    
-                    stayInMenu = false
-                    
-                ElseIf 80
-                
-                    followUp(rk_tut_start)
                     
                     stayInMenu = false
                     
