@@ -17,19 +17,18 @@
 <li>2 new characters (Valerie + Johnny)</li>
 <li>A tutorial (wip) and cheats.</li></ul>
 <br>
-<p>Popup scenes: 3</p>
+<p><u>Popup scenes: 3</u></p>
 <ul style="dotted"><li>1 scene for "Females"</li>
 <li>1 scene for "Males"</li>
 <li>1 scene for both</li></ul>
 <br>
-<p>Office jobs: Bunker guards (4) and surveillance cam operator (1).</p>
-<br>
-<p>Vendor jobs: Street vendor (28g), Nightclubs vendor (112g) and Runner (224g).</p>
+<p><u>Office jobs</u>: Bunker guards (4) and surveillance cam operator (1).</p>
+<p><u>Vendor jobs</u>: Street vendor (28g), Nightclubs vendor (112g) and Runner (224g).</p>
 <br>
 <hr>
 <br>
 <h3>Module requirements</h3>
-<p>At least LifePlay 3.18</p>
+<p>At least the game LifePlay 3.18</p>
 <p>Mod: nn_GangsOfLifePlay</p>
 <br>
 <p>Optional Mod: <a href="https://github.com/RaiderKnight/RK-Weed-Shop" title="Rk-Weed-Shop">rk_WeedShop</a> - To get more locations to buy.</p>
