@@ -3,7 +3,7 @@
 <p>https://github.com/vinfamy/LifePlay</p>
 <br>
 <h3>rk_Weed_biz :</h3>
-<p>Version: 1.0.1</p>
+<p>Version: 1.0.2</p>
 <br>
 <ul style="dotted"><li>Start your own business as a dealer.</li>
 <li>Contain 29 scenes. </li>
