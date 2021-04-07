@@ -1,8 +1,8 @@
 WHAT: all
 WHERE: home
 WHEN: 12 - 24
-WHO: 
-OTHER: isAtHome()
+WHO: none
+OTHER: isAtHome() && Player:rkOpenedWeedCartel >= 1
 
 SceneStart()
 

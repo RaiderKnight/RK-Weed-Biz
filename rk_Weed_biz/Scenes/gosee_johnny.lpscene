@@ -11,27 +11,31 @@ OTHER: none
         
     Else
         JohnActor = generatePerson(rk_ModelM_Johnny_Boy)
-        JohnActor.show()
+        JohnActor.hide()
         JohnActor.dress()
         Bar_Owner = generatePersonTemporary()
         Bar_Owner.show()
         Bar_Owner.dress()
         dressFormal()
-            
+        
+        Player.moveToPersonStand(Bar_Owner, 50)
         "I approach the bar owner and ask him:"
-        Player::"Can I talk to Johnny?"
+        Player(Curious)::"Can I talk to Johnny?"
         Bar_Owner(Curious)::"Who's asking?"
-        Player::"<Player.name>"  
+        Player(Anxious)::"<Player.name>"  
         Bar_Owner(Curious)::"You doesn't look like a dog so, let me check! Sometime he's left, but he will come back if he is!"
-        JNoYes = Random(1,2)
+        JNoYes = Random(0, 2)
+        IfJNoYes = JNoYes.round()
+        IfISeeHim = Player.getActorVar(IfISeeHim)
+        passTime(0.15, 0.25)
         
-        If JNoYes == 1
-        
+        If IfJNoYes <= 1
+
+            JohnActor.show()
             JohnActor(Curious)::"Yes, what can I do for you?"
             
-            Player::"Do you have any weed to sell?"
+            Player(Curious)::"Do you have any weed to sell?"
 
-            // Get current weed strains
             price_AK47Weed = Random(5, 10)
             price_AK47Weed_local = price_AK47Weed.convertToLocalCurrency()
             price_SSWeed = Random(10, 11)
@@ -53,95 +57,126 @@ OTHER: none
             dressFormal()
             
             JohnActor(Happy)::"Always, which strain do you want ?"
-            Player::"He have many varieties of weeds. Cool, I love having choices!"
-            0:: money >= 0:: "1 gram of AK 47 (13-20%) for <price_AK47Weed_local>"
-            1:: money >= 0:: "1 gram of Sunset Sherbet (15-19%) for <price_SSWeed_local>"
-            2:: money >= 0:: "1 gram of White Widow (18-25%) for <price_WWWeed_local>"
-            3:: money >= 0:: "1 gram of Pineapple Express (19-25%) for <price_PEWeed_local>"
-            4:: money >= 0:: "1 gram of OG Kush (20-25%) for <price_OGKWeed_local>"
-            5:: money >= 0:: "1 gram of Girl Scout Cookies (25-28%) for <price_GSCWeed_local>"
-            6:: money >= 0:: "1 gram of Bruce Banner (25-29%) for <price_BBWeed_local>"
-            7:: money >= 0:: "1 gram of Gorilla Glue (25-30%) for <price_GGWeed_local>"
-            8:: "Buy nothing"
+            Player(Happy)::"He have many varieties of weeds. Cool, I love having choices!"
+            
+            stayInMenu = true
+            While stayInMenu
+                
+                "Which strain I will buy?"
+                0:: money >= 0:: "1 gram of AK 47 (13-20%) for <price_AK47Weed_local>"
+                1:: money >= 0:: "1 gram of Sunset Sherbet (15-19%) for <price_SSWeed_local>"
+                2:: money >= 0:: "1 gram of White Widow (18-25%) for <price_WWWeed_local>"
+                3:: money >= 0:: "1 gram of Pineapple Express (19-25%) for <price_PEWeed_local>"
+                4:: money >= 0:: "1 gram of OG Kush (20-25%) for <price_OGKWeed_local>"
+                5:: money >= 0:: "1 gram of Girl Scout Cookies (25-28%) for <price_GSCWeed_local>"
+                6:: money >= 0:: "1 gram of Bruce Banner (25-29%) for <price_BBWeed_local>"
+                7:: money >= 0:: "1 gram of Gorilla Glue (25-30%) for <price_GGWeed_local>"
+                99:: "Buy nothing"
         
-            If 0
+                If 0
                 
-                money -= price_AK47Weed
-                JohnActor(Happy)::"This strain produces happy memories, which makes me laugh and smile, during bad moments. See you later!"
-                Player.modifyActorVar(stock_AK47weed, 1)
-                passTime(1,2)
+                    money -= price_AK47Weed
+                    JohnActor(Happy)::"This strain produces happy memories, which makes me laugh and smile, during bad moments. See you later!"
+                    Player.modifyActorVar(stock_AK47weed, 1)
+                    Player.modifyActorVar(IfISeeHim, 1)
+                    passTime(1,2)
                                 
-            Elseif 1
+                Elseif 1
                 
-                money -= price_SSWeed
-                JohnActor(Happy)::"Powerful psychoactive effects which boost your motivation, creativity, imagination and inspiration. See you later!"
-                Player.modifyActorVar(stock_SSweed, 1)
-                passTime(1,2)
+                    money -= price_SSWeed
+                    JohnActor(Happy)::"Powerful psychoactive effects which boost your motivation, creativity, imagination and inspiration. See you later!"
+                    Player.modifyActorVar(stock_SSweed, 1)
+                    Player.modifyActorVar(IfISeeHim, 1)
+                    passTime(1,2)
                 
-            Elseif 2
+                Elseif 2
                 
-                money -= Price_WWweed
-                JohnActor(Happy)::"A delicious blend of earthy, wooded and flowery tastes. That one, smell very strong! See you later!"
-                Player.modifyActorVar(stock_WWweed, 1)
-                passTime(1,2)
+                    money -= Price_WWweed
+                    JohnActor(Happy)::"A delicious blend of earthy, wooded and flowery tastes. That one, smell very strong! See you later!"
+                    Player.modifyActorVar(stock_WWweed, 1)
+                    Player.modifyActorVar(IfISeeHim, 1)
+                    passTime(1,2)
                 
-            Elseif 3
+                Elseif 3
                 
-                money -= Price_PEweed
-                JohnActor(Happy)::"Perfect for smoking with friends during parties and social gatherings. See you later!"
-                Player.modifyActorVar(stock_PEweed, 1)
-                passTime(1,2)
+                    money -= Price_PEweed
+                    JohnActor(Happy)::"Perfect for smoking with friends during parties and social gatherings. See you later!"
+                    Player.modifyActorVar(stock_PEweed, 1)
+                    Player.modifyActorVar(IfISeeHim, 1)
+                    passTime(1,2)
                 
-            Elseif 4
+                Elseif 4
                 
-                money -= Price_OGKweed
-                JohnActor(Happy)::"For a rapid headrush, an uplifted mood and euphoria as well as increased mental stimulation. See you later!"
-                Player.modifyActorVar(stock_OGKweed, 1)
-                passTime(1,2)
+                    money -= Price_OGKweed
+                    JohnActor(Happy)::"For a rapid headrush, an uplifted mood and euphoria as well as increased mental stimulation. See you later!"
+                    Player.modifyActorVar(stock_OGKweed, 1)
+                    Player.modifyActorVar(IfISeeHim, 1)
+                    passTime(1,2)
                 
-            Elseif 5
+                Elseif 5
                 
-                money -= Price_GSCweed
-                JohnActor(Happy)::"It can help to feel creative, euphoric, relaxed and couch-locked. See you later!"
-                Player.modifyActorVar(stock_GSCweed, 1)
-                passTime(1,2)
+                    money -= Price_GSCweed
+                    JohnActor(Happy)::"It can help to feel creative, euphoric, relaxed and couch-locked. See you later!"
+                    Player.modifyActorVar(stock_GSCweed, 1)
+                    Player.modifyActorVar(IfISeeHim, 1)
+                    passTime(1,2)
                 
-            Elseif 6
+                Elseif 6
                 
-                money -= Price_BBweed
-                JohnActor(Happy)::"The top wake and bake strains due to its ability to make you creative and inspired. See you later!"
-                Player.modifyActorVar(stock_BBweed, 1)
-                passTime(1,2)
+                    money -= Price_BBweed
+                    JohnActor(Happy)::"The top wake and bake strains due to its ability to make you creative and inspired. See you later!"
+                    Player.modifyActorVar(stock_BBweed, 1)
+                    Player.modifyActorVar(IfISeeHim, 1)
+                    passTime(1,2)
                 
-            Elseif 7
+                Elseif 7
                 
-                money -= price_GGWeed
-                JohnActor(Happy)::"Increased mental clarity, stimulation, energy and uber-relaxing effects. See you later!"
-                Player.modifyActorVar(stock_GGweed, 1)
-                passTime(1,2)
+                    money -= price_GGWeed
+                    JohnActor(Happy)::"Increased mental clarity, stimulation, energy and uber-relaxing effects. See you later!"
+                    Player.modifyActorVar(stock_GGweed, 1)
+                    Player.modifyActorVar(IfISeeHim, 1)
+                    passTime(1,2)
                 
-            Elseif 8
+                Elseif 99
             
-                JohnActor.show()
-                JohnActor.dress()
-                dressFormal()
+                    JohnActor.show()
+                    JohnActor.dress()
+                    dressFormal()
             
-                Random
-                JohnActor(Angry)::"Damn! Your loosing my time bro, don't ask for me if you don't have money !"
-                JohnActor(Angry)::"Fuck man! Don't ask for me if you don't have any money !"
-                JohnActor(Angry)::"Hey looser! Your loosing my time bro, don't ask for me if you don't have any money !"
-                EndRandom
+                    If IfISeeHim > 0
+                        
+                        Random
+                            JohnActor(Happy)::"I'm happy that you like my weeds !"
+                            JohnActor(Happy)::"Good! If you need more come back any time!"
+                            JohnActor(Happy)::"Good! Have a good time with my weeds, you will come back I'm pretty sure!"
+                        EndRandom
+                        JohnActor:rapportwithplayer += Random(0, 2)
+                        Player.setActorVar(IfISeeHim, 0)
+                        
+                    Else
+                    
+                        Random
+                            JohnActor(Angry)::"Damn! Your loosing my time bro, don't ask for me if you don't have money !"
+                            JohnActor(Angry)::"Fuck man! Don't ask for me if you don't have any money !"
+                            JohnActor(Angry)::"Hey looser! Your loosing my time bro, don't ask for me if you don't have any money !"
+                        EndRandom
+                        JohnActor:rapportwithplayer -= Random(0, 2)
+                        
+                    Endif
+                    
+                    passTime(1,2)
+                    stayInMenu = false
                 
-                JohnActor:rapportwithplayer -= Random(0, 2)
-                passTime(1,2)
-                
-            Endif
+                Endif
+            
+            EndWhile
             
         Else
         
             "After few minutes!"
+            passTime(0.05, 0.15)
             Bar_Owner(Curious)::"Sorry, Johnny is not here! Come back later!"
-            Player::"Ok, thanks!"
+            Player(Sad)::"Ok, thanks!"
         
         Endif
     Endif

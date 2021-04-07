@@ -31,6 +31,7 @@ OTHER: none
             If 0
             
                 JohnActor = generatePersonTemporary(rk_ModelM_Johnny_Boy)
+                dressFormal()
                 JohnActor.dress()
                 dressFormal()
                 JohnActor.show(3)
@@ -56,6 +57,10 @@ OTHER: none
                     Player.setBoss()
                 EndIf
             
+                JohnActor.SetJob(Smuggler)
+                JohnActor.makePermanent()
+                exchangeContact(JohnActor)
+                dressFormal()
                 JohnActor.show(1)
                 dressFormal()
                 JohnActor(Happy)::"Howdy! My name is <JohnActor.name>. You probably saw me at the bar or pub...,anyway, I am proud to be your official weed dealer."
