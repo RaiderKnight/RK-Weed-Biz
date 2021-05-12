@@ -40,6 +40,7 @@ SceneStart()
         If JNoYes >= 3
 
             JohnActor.show()
+            JohnActor.moveToPersonStand(Player, 50)
             JohnActor(Curious)::"Yes, what can I do for you?"
             
             Player(Curious)::"Do you have any weed to sell?"
@@ -64,7 +65,7 @@ SceneStart()
             JohnActor.show()
             dressFormal()
             
-            JohnActor(Happy)::"Always, which strain do you want ?"
+            JohnActor(Happy)::"Always, which strain do you want?"
             Player(Happy)::"He have many varieties of weeds. Cool, I love having choices!"
             
             round = 0
@@ -287,6 +288,9 @@ SceneStart()
                     Player.show()
                     Player.strip()
                     Sex(Bar_Owner, Player)
+                    Bar_Owner:rapportwithplayer += Random(0, 2)
+                    Bar_Owner:attractiontoplayer += Random(0, 2)
+                    passTime(0.5, 1)
                     
                 Endif
             
