@@ -66,7 +66,7 @@ SceneStart()
             dressFormal()
             
             JohnActor(Happy)::"Always, which strain do you want?"
-            Player(Happy)::"He have many varieties of weeds. Cool, I love having choices!"
+            "He have many varieties of weeds. Cool, I love having choices!"
             
             round = 0
             stayInMenu = true

@@ -3,5 +3,5 @@ MODULE_NAME: Weed Business
 MODULE_AUTHOR: Raddeck
 MODULE_LINK: https://github.com/RaiderKnight/RK-Weed-Biz
 MODULE_DESCRIPTION: Start your own weed business, make more money!
-MODULE_REQUIREMENTS: nn_GangsOfLifePlay
-MODULE_VERSION: 1.0.2
+MODULE_REQUIREMENTS: nn_GangsOfLifePlay, rk_Personal_Inventories
+MODULE_VERSION: 1.0.3

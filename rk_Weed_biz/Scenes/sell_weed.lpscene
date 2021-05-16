@@ -647,10 +647,11 @@ OTHER: none
                 EndIf
  
             EndIf
-                
-            If WHERE == bar && sneak < 60 || WHERE == biergarten && sneak < 60 || WHERE == nightclub && sneak < 60 || WHERE == pub && sneak < 60
+
+            If WHERE == bar && weeddealerLvl < 150 || WHERE == biergarten && weeddealerLvl < 150 || WHERE == nightclub && weeddealerLvl < 150 || WHERE == pub && weeddealerLvl < 150
             
-                ChanceCatch = Random(0, 3)
+                JohnActorintox = Random(0, 60)
+                ChanceCatch = Random(0, 6)
                 JohnActor = generatePerson(rk_ModelM_Johnny_Boy)
                 JohnActor.hide()
                 Bar_Owner = generatePersonTemporary()
@@ -659,17 +660,18 @@ OTHER: none
                 If ChanceCatch > 2
 
                     "You're unlucky, <JohnActor.name> has just seen you sell on his territory, he doesn't look happy and he's coming to confront you ... good luck!"
+                    JohnActor.show()
 
-                    If JohnActor:arousal > 25 && JohnActor:intoxication > 25 && JohnActor:perversion > 60
+                    If JohnActor:arousal > 25 && JohnActorintox > 25 && JohnActor:perversion > 60
 
                         JohnActor(Furious)::"Hey stupid ass! What the fuck are you doing..., this is my spot here, I will kick your ass mother fucker..."
                         "<JohnActor.name> is really not happy, he comes in my direction and wants to fight!"
                         JohnActor.moveToPersonStand(Player, 50)
                         
                         Roundcount = 0
-                        FightInAction = true
+                        FightInAction = 0
 
-                        While FightInAction && choice == 1
+                        While FightInAction < 1 && choice == 1
 
                             JohnActor.show()
                             FightAction = Random(0, 2)
@@ -697,12 +699,12 @@ OTHER: none
                                 If Roundcount >= 20 || JohnActor:energy < 50 && Roundcount >= 5
 
                                     JohnActor(Pain)::"Ok for now, consider yourself lucky...!"
-                                    FightInAction = false
+                                    FightInAction = 1
                             
                                 Else
                             
                                     JohnActor(Evil)::"Fuck off little pussy...c'mon come..."
-                                    FightInAction = true
+                                    FightInAction = 0
                             
                                 EndIf
                             
@@ -719,7 +721,7 @@ OTHER: none
                                     
                                     Player.animate()
                                     JohnActor.animate()
-                                    FightInAction = true
+                                    FightInAction = 0
                             
                                 ElseIf FightAction == 1
                             
@@ -770,7 +772,7 @@ OTHER: none
                                 
                                     Player.animate()
                                     JohnActor.animate()
-                                    FightInAction = true
+                                    FightInAction = 0
                             
                                 ElseIf FightAction == 2
                             
@@ -821,7 +823,7 @@ OTHER: none
                                 
                                     Player.animate()
                                     JohnActor.animate()
-                                    FightInAction = true
+                                    FightInAction = 0
                             
                                 EndIf
                             
@@ -880,16 +882,16 @@ OTHER: none
                             
                         EndIf
                     
-                    ElseIf JohnActor:intoxication > 25
+                    ElseIf JohnActorintox = Random(0, 60) > 25
                     
                         JohnActor(Furious)::"Hey stupid ass! What the fuck are you doing..., this is my spot here, I will kick your ass mother fucker..."
                         "<JohnActor.name> is really not happy, he comes in my direction and wants to fight!"
                         JohnActor.moveToPersonStand(Player, 50)
                         
                         Roundcount = 0
-                        FightInAction = true
+                        FightInAction = 0
 
-                        While FightInAction && choice == 1
+                        While FightInAction < 1 && choice == 1
 
                             JohnActor.show()
                             FightAction = Random(0, 2)
@@ -917,12 +919,12 @@ OTHER: none
                                 If Roundcount >= 20 || JohnActor:energy < 50 && Roundcount >= 5
 
                                     JohnActor(Pain)::"Ok for now, consider yourself lucky...!"
-                                    FightInAction = false
+                                    FightInAction = 1
                             
                                 Else
                             
                                     JohnActor(Evil)::"Fuck off little pussy...c'mon come..."
-                                    FightInAction = true
+                                    FightInAction = 0
                             
                                 EndIf
                             
@@ -938,7 +940,7 @@ OTHER: none
                                     Player.animate()
                                     JohnActor.animate()
                                     
-                                    FightInAction = true
+                                    FightInAction = 0
                             
                                 ElseIf FightAction == 1
                             
@@ -989,7 +991,7 @@ OTHER: none
                                     Player.animate()
                                     JohnActor.animate()
                                 
-                                    FightInAction = true
+                                    FightInAction = 0
                             
                                 ElseIf FightAction == 2
                             
@@ -1040,7 +1042,7 @@ OTHER: none
                                     Player.animate()
                                     JohnActor.animate()
                                 
-                                    FightInAction = true
+                                    FightInAction = 0
                             
                                 EndIf
                             
