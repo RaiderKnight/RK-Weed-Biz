@@ -661,6 +661,7 @@ OTHER: none
 
                     "You're unlucky, <JohnActor.name> has just seen you sell on his territory, he doesn't look happy and he's coming to confront you ... good luck!"
                     JohnActor.show()
+                    JohnActor.dress()
 
                     If JohnActor:arousal > 25 && JohnActorintox > 25 && JohnActor:perversion > 60
 
