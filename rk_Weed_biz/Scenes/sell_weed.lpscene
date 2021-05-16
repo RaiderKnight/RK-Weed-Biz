@@ -127,6 +127,12 @@ OTHER: none
                         Player.modifyActorVar(weeddealerLvl, 1)
 
                     EndIf
+            
+                ElseIf 99
+            
+                    SceneStart()
+                    
+                    SceneEnd()
                 EndIf   
 
             Elseif 1 
@@ -199,6 +205,12 @@ OTHER: none
                         Player.modifyActorVar(weeddealerLvl, 1)
                         
                     EndIf
+            
+                ElseIf 99
+            
+                    SceneStart()
+                    
+                    SceneEnd()
                 EndIf   
 
             Elseif 2 
@@ -272,6 +284,12 @@ OTHER: none
                         Player.modifyActorVar(weeddealerLvl, 1)
                             
                     EndIf
+            
+                ElseIf 99
+            
+                    SceneStart()
+                    
+                    SceneEnd()
                 EndIf   
 
             Elseif 3 
@@ -347,6 +365,12 @@ OTHER: none
                         "+1 added to your weed dealer level"
                         Player.modifyActorVar(weeddealerLvl, 1)
                     EndIf
+            
+                ElseIf 99
+            
+                    SceneStart()
+                    
+                    SceneEnd()
                     
                 EndIf
 
@@ -421,6 +445,12 @@ OTHER: none
                         "+1 added to your weed dealer level"
                         Player.modifyActorVar(weeddealerLvl, 1)
                     EndIf
+            
+                ElseIf 99
+            
+                    SceneStart()
+                    
+                    SceneEnd()
     
                 EndIf
 
@@ -493,6 +523,12 @@ OTHER: none
                         "+1 added to your weed dealer level"
                         Player.modifyActorVar(weeddealerLvl, 1)
                     EndIf
+            
+                ElseIf 99
+            
+                    SceneStart()
+                    
+                    SceneEnd()
                 EndIf
 
             Elseif 6 
@@ -567,6 +603,12 @@ OTHER: none
                         "+1 added to your weed dealer level"
                         Player.modifyActorVar(weeddealerLvl, 1)
                     EndIf
+            
+                ElseIf 99
+            
+                    SceneStart()
+                    
+                    SceneEnd()
                 EndIf
                     
             Elseif 7 
@@ -602,7 +644,6 @@ OTHER: none
 
                     EndIf
                             
-                
                 Elseif 2
                     
                     If stash_GGWeed < 10
@@ -643,14 +684,27 @@ OTHER: none
                         Player.modifyActorVar(weeddealerLvl, 1)
                         
                     EndIf
+            
+                ElseIf 99
+            
+                    SceneStart()
+                    
+                    SceneEnd()
                     
                 EndIf
+            
+            ElseIf 8
+            
+                SceneStart()
+                    
+                SceneEnd()
  
             EndIf
 
             If WHERE == bar && weeddealerLvl < 150 || WHERE == biergarten && weeddealerLvl < 150 || WHERE == nightclub && weeddealerLvl < 150 || WHERE == pub && weeddealerLvl < 150
             
-                JohnActorintox = Random(0, 60)
+                JohnActorintox = Random(10, 60)
+                JohnActorperv = Random(10, 60)
                 ChanceCatch = Random(0, 6)
                 JohnActor = generatePerson(rk_ModelM_Johnny_Boy)
                 JohnActor.hide()
@@ -663,7 +717,7 @@ OTHER: none
                     JohnActor.show()
                     JohnActor.dress()
 
-                    If JohnActor:arousal > 25 && JohnActorintox > 25 && JohnActor:perversion > 60
+                    If JohnActor:arousal > 25 && JohnActorintox > 25 && JohnActorperv > 60
 
                         JohnActor(Furious)::"Hey stupid ass! What the fuck are you doing..., this is my spot here, I will kick your ass mother fucker..."
                         "<JohnActor.name> is really not happy, he comes in my direction and wants to fight!"
@@ -883,7 +937,7 @@ OTHER: none
                             
                         EndIf
                     
-                    ElseIf JohnActorintox = Random(0, 60) > 25
+                    ElseIf JohnActorintox = Random(10, 60) > 25
                     
                         JohnActor(Furious)::"Hey stupid ass! What the fuck are you doing..., this is my spot here, I will kick your ass mother fucker..."
                         "<JohnActor.name> is really not happy, he comes in my direction and wants to fight!"
