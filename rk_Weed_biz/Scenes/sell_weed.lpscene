@@ -1096,6 +1096,7 @@ OTHER: none
                         JohnActor:attractiontoplayer -= 1
                         energy -= 5
                         passTime(0.15, 0.50)
+                        moveTo(home)
 
                     EndIf
 
