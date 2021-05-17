@@ -27,13 +27,13 @@ OTHER: none
             If JohnActor:arousal > 25 && JohnActor:intoxication > 25 && JohnActor:perversion > 60
 
                 JohnActor(Furious)::"Hey stupid ass! What the fuck are you doing..., this is my spot here, I will kick your ass mother fucker..."
-                "<JohnActor.name> is really not happy, he comes in my direction and wants to fight!1"
-                JohnActor.moveToPersonStand(Player, 20)
+                "<JohnActor.name> is really not happy, he comes in my direction and wants to fight!"
+                JohnActor.moveToPersonStand(Player, 25)
                         
                 Roundcount = 0
                 FightInAction = 0
 
-                While FightInAction < 1 && choice == 1
+                While FightInAction < 1 && choice == 1 && Player:energy > 10
 
                     JohnActor.show()
                     FightAction = Random(0, 2)
@@ -75,7 +75,7 @@ OTHER: none
                         Roundcount += 1
                         If FightAction == 0
                             
-                            JohnActor.moveToPersonStand(Player, 20)
+                            JohnActor.moveToPersonStand(Player, 25)
                             faceEachOther(JohnActor, Player)
                             Player.animate(martialart)
                             JohnActor.animate(martialart)
@@ -86,7 +86,7 @@ OTHER: none
                             
                         ElseIf FightAction == 1
                             
-                            JohnActor.moveToPersonStand(Player, 20)
+                            JohnActor.moveToPersonStand(Player, 25)
                             faceEachOther(JohnActor, Player)
                             Player.animate(martialart)
                             JohnActor.animate(martialart)
@@ -127,16 +127,42 @@ OTHER: none
                             If JFightAction > 0
                                 
                                 JohnActor.animate(martialart)
-                                "<JohnActor.name> respond with his fist in your face!"
-                                Player:energy -= JFightHit
-
+                                DefendHit = Random(0, 4)
+                                DefendHit = DefendHit.round()
+                                
+                                If 0
+                                    "<JohnActor.name> respond with his fist in your face!"
+                                    Player:energy -= JFightHit 
+                                    
+                                ElseIf 1
+                                
+                                    "<JohnActor.name> respond with a hit in your genitals."
+                                    Player:energy -= JFightHit + 2
+                                    
+                                ElseIf 2
+                                
+                                    "<JohnActor.name> respond with a hit in your rib cage."
+                                    Player:energy -= JFightHit + 1
+                                    
+                                ElseIf 3
+                                
+                                    "<JohnActor.name> respond with a front kick."
+                                    Player:energy -= JFightHit + 3
+                                    
+                                ElseIf 4
+                                
+                                    "<JohnActor.name> respond with a knee kick." 
+                                    Player:energy -= JFightHit + 3
+                                    
+                                EndIf
+                                
                             EndIf
 
                             FightInAction = 0
                             
                         ElseIf FightAction == 2
                             
-                            JohnActor.moveToPersonStand(Player, 20)
+                            JohnActor.moveToPersonStand(Player, 25)
                             faceEachOther(JohnActor, Player)
                             Player.animate(martialart)
                             JohnActor.animate(martialart)
@@ -177,8 +203,34 @@ OTHER: none
                             If JFightAction > 0
                                 
                                 JohnActor.animate(martialart)
-                                "<JohnActor.name> respond with his fist in your face!"
-                                Player:energy -= JFightHit
+                                DefendHit = Random(0, 4)
+                                DefendHit = DefendHit.round()
+                                
+                                If 0
+                                    "<JohnActor.name> respond with his fist in your face!"
+                                    Player:energy -= JFightHit 
+                                    
+                                ElseIf 1
+                                
+                                    "<JohnActor.name> respond with a hit in your genitals."
+                                    Player:energy -= JFightHit + 2
+                                    
+                                ElseIf 2
+                                
+                                    "<JohnActor.name> respond with a hit in your rib cage."
+                                    Player:energy -= JFightHit + 1
+                                    
+                                ElseIf 3
+                                
+                                    "<JohnActor.name> respond with a front kick."
+                                    Player:energy -= JFightHit + 3
+                                    
+                                ElseIf 4
+                                
+                                    "<JohnActor.name> respond with a knee kick." 
+                                    Player:energy -= JFightHit + 3
+                                    
+                                EndIf
                                     
                             EndIf
 
@@ -190,23 +242,24 @@ OTHER: none
 
                 EndWhile
                 
-                        
-                If JohnActor:energy > energy
+                If Player:energy < 10
 
+                    JohnActor.animate()
                     "Suddenly everything goes black ... you lost your consciousness."
-                    Player.animate(fightlost)
+                    Player.animate(knockedout)
                     JohnActor:rapportwithplayer -= 5
                     JohnActor:attractiontoplayer -= 1
+                    Player.strip()
+                    JohnActor.dressExcept(Outerwear, Bottom)
                     Filter(Aggressive)
-                    TalkNonConsensual()
-                    SexNoAffair(Actor, Player)
+                    SexNoAffair(JohnActor, Player)
 
                     passTime(0.50, 1.50)
+                    JohnActor.hide()
                     "After a few minutes, I woke up but I'm still a little stunned…"
                     Player.animate()
                     "As you try to stand up you notice that you are naked ... and your whole body hurts. It feels like you have been beaten up."
                     Player.show()
-                    Player.strip()
                     "You feel something running down your <Player.ass_or_pussy>..."
                     "You touch your <Player.ass_or_pussy> to see what it is ..."
                     "It's cum, a lot of cum! It gushes literally out of your <Player.ass_or_pussy>, running down both legs ..."
@@ -222,11 +275,24 @@ OTHER: none
                     1::"No thanks, I think I will go home instead..."
                             
                     If 0
-                            
-                        "I drink my glass with difficulty..."
-                        "Once my drink is finished, I go straight home..."
-                        mood += 2
-                        intoxication += 15
+                        
+                        RapeChance = Random(0, 10)
+                        If Bar_Owner.isInterestedIn(Player) && RapeChance > 5
+                        
+                            Filter(Aggressive)
+                            SexNoAffair(Bar_Owner, Player)
+                            "That's really not my day..."
+                            "Now my holes are red and in real bad shapes,.... fuck!"
+                            "I'm going home right now!"
+
+                        Else
+                        
+                            "I drink my glass with difficulty..."
+                            "Once my drink is finished, I go straight home..."
+                            mood += 2
+                            intoxication += 15
+                        
+                        EndIf
                         moveTo(home)
                             
                     Else
@@ -240,216 +306,421 @@ OTHER: none
                         
                     SceneStart()
                         "I win the fight, he will stay quiet for a few..."
+                                
+                        If JohnActor:energy < 10
+                                    
+                            JohnActor.animate(knockedout)
+                            "What do I do?"
+                            0::"Loot him"
+                            1::"Fuck him"
+                            99::"Nothing"
+                                    
+                            If 0
+                                        
+                                FindMoney = Random(100, 2000)
+                                FindMoney_Loc = FindMoney.convertToLocalCurrency()
+                                FindWeedg = Random(4, 200) 
+                                WeedVar = Random(1, 4)
+                                        
+                                If WeedVar == 1
+                                        
+                                    VarWeed = "<FindWeedg>g of Sunset Sherbet"
+                                    Player.modifyActorVar(stock_SSweed, FindWeedg)
+                                        
+                                ElseIf WeedVar == 2
+                                        
+                                    divideWeed = FindWeedg/2
+                                    divideWeed2 = FindWeedg/2
+                                    VarWeed = "<divideWeed>g of Bruce Banner and <divideWeed2>g of Gorilla Glue"
+                                    Player.modifyActorVar(stock_BBweed, divideWeed)
+                                    Player.modifyActorVar(stock_GGweed, divideWeed2)
+                                        
+                                ElseIf WeedVar == 3
+                                        
+                                    divideWeed = FindWeedg/3
+                                    divideWeed1 = FindWeedg/3
+                                    divideWeed2 = FindWeedg/3
+                                    VarWeed = "<divideWeed>g of Sunset Sherbet, <divideWeed1>g of AK 47 and <divideWeed2>g of Gorilla Glue"
+                                    Player.modifyActorVar(stock_SSweed, divideWeed)
+                                    Player.modifyActorVar(stock_GGweed, divideWeed2)
+                                            Player.modifyActorVar(stock_AK47weed, divideWeed1)
+                                        
+                                ElseIf WeedVar == 4
+                                        
+                                    divideWeed = FindWeedg/4
+                                    divideWeed1 = FindWeedg/4
+                                    divideWeed2 = FindWeedg/4
+                                    divideWeed3 = FindWeedg/4
+                                    VarWeed = "<divideWeed>g of Sunset Sherbet, <divideWeed3>g of Pineapple Express, <divideWeed1>g of AK 47 and <divideWeed2>g of Gorilla Glue"
+                                    Player.modifyActorVar(stock_SSweed, divideWeed)
+                                    Player.modifyActorVar(stock_AK47weed, divideWeed1)
+                                    Player.modifyActorVar(stock_GGweed, divideWeed2)
+                                    Player.modifyActorVar(stock_PEweed, divideWeed3)
+                                        
+                                EndIf
+                                        
+                                "You find <FindMoney_Loc> and <FindWeedg>g of weeds! <VarWeed>."
+                                        
+                            ElseIf 1
+                                
+                                
+                                Player.dressExcept(Outerwear, Bottom)
+                                JohnActor.strip()
+                                Filter(Aggressive)
+                                SexNoAffair(Player, JohnActor)
+
+                                passTime(0.50, 1.50)
+
+                            EndIf
+
+                        EndIf
+
                     SceneEnd()
                             
                 EndIf
                     
             ElseIf JohnActor:intoxication > 25
                     
-                        JohnActor(Furious)::"Hey stupid ass! What the fuck are you doing..., this is my spot here, I will kick your ass mother fucker..."
-                        "<JohnActor.name> is really not happy, he comes in my direction and wants to fight!2"
-                        JohnActor.moveToPersonStand(Player, 20)
+                JohnActor(Furious)::"Hey stupid ass! What the fuck are you doing..., this is my spot here, I will kick your ass mother fucker..."
+                "<JohnActor.name> is really not happy, he comes in my direction and wants to fight!"
+                JohnActor.moveToPersonStand(Player, 25)
                         
-                        Roundcount = 0
-                        FightInAction = 0
+                Roundcount = 0
+                FightInAction = 0
 
-                        While FightInAction < 1 && choice == 1
+                While FightInAction < 1 && choice == 1 && Player:energy > 10
 
-                            JohnActor.show()
-                            FightAction = Random(0, 2)
-                            FightAction = FightAction.round()
-                            // 0 = miss
-                            // 2 = small hit
-                            // 4 = big hit
-                            BlockAction = Random(0, 2)
-                            BlockAction = BlockAction.round()
-                            // 0 = miss
-                            // 2 = small hit
-                            // 4 = big hit
-                            JFightAction = Random(0, 1)
-                            JFightAction = JFightAction.round()
-                            JFightHit = Random(3, 6)
+                    JohnActor.show()
+                    FightAction = Random(0, 2)
+                    FightAction = FightAction.round()
+                    // 0 = miss
+                    // 2 = small hit
+                    // 4 = big hit
+                    BlockAction = Random(0, 2)
+                    BlockAction = BlockAction.round()
+                    // 0 = miss
+                    // 2 = small hit
+                    // 4 = big hit
+                    JFightAction = Random(0, 1)
+                    JFightAction = JFightAction.round()
+                    JFightHit = Random(3, 6)
                         
-                            "What should I do?"
-                            0:: Roundcount > 5::"Try to stop the fight"
-                            1:: "Hit him"
+                    "What should I do?"
+                    0:: Roundcount > 5::"Try to stop the fight"
+                    1:: "Hit him"
     
-                            If 0
+                    If 0
 
-                                Player(Pain)::"C'mon <JohnActor.name>, let's stop that fight?"
+                        Player(Pain)::"C'mon <JohnActor.name>, let's stop that fight?"
                             
-                                If Roundcount >= 20 || JohnActor:energy < 50 && Roundcount >= 5
+                        If Roundcount >= 20 || JohnActor:energy < 50 && Roundcount >= 5
 
-                                    SceneStart()
-                                        JohnActor(Pain)::"Ok for now, consider yourself lucky...!"
-                                        FightInAction = 1
-                                    SceneEnd()
-                            
-                                Else
-                            
-                                    JohnActor(Evil)::"Fuck off little pussy...c'mon come..."
-                                    FightInAction = 0
-                            
-                                EndIf
-                            
-                            Else
-                        
-                                Roundcount += 1
-                                If FightAction == 0
-                            
-                                    JohnActor.moveToPersonStand(Player, 20)
-                                    faceEachOther(JohnActor, Player)
-                                    Player.animate(martialart)
-                                    JohnActor.animate(martialart)
-                                    "You completely missed your attack ... <JohnActor.name> blocked your move!"
-                                    
-                                    FightInAction = 0
-                            
-                                ElseIf FightAction == 1
-                            
-                                    JohnActor.moveToPersonStand(Player, 20)
-                                    faceEachOther(JohnActor, Player)
-                                    Player.animate(martialart)
-                                    JohnActor.animate(martialart)
-                                    If martial > JohnActor:martial && muscle > JohnActor:muscle && fitness > JohnActor:fitness
-                                        Random
-                                            "You manage to hit John in the face."
-                                            "You manage to hit John in his genitals."
-                                            "You manage to hit John in his rib cage."
-                                            "You manage to hit John with a front kick."
-                                            "You manage to hit John with a knee kick." 
-                                        EndRandom
-                                        JohnActor:energy -= 5
-                            
-                                    ElseIf martial > JohnActor:martial && muscle > JohnActor:muscle
-                                        Random
-                                            "You manage to hit John in the face."
-                                            "You manage to hit John in his genitals."
-                                            "You manage to hit John in his rib cage."
-                                            "You manage to hit John with a front kick."
-                                            "You manage to hit John with a knee kick." 
-                                        EndRandom
-                                        JohnActor:energy -= 3
-                            
-                                    ElseIf muscle > JohnActor:muscle
-                                        Random
-                                            "You manage to hit John in the face."
-                                            "You manage to hit John in his genitals."
-                                            "You manage to hit John in his rib cage."
-                                        EndRandom
-                                        JohnActor:energy -= 2
-                            
-                                    Else
-                                        "You manage to hit <JohnActor.name> in the face."
-                                        JohnActor:energy -= 1
-                                    EndIf
-                                
-                                    If JFightAction > 0
-
-                                        JohnActor.animate(martialart)
-                                        "<JohnActor.name> respond with his fist in your face!"
-                                        Player:energy -= JFightHit
-                                    
-                                    EndIf
-                                
-                                    FightInAction = 0
-                            
-                                ElseIf FightAction == 2
-                            
-                                    JohnActor.moveToPersonStand(Player, 20)
-                                    faceEachOther(JohnActor, Player)
-                                    Player.animate(martialart)
-                            
-                                    If martial > JohnActor:martial && muscle > JohnActor:muscle && fitness > JohnActor:fitness
-                                        Random
-                                            "You manage to hit John in the face."
-                                            "You manage to hit John in his genitals."
-                                            "You manage to hit John in his rib cage."
-                                            "You manage to hit John with a front kick."
-                                            "You manage to hit John with a knee kick." 
-                                        EndRandom
-                                        JohnActor:energy -= 15
-                            
-                                    ElseIf martial > JohnActor:martial && muscle > JohnActor:muscle
-                                        Random
-                                            "You manage to hit John in the face."
-                                            "You manage to hit John in his genitals."
-                                            "You manage to hit John in his rib cage."
-                                            "You manage to hit John with a front kick."
-                                            "You manage to hit John with a knee kick." 
-                                        EndRandom
-                                        JohnActor:energy -= 12
-                            
-                                    ElseIf muscle > JohnActor:muscle
-                                        Random
-                                            "You manage to hit John in the face."
-                                            "You manage to hit John in his genitals."
-                                            "You manage to hit John in his rib cage." 
-                                        EndRandom
-                                        JohnActor:energy -= 8
-                            
-                                    Else
-                                        "You manage to hit <JohnActor.name> in the face."
-                                        JohnActor:energy -= 4
-                                    EndIf
-                                
-                                    If JFightAction > 0
-                                
-                                        JohnActor.animate(martialart)
-                                        "<JohnActor.name> respond with his fist in your face!"
-                                        Player:energy -= JFightHit
-                                    
-                                    EndIf
-                                
-                                    FightInAction = 0
-                            
-                                EndIf
-                                
-                                FightInAction = 0
-                            
-                            EndIf
-
-                        EndWhile
-                        
-                        If JohnActor:energy > energy
-                            
-                            Player.animate(fightlost)
-                            JohnActor:rapportwithplayer -= 5
-                            JohnActor:attractiontoplayer -= 1
-                            
-                            passTime(0.15, 0.50)
-                            Player.animate()
-                            "After a few minutes, I woke up but I'm still a little stunned…"
-                            mood => 5
-                            energy => 5
-                            Bar_Owner.show()
-                            Bar_Owner(Wink)::"Hey my friend, you want a drink before you go, I give it to you, it's free?"
-                            "Do I accept or I'm going home?"
-                            0::"Yeah sure, that'll wake me up a bit more..."
-                            1::"No thanks, I think I will go home instead..."
-                            
-                            If 0
-                            
-                                "I drink my glass with difficulty..."
-                                "Once my drink is finished, I go straight home..."
-                                mood += 2
-                                intoxication += 15
-                                moveTo(home)
-                            
-                            Else
-                            
-                               "Going back home..."
-                               moveTo(home)
-                            
-                            EndIf
+                            SceneStart()
+                                JohnActor(Pain)::"Ok for now, consider yourself lucky...!"
+                                FightInAction = 1
+                            SceneEnd()
                             
                         Else
                             
-                            SceneStart()
-                                "I win the fight, he will stay quiet for a few..."
-                            SceneEnd()
+                            JohnActor(Evil)::"Fuck off little pussy...c'mon come..."
+                            FightInAction = 0
                             
                         EndIf
+                            
+                    Else
+                        
+                        Roundcount += 1
+                        If FightAction == 0
+                            
+                            JohnActor.moveToPersonStand(Player, 25)
+                            faceEachOther(JohnActor, Player)
+                            Player.animate(martialart)
+                            JohnActor.animate(martialart)
+                            "You completely missed your attack ... <JohnActor.name> blocked your move!"
+                                    
+                            FightInAction = 0
+                            
+                        ElseIf FightAction == 1
+                            
+                            JohnActor.moveToPersonStand(Player, 25)
+                            faceEachOther(JohnActor, Player)
+                            Player.animate(martialart)
+                            JohnActor.animate(martialart)
+                            If martial > JohnActor:martial && muscle > JohnActor:muscle && fitness > JohnActor:fitness
+                                Random
+                                    "You manage to hit John in the face."
+                                    "You manage to hit John in his genitals."
+                                    "You manage to hit John in his rib cage."
+                                    "You manage to hit John with a front kick."
+                                    "You manage to hit John with a knee kick." 
+                                EndRandom
+                                JohnActor:energy -= 5
+                            
+                            ElseIf martial > JohnActor:martial && muscle > JohnActor:muscle
+                                Random
+                                    "You manage to hit John in the face."
+                                    "You manage to hit John in his genitals."
+                                    "You manage to hit John in his rib cage."
+                                    "You manage to hit John with a front kick."
+                                    "You manage to hit John with a knee kick." 
+                                EndRandom
+                                JohnActor:energy -= 3
+                            
+                            ElseIf muscle > JohnActor:muscle
+                                Random
+                                    "You manage to hit John in the face."
+                                    "You manage to hit John in his genitals."
+                                    "You manage to hit John in his rib cage."
+                                EndRandom
+                                JohnActor:energy -= 2
+                            
+                            Else
+                                "You manage to hit <JohnActor.name> in the face."
+                                JohnActor:energy -= 1
+                            EndIf
+                                
+                            If JFightAction > 0
+
+                                JohnActor.animate(martialart)
+                                DefendHit = Random(0, 4)
+                                DefendHit = DefendHit.round()
+                                
+                                If 0
+                                    "<JohnActor.name> respond with his fist in your face!"
+                                    Player:energy -= JFightHit 
+                                    
+                                ElseIf 1
+                                
+                                    "<JohnActor.name> respond with a hit in your genitals."
+                                    Player:energy -= JFightHit + 2
+                                    
+                                ElseIf 2
+                                
+                                    "<JohnActor.name> respond with a hit in your rib cage."
+                                    Player:energy -= JFightHit + 1
+                                    
+                                ElseIf 3
+                                
+                                    "<JohnActor.name> respond with a front kick."
+                                    Player:energy -= JFightHit + 3
+                                    
+                                ElseIf 4
+                                
+                                    "<JohnActor.name> respond with a knee kick." 
+                                    Player:energy -= JFightHit + 3
+                                    
+                                EndIf
+                                    
+                            EndIf
+                                
+                            FightInAction = 0
+                            
+                        ElseIf FightAction == 2
+                            
+                            JohnActor.moveToPersonStand(Player, 25)
+                            faceEachOther(JohnActor, Player)
+                            Player.animate(martialart)
+                            
+                            If martial > JohnActor:martial && muscle > JohnActor:muscle && fitness > JohnActor:fitness
+                                Random
+                                    "You manage to hit John in the face."
+                                    "You manage to hit John in his genitals."
+                                    "You manage to hit John in his rib cage."
+                                    "You manage to hit John with a front kick."
+                                    "You manage to hit John with a knee kick." 
+                                EndRandom
+                                JohnActor:energy -= 15
+                            
+                            ElseIf martial > JohnActor:martial && muscle > JohnActor:muscle
+                                Random
+                                    "You manage to hit John in the face."
+                                    "You manage to hit John in his genitals."
+                                    "You manage to hit John in his rib cage."
+                                    "You manage to hit John with a front kick."
+                                    "You manage to hit John with a knee kick." 
+                                EndRandom
+                                JohnActor:energy -= 12
+                            
+                            ElseIf muscle > JohnActor:muscle
+                                Random
+                                    "You manage to hit John in the face."
+                                    "You manage to hit John in his genitals."
+                                    "You manage to hit John in his rib cage." 
+                                EndRandom
+                                JohnActor:energy -= 8
+                            
+                            Else
+                                "You manage to hit <JohnActor.name> in the face."
+                                JohnActor:energy -= 4
+                            EndIf
+                                
+                            If JFightAction > 0
+
+                                JohnActor.animate(martialart)
+                                DefendHit = Random(0, 4)
+                                DefendHit = DefendHit.round()
+                                
+                                If 0
+                                    "<JohnActor.name> respond with his fist in your face!"
+                                    Player:energy -= JFightHit 
+                                    
+                                ElseIf 1
+                                
+                                    "<JohnActor.name> respond with a hit in your genitals."
+                                    Player:energy -= JFightHit + 2
+                                    
+                                ElseIf 2
+                                
+                                    "<JohnActor.name> respond with a hit in your rib cage."
+                                    Player:energy -= JFightHit + 1
+                                    
+                                ElseIf 3
+                                
+                                    "<JohnActor.name> respond with a front kick."
+                                    Player:energy -= JFightHit + 3
+                                    
+                                ElseIf 4
+                                
+                                    "<JohnActor.name> respond with a knee kick." 
+                                    Player:energy -= JFightHit + 3
+                                    
+                                EndIf
+                                    
+                            EndIf
+                                
+                            FightInAction = 0
+                            
+                        EndIf
+                                
+                        FightInAction = 0
+                            
+                    EndIf
+
+                EndWhile
+                        
+                If Player:energy < 10
+                
+                    "<JohnActor.name> beat me all the way..."
+                    JohnActor.animate()
+                    JohnActor.hide()
+                    Player.animate(knockedout)
+                    JohnActor:rapportwithplayer -= 5
+                    JohnActor:attractiontoplayer -= 1
+                            
+                    passTime(0.15, 0.50)
+                    Player.animate()
+                    "After a few minutes, I woke up but I'm still a little stunned…"
+                    mood => 5
+                    energy => 5
+                    Bar_Owner.show()
+                    Bar_Owner(Wink)::"Hey my friend, you want a drink before you go, I give it to you, it's free?"
+                    "Do I accept or I'm going home?"
+                    0::"Yeah sure, that'll wake me up a bit more..."
+                    1::"No thanks, I think I will go home instead..."
+                            
+                    If 0
+                            
+                        RapeChance = Random(0, 10)
+                        If Bar_Owner.isInterestedIn(Player) && RapeChance > 5
+                        
+                            Filter(Aggressive)
+                            SexNoAffair(Bar_Owner, Player)
+                            "That's really not my day..."
+                            "Now my holes are red and in real bad shapes,.... fuck!"
+                            "I'm going home right now!"
+
+                        Else
+                        
+                            "I drink my glass with difficulty..."
+                            "Once my drink is finished, I go straight home..."
+                            mood += 2
+                            intoxication += 15
+                        
+                        EndIf
+                        moveTo(home)
+                            
+                    Else
+                            
+                        "Going back home..."
+                        moveTo(home)
+                            
+                    EndIf
+                            
+                Else
+                            
+                    SceneStart()
+                        "I win the fight, he will stay quiet for a few..."
+                                
+                        If JohnActor:energy < 10
+                                    
+                            JohnActor.animate(knockedout)
+                            "What do I do?"
+                            0::"Loot him"
+                            1::"Fuck him"
+                            99::"Nothing"
+                                    
+                            If 0
+                                        
+                                FindMoney = Random(100, 2000)
+                                FindMoney_Loc = FindMoney.convertToLocalCurrency()
+                                FindWeedg = Random(4, 200) 
+                                WeedVar = Random(1, 4)
+                                        
+                                If WeedVar == 1
+                                        
+                                    VarWeed = "<FindWeedg>g of Sunset Sherbet"
+                                    Player.modifyActorVar(stock_SSweed, FindWeedg)
+                                        
+                                ElseIf WeedVar == 2
+                                        
+                                    divideWeed = FindWeedg/2
+                                    divideWeed2 = FindWeedg/2
+                                    VarWeed = "<divideWeed>g of Bruce Banner and <divideWeed2>g of Gorilla Glue"
+                                    Player.modifyActorVar(stock_BBweed, divideWeed)
+                                    Player.modifyActorVar(stock_GGweed, divideWeed2)
+                                        
+                                ElseIf WeedVar == 3
+                                        
+                                    divideWeed = FindWeedg/3
+                                    divideWeed1 = FindWeedg/3
+                                    divideWeed2 = FindWeedg/3
+                                    VarWeed = "<divideWeed>g of Sunset Sherbet, <divideWeed1>g of AK 47 and <divideWeed2>g of Gorilla Glue"
+                                    Player.modifyActorVar(stock_SSweed, divideWeed)
+                                    Player.modifyActorVar(stock_GGweed, divideWeed2)
+                                            Player.modifyActorVar(stock_AK47weed, divideWeed1)
+                                        
+                                ElseIf WeedVar == 4
+                                        
+                                    divideWeed = FindWeedg/4
+                                    divideWeed1 = FindWeedg/4
+                                    divideWeed2 = FindWeedg/4
+                                    divideWeed3 = FindWeedg/4
+                                    VarWeed = "<divideWeed>g of Sunset Sherbet, <divideWeed3>g of Pineapple Express, <divideWeed1>g of AK 47 and <divideWeed2>g of Gorilla Glue"
+                                    Player.modifyActorVar(stock_SSweed, divideWeed)
+                                    Player.modifyActorVar(stock_AK47weed, divideWeed1)
+                                    Player.modifyActorVar(stock_GGweed, divideWeed2)
+                                    Player.modifyActorVar(stock_PEweed, divideWeed3)
+                                        
+                                EndIf
+                                        
+                                "You find <FindMoney_Loc> and <FindWeedg>g of weeds! <VarWeed>."
+                                        
+                            ElseIf 1
+                                    
+                                Player.dressExcept(Outerwear, Bottom)
+                                JohnActor.strip()
+                                Filter(Aggressive)
+                                SexNoAffair(Player, JohnActor)
+
+                                passTime(0.50, 1.50)
+
+                            EndIf
+
+                        EndIf
+
+                    SceneEnd()
+
+                EndIf
                     
             Else
                     
